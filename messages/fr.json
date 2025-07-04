@@ -1,0 +1,239 @@
+{
+  "Header": {
+    "title": "EcoGuerrier",
+    "dashboardLink": "Tableau de Bord",
+    "debunkLink": "Mythes & Réalités",
+    "timelineLink": "Chronologie",
+    "calculatorLink": "Calculateur",
+    "mapLink": "Carte des Impacts",
+    "profileLink": "Profil",
+    "subscribeButton": "Devenir Membre"
+  },
+  "HomePage": {
+    "title": "Le changement climatique n'attend pas.",
+    "subtitle": "Et vous ?",
+    "description": "Découvrez les faits, comprenez les enjeux et agissez maintenant. Notre planète a besoin de guerriers.",
+    "features": {
+      "showcase": {
+        "title": "Toutes nos fonctionnalités en un coup d'œil",
+        "description": "Découvrez comment EcoWarrior vous aide à comprendre et à agir pour le climat",
+        "cta": {
+          "text": "Prêt à devenir un véritable EcoGuerrier ?",
+          "primary": "Commencer maintenant",
+          "secondary": "En savoir plus"
+        }
+      },
+      "dashboard": {
+        "name": "Tableau de bord",
+        "title": "Surveillez le climat en temps réel",
+        "description": "Accédez aux dernières données climatiques mondiales : CO₂, température, niveau des mers et fonte des glaces. Des informations précises pour rester informé."
+      },
+      "debunk": {
+        "name": "Mythes & Réalités",
+        "title": "Démontez les idées reçues",
+        "description": "Explorez notre contenu éditorial basé sur des sources scientifiques fiables pour comprendre les véritables enjeux climatiques et déjouer la désinformation."
+      },
+      "timeline": {
+        "name": "Chronologie",
+        "title": "L'histoire de la science du climat",
+        "description": "Découvrez les étapes clés qui ont façonné notre compréhension du changement climatique, des premières découvertes aux consensus actuels."
+      },
+      "map": {
+        "name": "Carte d'impacts",
+        "title": "Visualisez les impacts près de chez vous",
+        "description": "Explorez une carte interactive des effets concrets du changement climatique dans votre région et partout dans le monde."
+      },
+      "calculator": {
+        "name": "Calculateur",
+        "title": "Mesurez votre empreinte carbone",
+        "description": "Estimez votre impact environnemental annuel et suivez votre progression vers un mode de vie plus durable grâce à notre calculateur intelligent."
+      },
+      "articles": {
+        "name": "Articles",
+        "title": "Analyses approfondies du climat",
+        "description": "Explorez nos articles d'analyse détaillés sur les enjeux climatiques, les solutions innovantes et les dernières recherches scientifiques pour approfondir vos connaissances."
+      },
+      "premium": {
+        "name": "Premium",
+        "title": "Débloquez toutes les fonctionnalités",
+        "description": "Accédez à l'assistant IA illimité, aux données avancées et aux outils exclusifs pour maximiser votre impact positif sur la planète."
+      }
+    }
+  },
+  "DashboardPage": {
+    "title": "Tableau de Bord du Climat",
+    "description": "Les indicateurs clés de notre planète en temps réel.",
+    "loading": "Chargement des données...",
+    "error": "Erreur : {errorMessage}",
+    "co2CardTitle": "Concentration CO₂",
+    "tempCardTitle": "Anomalie Température",
+    "seaLevelCardTitle": "Élévation Niveau Mer",
+    "iceMeltCardTitle": "Glace Antarctique"
+  },
+  "DebunkPage": {
+    "title": "Mythes & Réalités du Climat",
+    "subtitle": "Des faits scientifiques solides pour démonter les idées reçues sur le changement climatique.",
+    "description": "Contenu éditorial de qualité basé sur des sources fiables comme Jean-Marc Jancovici, le GIEC et les organismes scientifiques reconnus.",
+    "loading": "Chargement des mythes...",
+    "error": "Erreur: {errorMessage}",
+    "noPosts": "Aucun contenu disponible pour le moment.",
+    "mythPrefix": "Mythe",
+    "realityPrefix": "Réalité",
+    "sourceLink": "Voir la source →",
+    "card": {
+      "mythLabel": "💭 Mythe",
+      "realityLabel": "✅ Réalité",
+      "clickToRead": "Cliquer pour lire",
+      "like": "J'aime",
+      "unlike": "Je n'aime plus",
+      "loginToLike": "Connectez-vous pour liker",
+      "loginToVote": "Connectez-vous pour liker",
+      "sourceLink": "Voir la source →"
+    },
+    "comments": {
+      "title": "💬 Discussion Premium",
+      "placeholder": "Partagez vos réflexions...",
+      "submitButton": "Publier",
+      "submitting": "Publication...",
+      "premiumOnly": "💎 Seuls les membres Premium peuvent participer à la discussion. Devenez membre pour partager votre avis !",
+      "loginRequired": "Connectez-vous pour voir les commentaires",
+      "loading": "Chargement des commentaires...",
+      "noComments": "Aucun commentaire pour le moment. Soyez le premier à donner votre avis !"
+    }
+  },
+  "TimelinePage": {
+    "title": "Histoire de la Science du Climat",
+    "subtitle": "Découvrez les étapes clés qui ont façonné notre compréhension du changement climatique.",
+    "loading": "Chargement de la chronologie...",
+    "error": "Erreur lors du chargement de la chronologie"
+  },
+  "ChatAssistant": {
+    "title": "Demandez à EcoBot",
+    "placeholder": "Comment puis-je réduire ma consommation d'eau ?",
+    "loginToChat": "Connectez-vous pour utiliser l'assistant",
+    "limitReached": "Limite atteinte - Devenez membre Premium",
+    "sendButton": "Envoyer",
+    "sendingButton": "Envoi...",
+    "userLabel": "Vous",
+    "botLabel": "EcoBot",
+    "creditsLeft": "Messages gratuits restants : {count}",
+    "error": {
+      "limitReached": "Vous avez atteint votre limite de messages gratuits.",
+      "becomeMember": "Devenez membre Premium"
+    }
+  },
+  "CalculatorPage": {
+    "title": "Calculez votre Empreinte Carbone",
+    "subtitle": "Estimez votre impact annuel sur la planète en quelques clics.",
+    "form": {
+      "transport": {
+        "distanceLabel": "Distance quotidienne moyenne",
+        "modeLabel": "Mode de transport principal",
+        "modePlaceholder": "Sélectionnez un mode...",
+        "modes": {
+          "car_gasoline": "Voiture (essence)",
+          "car_electric": "Voiture (électrique)",
+          "train": "Train",
+          "plane": "Avion"
+        }
+      },
+      "diet": {
+        "label": "Régime alimentaire",
+        "placeholder": "Sélectionnez un régime...",
+        "types": {
+          "meat_lover": "Riche en viande",
+          "average": "Moyen",
+          "vegetarian": "Végétarien",
+          "vegan": "Végétalien"
+        }
+      },
+      "energy": {
+        "label": "Consommation d'énergie du foyer"
+      },
+      "calculateButton": "Calculer mon empreinte",
+      "calculating": "Calcul en cours...",
+      "result": {
+        "title": "Votre Empreinte Carbone Annuelle Estimée",
+        "unit": "tonnes de CO₂e",
+        "saveButton": "Sauvegarder ce calcul",
+        "saving": "Sauvegarde..."
+      }
+    },
+    "history": {
+      "title": "Évolution de votre Empreinte Carbone",
+      "chartLabel": "Émissions (tonnes CO₂e)"
+    },
+    "premium": {
+      "title": "Découvrez le Calculateur Premium",
+      "description": "Suivez votre progression dans le temps avec notre calculateur avancé !",
+      "featureTitle": "Fonctionnalité Premium",
+      "featureDescription": "Visualisez votre évolution et atteignez vos objectifs climatiques",
+      "signInButton": "Se connecter",
+      "discoverButton": "Découvrir Premium",
+      "features": {
+        "history": "Historique de vos calculs",
+        "goals": "Objectifs personnalisés",
+        "tips": "Conseils personnalisés",
+        "badges": "Système de badges",
+        "reservedForPremium": "Fonctionnalité réservée aux membres Premium",
+        "signInAndUpgrade": "Connectez-vous et devenez Premium pour sauvegarder vos calculs"
+      }
+    }
+  },
+  "MapPage": {
+    "title": "Carte des Impacts Climatiques",
+    "subtitle": "Découvrez les effets concrets du changement climatique près de chez vous.",
+    "loading": "Chargement de la carte...",
+    "premium": {
+      "authenticatedTitle": "Vous aimez ce que vous voyez ?",
+      "authenticatedDescription": "Devenez Membre Premium pour débloquer tous les points d'impact sur la carte et soutenir notre mission.",
+      "authenticatedButton": "Devenir Membre",
+      "unauthenticatedTitle": "Découvrez tous les impacts climatiques",
+      "unauthenticatedDescription": "Connectez-vous pour voir plus de points d'impact sur la carte, ou devenez Premium pour un accès complet !",
+      "signInButton": "Se connecter",
+      "becomePremiumButton": "Devenir Premium"
+    }
+  },
+  "ConsensusSection": {
+    "title": "Un Consensus Scientifique Écrasant",
+    "subtitle": "Les plus grandes organisations scientifiques mondiales sont unanimes dans leurs conclusions : le changement climatique est réel, causé par l'homme et nécessite une action urgente."
+  },
+  "ProfilePage": {
+    "title": "Votre Profil",
+    "subtitle": "Gérez les informations et les paramètres de votre compte.",
+    "stats": {
+      "title": "Mes Statistiques",
+      "badges": "Badges Obtenus",
+      "lastCalculation": "Dernier Calcul",
+      "noCalculation": "Aucun calcul",
+      "memberStatus": "Statut Membre",
+      "premium": "Premium"
+    }
+  },
+  "BillingSection": {
+    "title": "Gestion de l'Abonnement",
+    "subscribed": {
+      "message": "Vous êtes actuellement abonné à EcoGuerrier Premium. Gérez votre abonnement, changez votre méthode de paiement ou annulez votre abonnement.",
+      "button": "Gérer mon abonnement"
+    },
+    "notSubscribed": {
+      "message": "Vous n'êtes pas encore abonné. Découvrez tous les avantages de notre offre Premium pour soutenir la planète.",
+      "button": "Découvrir Premium"
+    }
+  },
+  "PricingPage": {
+    "title": "Devenez Membre Premium",
+    "subtitle": "Soutenez notre mission et accédez à des fonctionnalités exclusives",
+    "plan": {
+      "title": "EcoGuerrier Premium",
+      "promotion": "🔥 OFFRE DE LANCEMENT",
+      "features": [
+        "Accès à toutes les données climatiques en temps réel",
+        "Assistant IA personnalisé illimité", 
+        "Calculateur d'empreinte carbone avancé",
+        "Priorité sur les nouvelles fonctionnalités"
+      ],
+      "button": "Profiter de l'offre maintenant"
+    }
+  }
+} 

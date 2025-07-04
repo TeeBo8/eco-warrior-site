@@ -1,0 +1,239 @@
+{
+  "Header": {
+    "title": "EcoWarrior",
+    "dashboardLink": "Dashboard",
+    "debunkLink": "Myths & Realities",
+    "timelineLink": "Timeline",
+    "calculatorLink": "Calculator",
+    "mapLink": "Impact Map",
+    "profileLink": "Profile",
+    "subscribeButton": "Become a Member"
+  },
+  "HomePage": {
+    "title": "Climate change isn't waiting.",
+    "subtitle": "Are you?",
+    "description": "Discover the facts, understand the stakes, and act now. Our planet needs warriors.",
+    "features": {
+      "showcase": {
+        "title": "All our features at a glance",
+        "description": "Discover how EcoWarrior helps you understand and act for the climate",
+        "cta": {
+          "text": "Ready to become a true EcoWarrior?",
+          "primary": "Get started now",
+          "secondary": "Learn more"
+        }
+      },
+      "dashboard": {
+        "name": "Dashboard",
+        "title": "Monitor climate in real-time",
+        "description": "Access the latest global climate data: CO₂, temperature, sea levels and ice melting. Precise information to stay informed."
+      },
+      "debunk": {
+        "name": "Myths & Facts",
+        "title": "Debunk misconceptions",
+        "description": "Explore our editorial content based on reliable scientific sources to understand real climate issues and counter misinformation."
+      },
+      "timeline": {
+        "name": "Timeline",
+        "title": "The history of climate science",
+        "description": "Discover the key milestones that shaped our understanding of climate change, from first discoveries to current consensus."
+      },
+      "map": {
+        "name": "Impact Map",
+        "title": "Visualize impacts near you",
+        "description": "Explore an interactive map of concrete climate change effects in your region and around the world."
+      },
+      "calculator": {
+        "name": "Calculator",
+        "title": "Measure your carbon footprint",
+        "description": "Estimate your annual environmental impact and track your progress towards a more sustainable lifestyle with our smart calculator."
+      },
+      "articles": {
+        "name": "Articles",
+        "title": "In-depth climate analysis",
+        "description": "Explore our detailed analysis articles on climate issues, innovative solutions and the latest scientific research to deepen your knowledge."
+      },
+      "premium": {
+        "name": "Premium",
+        "title": "Unlock all features",
+        "description": "Access unlimited AI assistant, advanced data and exclusive tools to maximize your positive impact on the planet."
+      }
+    }
+  },
+  "DashboardPage": {
+    "title": "Climate Dashboard",
+    "description": "The key vital signs of our planet in real time.",
+    "loading": "Loading data...",
+    "error": "Error: {errorMessage}",
+    "co2CardTitle": "CO₂ Concentration",
+    "tempCardTitle": "Temperature Anomaly",
+    "seaLevelCardTitle": "Sea Level Rise",
+    "iceMeltCardTitle": "Ice Melt"
+  },
+  "DebunkPage": {
+    "title": "Climate Myths & Facts",
+    "subtitle": "Solid scientific facts to debunk misconceptions about climate change.",
+    "description": "Quality editorial content based on reliable sources like Jean-Marc Jancovici, IPCC and recognized scientific organizations.",
+    "loading": "Loading myths...",
+    "error": "Error: {errorMessage}",
+    "noPosts": "No content available at the moment.",
+    "mythPrefix": "Myth",
+    "realityPrefix": "Reality",
+    "sourceLink": "See source →",
+    "card": {
+      "mythLabel": "💭 Myth",
+      "realityLabel": "✅ Reality",
+      "clickToRead": "Click to read",
+      "like": "Like",
+      "unlike": "Unlike",
+      "loginToLike": "Sign in to like",
+      "loginToVote": "Sign in to like",
+      "sourceLink": "See source →"
+    },
+    "comments": {
+      "title": "💬 Premium Discussion",
+      "placeholder": "Share your thoughts...",
+      "submitButton": "Post",
+      "submitting": "Posting...",
+      "premiumOnly": "💎 Only Premium members can participate in discussions. Become a member to share your opinion!",
+      "loginRequired": "Sign in to view comments",
+      "loading": "Loading comments...",
+      "noComments": "No comments yet. Be the first to share your thoughts!"
+    }
+  },
+  "TimelinePage": {
+    "title": "History of Climate Science",
+    "subtitle": "Discover the key milestones that shaped our understanding of climate change.",
+    "loading": "Loading timeline...",
+    "error": "Error loading timeline"
+  },
+  "ChatAssistant": {
+    "title": "Ask EcoBot",
+    "placeholder": "How can I reduce my water consumption?",
+    "loginToChat": "Sign in to use the assistant",
+    "limitReached": "Limit reached - Become Premium member",
+    "sendButton": "Send",
+    "sendingButton": "Sending...",
+    "userLabel": "You",
+    "botLabel": "EcoBot",
+    "creditsLeft": "Free messages remaining: {count}",
+    "error": {
+      "limitReached": "You have reached your free message limit.",
+      "becomeMember": "Become Premium member"
+    }
+  },
+  "CalculatorPage": {
+    "title": "Calculate your Carbon Footprint",
+    "subtitle": "Estimate your annual impact on the planet in just a few clicks.",
+    "form": {
+      "transport": {
+        "distanceLabel": "Average daily distance",
+        "modeLabel": "Main transport mode",
+        "modePlaceholder": "Select a mode...",
+        "modes": {
+          "car_gasoline": "Car (gasoline)",
+          "car_electric": "Car (electric)",
+          "train": "Train",
+          "plane": "Plane"
+        }
+      },
+      "diet": {
+        "label": "Diet type",
+        "placeholder": "Select a diet...",
+        "types": {
+          "meat_lover": "Meat lover",
+          "average": "Average",
+          "vegetarian": "Vegetarian",
+          "vegan": "Vegan"
+        }
+      },
+      "energy": {
+        "label": "Household energy consumption"
+      },
+      "calculateButton": "Calculate my footprint",
+      "calculating": "Calculating...",
+      "result": {
+        "title": "Your Estimated Annual Carbon Footprint",
+        "unit": "tonnes CO₂e",
+        "saveButton": "Save this calculation",
+        "saving": "Saving..."
+      }
+    },
+    "history": {
+      "title": "Your Carbon Footprint Evolution",
+      "chartLabel": "Emissions (tonnes CO₂e)"
+    },
+    "premium": {
+      "title": "Discover the Premium Calculator",
+      "description": "Track your progress over time with our advanced calculator!",
+      "featureTitle": "Premium Feature",
+      "featureDescription": "Visualize your evolution and achieve your climate goals",
+      "signInButton": "Sign In",
+      "discoverButton": "Discover Premium",
+      "features": {
+        "history": "Your calculation history",
+        "goals": "Personalized goals",
+        "tips": "Personalized advice",
+        "badges": "Badge system",
+        "reservedForPremium": "Feature reserved for Premium members",
+        "signInAndUpgrade": "Sign in and upgrade to Premium to save your calculations"
+      }
+    }
+  },
+  "MapPage": {
+    "title": "Climate Impact Map",
+    "subtitle": "Discover the concrete effects of climate change in your area.",
+    "loading": "Loading map...",
+    "premium": {
+      "authenticatedTitle": "Do you like what you see?",
+      "authenticatedDescription": "Become a Premium Member to unlock all impact points on the map and support our mission.",
+      "authenticatedButton": "Become a Member",
+      "unauthenticatedTitle": "Discover all climate impacts",
+      "unauthenticatedDescription": "Sign in to see more impact points on the map, or become Premium for full access!",
+      "signInButton": "Sign In",
+      "becomePremiumButton": "Become Premium"
+    }
+  },
+  "ConsensusSection": {
+    "title": "An Overwhelming Scientific Consensus",
+    "subtitle": "The world's leading scientific organizations are united in their conclusions: climate change is real, human-caused, and requires urgent action."
+  },
+  "ProfilePage": {
+    "title": "Your Profile", 
+    "subtitle": "Manage your account information and settings.",
+    "stats": {
+      "title": "My Statistics",
+      "badges": "Badges Earned",
+      "lastCalculation": "Last Calculation",
+      "noCalculation": "No calculation",
+      "memberStatus": "Member Status",
+      "premium": "Premium"
+    }
+  },
+  "BillingSection": {
+    "title": "Subscription Management",
+    "subscribed": {
+      "message": "You are currently subscribed to EcoWarrior Premium. Manage your subscription, change your payment method, or cancel your subscription.",
+      "button": "Manage my subscription"
+    },
+    "notSubscribed": {
+      "message": "You are not yet subscribed. Discover all the benefits of our Premium offer to support the planet.",
+      "button": "Discover Premium"
+    }
+  },
+  "PricingPage": {
+    "title": "Become Premium Member",
+    "subtitle": "Support our mission and access exclusive features",
+    "plan": {
+      "title": "EcoWarrior Premium",
+      "promotion": "🔥 LAUNCH OFFER",
+      "features": [
+        "Access to all real-time climate data",
+        "Unlimited personalized AI assistant",
+        "Advanced carbon footprint calculator", 
+        "Priority access to new features"
+      ],
+      "button": "Take advantage of this offer now"
+    }
+  }
+} 
