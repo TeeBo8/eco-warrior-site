@@ -198,6 +198,17 @@
     "title": "Un Consensus Scientifique Écrasant",
     "subtitle": "Les plus grandes organisations scientifiques mondiales sont unanimes dans leurs conclusions : le changement climatique est réel, causé par l'homme et nécessite une action urgente."
   },
+  "MissionSection": {
+    "title": "Notre Prochaine Mission, Ensemble.",
+    "description": "Chez EcoWarrior, nous croyons à l'action concrète. C'est pourquoi je m'engage personnellement : dès que nous atteindrons 5000 membres premium, nous utiliserons une partie des fonds pour acquérir des terrains naturels et les sanctuariser, les protégeant ainsi définitivement de l'activité humaine. Chaque contrat d'acquisition vous sera partagé en toute transparence. Votre abonnement n'est pas une dépense, c'est un investissement pour la planète.",
+    "stats": {
+      "members": "Membres",
+      "goal": "Objectif",
+      "progress": "de notre objectif atteint !"
+    },
+    "cta": "Devenir Membre et Protéger la Nature",
+    "photoPlaceholder": "Votre photo ici"
+  },
   "ProfilePage": {
     "title": "Votre Profil",
     "subtitle": "Gérez les informations et les paramètres de votre compte.",

@@ -5,6 +5,7 @@ import { EcoFeatureShowcase } from "@/components/eco-feature-showcase";
 import { ConsensusLogos } from "@/components/consensus-logos";
 import { GlobalTestPanel } from "@/components/global-test-panel";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { MissionSection } from "@/components/landing/MissionSection";
 import { useTranslations } from 'next-intl';
 
 export default function HomePage() {
@@ -49,6 +50,9 @@ export default function HomePage() {
       
       {/* Section Carrousel de Fonctionnalités */}
       <EcoFeatureShowcase />
+      
+      {/* Section Mission */}
+      <MissionSection />
       
       {/* Section Consensus Scientifique */}
       <div className="bg-muted/50">

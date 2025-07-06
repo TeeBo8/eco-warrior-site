@@ -196,7 +196,18 @@
   },
   "ConsensusSection": {
     "title": "An Overwhelming Scientific Consensus",
-    "subtitle": "The world's leading scientific organizations are united in their conclusions: climate change is real, human-caused, and requires urgent action."
+    "subtitle": "The world's leading scientific organizations are unanimous in their conclusions: climate change is real, human-caused, and requires urgent action."
+  },
+  "MissionSection": {
+    "title": "Our Next Mission, Together.",
+    "description": "At EcoWarrior, we believe in concrete action. That's why I'm personally committed: as soon as we reach 5000 premium members, we'll use part of the funds to acquire natural lands and protect them, safeguarding them permanently from human activity. Every acquisition contract will be shared with you in complete transparency. Your subscription isn't an expense, it's an investment in the planet.",
+    "stats": {
+      "members": "Members",
+      "goal": "Goal",
+      "progress": "of our goal achieved!"
+    },
+    "cta": "Become a Member and Protect Nature",
+    "photoPlaceholder": "Your photo here"
   },
   "ProfilePage": {
     "title": "Your Profile", 

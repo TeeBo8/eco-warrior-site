@@ -9,6 +9,7 @@ import { postRouter } from '../api/routers/post';
 import { commentRouter } from '../api/routers/comment';
 import { mapRouter } from '../api/routers/map';
 import { articleRouter } from '../api/routers/article';
+import { userRouter } from '../api/routers/user';
 
 export const appRouter = router({
   stripe: stripeRouter,
@@ -19,6 +20,7 @@ export const appRouter = router({
   comment: commentRouter,
   map: mapRouter,
   article: articleRouter,
+  user: userRouter,
   
   getClimateIndicators: privateProcedure.query(async () => {
     // On appelle notre service qui fait maintenant tout le travail !
