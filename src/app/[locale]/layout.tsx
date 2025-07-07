@@ -8,6 +8,8 @@ import { getMessages } from 'next-intl/server';
 import { MainSidebar } from "@/components/main-sidebar";
 import { TestModeProvider } from "@/lib/test-mode-context";
 import { ThemeProvider } from "next-themes";
+import { Footer } from "@/components/layout/Footer";
+import { Toaster } from "@/components/ui/toaster";
 
 const montserrat = Montserrat({
   variable: "--font-sans",
@@ -57,8 +59,14 @@ export default async function RootLayout({
               <TrpcProvider>
                 <TestModeProvider>
                   <MainSidebar>
-                    {children}
+                    <div className="flex flex-col min-h-screen">
+                      <div className="flex-1">
+                        {children}
+                      </div>
+                      <Footer />
+                    </div>
                   </MainSidebar>
+                  <Toaster />
                 </TestModeProvider>
               </TrpcProvider>
             </NextIntlClientProvider>

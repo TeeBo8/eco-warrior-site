@@ -68,7 +68,7 @@ export function MainSidebar({ children }: { children: React.ReactNode }) {
   ];
 
   return (
-    <div className={cn("rounded-md flex flex-col md:flex-row w-full flex-1 h-screen mx-auto overflow-hidden")}>
+    <div className={cn("rounded-md flex flex-col md:flex-row w-full flex-1 min-h-screen mx-auto")}>
       <Sidebar open={open} setOpen={setOpen}>
         <SidebarBody className="justify-between gap-10">
           <div className="flex flex-col flex-1 overflow-y-auto">
@@ -146,8 +146,8 @@ export function MainSidebar({ children }: { children: React.ReactNode }) {
           </div>
         </SidebarBody>
       </Sidebar>
-      <div className="flex flex-1 overflow-auto">
-        <div className="p-2 md:p-10 flex-1 w-full h-full">
+      <div className="flex flex-1">
+        <div className="p-2 md:p-10 flex-1 w-full">
           {children}
         </div>
       </div>

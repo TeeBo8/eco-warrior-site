@@ -246,5 +246,26 @@
       ],
       "button": "Take advantage of this offer now"
     }
+  },
+  "Footer": {
+    "links": {
+      "dashboard": "Dashboard",
+      "myths": "Myths & Facts",
+      "timeline": "Timeline",
+      "impactMap": "Impact Map",
+      "calculator": "Calculator",
+      "profile": "Profile"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "emailPlaceholder": "Your email address",
+      "messagePlaceholder": "Your message...",
+      "sendButton": "Send Message",
+      "successTitle": "Message sent!",
+      "successDescription": "Thank you, we will respond as soon as possible.",
+      "errorTitle": "Error",
+      "errorDescription": "The message could not be sent."
+    },
+    "rights": "All rights reserved"
   }
 } 

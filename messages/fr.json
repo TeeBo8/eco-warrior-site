@@ -246,5 +246,26 @@
       ],
       "button": "Profiter de l'offre maintenant"
     }
+  },
+  "Footer": {
+    "links": {
+      "dashboard": "Tableau de Bord",
+      "myths": "Mythes & Réalités",
+      "timeline": "Chronologie",
+      "impactMap": "Carte des Impacts",
+      "calculator": "Calculateur",
+      "profile": "Profil"
+    },
+    "contact": {
+      "title": "Contactez-nous",
+      "emailPlaceholder": "Votre adresse email",
+      "messagePlaceholder": "Votre message...",
+      "sendButton": "Envoyer le message",
+      "successTitle": "Message envoyé !",
+      "successDescription": "Merci, nous vous répondrons dès que possible.",
+      "errorTitle": "Erreur",
+      "errorDescription": "Le message n'a pas pu être envoyé."
+    },
+    "rights": "Tous droits réservés"
   }
 } 
