@@ -85,6 +85,7 @@ export function PostCard({ post }: { post: Post }) {
               "flex items-center gap-2",
               post.isLiked && "bg-red-500 hover:bg-red-600"
             )}
+            aria-label={post.isLiked ? "Retirer le like" : "Liker ce post"}
           >
             <Heart className={cn("h-4 w-4", post.isLiked && "fill-white")} />
             {post.isLiked ? t('unlike') : t('like')} ({post.likes})

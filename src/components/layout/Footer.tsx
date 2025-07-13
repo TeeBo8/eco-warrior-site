@@ -105,18 +105,26 @@ export function Footer() {
           </div>
 
           <div className="mb-6 flex space-x-4">
-            <Link href="https://x.com/THIBAUL76280609" target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="icon" className="rounded-full">
+            <Button asChild variant="outline" size="icon" className="rounded-full">
+              <Link 
+                href="https://x.com/THIBAUL76280609" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Visiter notre profil Twitter"
+              >
                 <Twitter className="h-4 w-4" />
-                <span className="sr-only">Twitter</span>
-              </Button>
-            </Link>
-            <Link href="https://www.linkedin.com/in/thibault-leture-5740242a1/" target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="icon" className="rounded-full">
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="icon" className="rounded-full">
+              <Link 
+                href="https://www.linkedin.com/in/thibault-leture-5740242a1/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Visiter notre profil LinkedIn"
+              >
                 <Linkedin className="h-4 w-4" />
-                <span className="sr-only">LinkedIn</span>
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
 
           <div>
