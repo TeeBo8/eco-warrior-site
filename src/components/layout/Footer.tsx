@@ -4,9 +4,11 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Linkedin, Twitter, Loader2, Leaf } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,6 +34,9 @@ const EcoWarriorLogo = ({ className }: { className?: string }) => (
 
 export function Footer() {
   const pathname = usePathname();
+  const locale = useLocale();
+  const router = useRouter();
+  const { user } = useUser();
   const t = useTranslations('Footer');
   const { toast } = useToast();
   
@@ -68,13 +73,23 @@ export function Footer() {
     mutate(data);
   }
 
+  // Fonction pour gérer les clics sur les liens protégés
+  const handleProtectedLinkClick = (href: string, e: React.MouseEvent) => {
+    if (!user) {
+      e.preventDefault();
+      // Rediriger vers la page de connexion avec l'URL de retour
+      router.push(`/${locale}/sign-in?redirect_url=${encodeURIComponent(href)}`);
+    }
+    // Si l'utilisateur est connecté, le lien fonctionne normalement
+  };
+
   const navLinks = [
-    { href: "/dashboard", label: t('links.dashboard') },
-    { href: "/debunk", label: t('links.myths') },
-    { href: "/timeline", label: t('links.timeline') },
-    { href: "/map", label: t('links.impactMap') },
-    { href: "/calculator", label: t('links.calculator') },
-    { href: "/profile", label: t('links.profile') },
+    { href: `/${locale}/dashboard`, label: t('links.dashboard'), protected: true },
+    { href: `/${locale}/debunk`, label: t('links.myths'), protected: true },
+    { href: `/${locale}/timeline`, label: t('links.timeline'), protected: true },
+    { href: `/${locale}/map`, label: t('links.impactMap'), protected: true },
+    { href: `/${locale}/calculator`, label: t('links.calculator'), protected: true },
+    { href: `/${locale}/profile`, label: t('links.profile'), protected: true },
   ];
 
   return (
@@ -88,7 +103,12 @@ export function Footer() {
 
           <nav className="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-2">
             {navLinks.map(link => (
-                <Link key={link.href} href={link.href} className="text-sm font-medium hover:text-primary transition-colors">
+                <Link 
+                  key={link.href} 
+                  href={link.href} 
+                  className="text-sm font-medium hover:text-primary transition-colors"
+                  onClick={link.protected ? (e) => handleProtectedLinkClick(link.href, e) : undefined}
+                >
                     {link.label}
                 </Link>
             ))}
