@@ -49,6 +49,8 @@ export const carbonFootprints = pgTable("carbon_footprints", {
 export const posts = pgTable("posts", {
   id: serial("id").primaryKey(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  slug: varchar("slug", { length: 255 }).unique(),
   
   mythFr: text("myth_fr").notNull(),
   realityFr: text("reality_fr").notNull(),

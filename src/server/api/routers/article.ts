@@ -12,6 +12,7 @@ export const articleRouter = router({
       orderBy: [desc(articles.publishedAt)],
       // On ne sélectionne que ce qui est nécessaire pour la liste
       columns: { 
+        id: true,
         slug: true, 
         titleFr: true, titleEn: true,
         summaryFr: true, summaryEn: true,

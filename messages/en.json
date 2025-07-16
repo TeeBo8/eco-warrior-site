@@ -124,6 +124,7 @@
   },
   "CalculatorPage": {
     "title": "Calculate your Carbon Footprint",
+    "description": "Estimate your annual environmental impact and track your progress towards a more sustainable lifestyle with our smart calculator.",
     "subtitle": "Estimate your annual impact on the planet in just a few clicks.",
     "form": {
       "transport": {

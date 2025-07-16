@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslations } from "next-intl";
 import { Linkedin, Twitter, Loader2, Leaf } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,6 +31,7 @@ const EcoWarriorLogo = ({ className }: { className?: string }) => (
 );
 
 export function Footer() {
+  const pathname = usePathname();
   const t = useTranslations('Footer');
   const { toast } = useToast();
   
@@ -53,6 +55,14 @@ export function Footer() {
       });
     },
   });
+
+  // Ne pas afficher le footer si on n'est pas sur la page d'accueil
+  // On vérifie que l'URL se termine par juste la locale (ex: /fr ou /en)
+  const isHomePage = pathname.match(/^\/[a-z]{2}$/);
+  
+  if (!isHomePage) {
+    return null;
+  }
 
   function onSubmit(data: ContactFormValues) {
     mutate(data);
@@ -104,7 +114,7 @@ export function Footer() {
             </form>
           </div>
 
-          <div className="mb-6 flex space-x-4">
+          <div className="mb-6 flex gap-4">
             <Button asChild variant="outline" size="icon" className="rounded-full">
               <Link 
                 href="https://x.com/THIBAUL76280609" 

@@ -59,4 +59,15 @@ export const postRouter = router({
       
       return { success: true };
     }),
+  getLikeStatus: publicProcedure
+    .input(z.object({ postId: z.number() }))
+    .query(async ({ ctx, input }) => {
+      const totalLikes = await db.select({ count: sql`count(*)` }).from(likes).where(eq(likes.postId, input.postId));
+      const likesCount = totalLikes[0].count;
+      if (!ctx.userId) return { isLiked: false, likes: likesCount };
+      const userLike = await db.query.likes.findFirst({
+        where: and(eq(likes.postId, input.postId), eq(likes.userId, ctx.userId)),
+      });
+      return { isLiked: !!userLike, likes: likesCount };
+    }),
 }); 

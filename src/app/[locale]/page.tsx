@@ -1,5 +1,3 @@
-"use client";
-
 import { EcoChat } from "@/components/eco-chat";
 import { EcoFeatureShowcase } from "@/components/eco-feature-showcase";
 import { ConsensusLogos } from "@/components/consensus-logos";
@@ -7,6 +5,17 @@ import { GlobalTestPanel } from "@/components/global-test-panel";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { MissionSection } from "@/components/landing/MissionSection";
 import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const t = await getTranslations({ locale: resolvedParams.locale, namespace: 'HomePage' });
+  return {
+    title: t('title'),
+    description: t('description'),
+  };
+}
 
 export default function HomePage() {
   const t = useTranslations('HomePage');

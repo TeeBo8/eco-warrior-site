@@ -3,7 +3,6 @@
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import { trpc } from "@/app/_trpc/client";
-import { useParams } from "next/navigation";
 import * as LucideIcons from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -27,9 +26,7 @@ type TimelineEvent = {
   icon: string | null;
 };
 
-export function Timeline() {
-  const params = useParams();
-  const locale = typeof params.locale === "string" ? params.locale : "en";
+export function Timeline({ locale }: { locale: string }) {
   const t = useTranslations("TimelinePage");
   const eventsQuery = trpc.getTimelineEvents.useQuery();
 

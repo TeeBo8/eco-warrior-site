@@ -1,5 +1,15 @@
 import { CarbonCalculatorForm } from "@/components/carbon-calculator-form";
 import { getTranslations } from "next-intl/server";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const t = await getTranslations({ locale: resolvedParams.locale, namespace: 'CalculatorPage' });
+  return {
+    title: t('title'),
+    description: t('description'),
+  };
+}
 
 export default async function CalculatorPage({
   params,

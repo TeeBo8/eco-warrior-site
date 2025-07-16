@@ -124,6 +124,7 @@
   },
   "CalculatorPage": {
     "title": "Calculez votre Empreinte Carbone",
+    "description": "Estimez votre impact environnemental annuel et suivez votre progression vers un mode de vie plus durable grâce à notre calculateur intelligent.",
     "subtitle": "Estimez votre impact annuel sur la planète en quelques clics.",
     "form": {
       "transport": {
