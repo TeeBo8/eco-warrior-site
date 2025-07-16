@@ -122,6 +122,17 @@
       "becomeMember": "Become Premium member"
     }
   },
+  "EcoChat": {
+    "title": "Eco-Assistant",
+    "placeholder": "Ask a question about the climate...",
+    "suggestionsTitle": "Or try one of these questions:",
+    "suggestions": [
+      "What is the greenhouse effect?",
+      "How can I reduce my carbon footprint at home?",
+      "Explain the latest IPCC report simply.",
+      "What are the most promising renewable energies?"
+    ]
+  },
   "CalculatorPage": {
     "title": "Calculate your Carbon Footprint",
     "description": "Estimate your annual environmental impact and track your progress towards a more sustainable lifestyle with our smart calculator.",

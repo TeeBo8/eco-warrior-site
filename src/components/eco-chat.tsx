@@ -73,8 +73,9 @@ function ChatMessage({ role, content }: { role: 'user' | 'assistant', content: s
 
 export function EcoChat() {
   const t = useTranslations("ChatAssistant");
+  const tChat = useTranslations("EcoChat");
   const { user } = useUser();
-  const { messages, input, handleInputChange, handleSubmit, isLoading, error } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, isLoading, error, setInput } = useChat({
     onFinish: () => {
       // Recharger les crédits après chaque message
       refetchCredits();
@@ -82,6 +83,22 @@ export function EcoChat() {
   });
   const [inputFocused, setInputFocused] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // Récupérer les suggestions depuis les traductions
+  const suggestionQuestions = tChat.raw('suggestions') as string[];
+
+  // Fonction pour gérer le clic sur une suggestion
+  const handleSuggestionClick = (question: string) => {
+    setInput(question);
+    // Créer un événement factice pour soumettre immédiatement
+    const fakeEvent = { 
+      preventDefault: () => {}, 
+      currentTarget: {
+        requestSubmit: () => {}
+      }
+    } as unknown as React.FormEvent<HTMLFormElement>;
+    handleSubmit(fakeEvent);
+  };
   
   // Récupérer le vrai compteur depuis la base de données
   const { data: credits, refetch: refetchCredits } = trpc.chat.getCredits.useQuery(undefined, {
@@ -129,7 +146,7 @@ export function EcoChat() {
               className="inline-block"
             >
               <h1 className="text-3xl font-medium tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/60 pb-1">
-                {t('title')}
+                {tChat('title')}
               </h1>
               <motion.div 
                 className="h-px bg-gradient-to-r from-transparent via-border to-transparent"
@@ -144,9 +161,48 @@ export function EcoChat() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
             >
-              Posez une question ou tapez une commande
+              {tChat('placeholder')}
             </motion.p>
           </div>
+
+          {/* Section des suggestions (uniquement si pas de messages) */}
+          {messages.length === 0 && (
+            <motion.div 
+              className="backdrop-blur-xl bg-background/80 rounded-2xl border border-border p-6"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.4 }}
+            >
+              <h3 className="text-lg font-medium text-center mb-4">
+                {tChat('suggestionsTitle')}
+              </h3>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {suggestionQuestions.map((question, index) => (
+                  <motion.button
+                    key={index}
+                    onClick={() => handleSuggestionClick(question)}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={cn(
+                      "p-4 rounded-xl text-left transition-all duration-200",
+                      "bg-muted/50 hover:bg-muted border border-border hover:border-primary/50",
+                      "text-sm font-medium text-foreground",
+                      "disabled:opacity-50 disabled:cursor-not-allowed"
+                    )}
+                    disabled={!user || !canChat || isLoading}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 + index * 0.1 }}
+                  >
+                    <div className="flex items-start gap-3">
+                      <span className="text-primary text-lg">💡</span>
+                      <span className="flex-1">{question}</span>
+                    </div>
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          )}
 
           {/* Section d'affichage des messages avec scroll */}
           {messages.length > 0 && (
@@ -186,7 +242,7 @@ export function EcoChat() {
                 onBlur={() => setInputFocused(false)}
                 placeholder={
                   !user ? t('loginToChat') : 
-                  canChat ? t('placeholder') : t('limitReached')
+                  canChat ? tChat('placeholder') : t('limitReached')
                 }
                 disabled={!user || !canChat || isLoading}
                 containerClassName="w-full"

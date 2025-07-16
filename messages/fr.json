@@ -122,6 +122,17 @@
       "becomeMember": "Devenez membre Premium"
     }
   },
+  "EcoChat": {
+    "title": "Eco-Assistant",
+    "placeholder": "Posez une question sur le climat...",
+    "suggestionsTitle": "Ou essayez une de ces questions :",
+    "suggestions": [
+      "Qu'est-ce que l'effet de serre ?",
+      "Comment puis-je réduire mon empreinte carbone à la maison ?",
+      "Explique-moi le dernier rapport du GIEC simplement.",
+      "Quelles sont les énergies renouvelables les plus prometteuses ?"
+    ]
+  },
   "CalculatorPage": {
     "title": "Calculez votre Empreinte Carbone",
     "description": "Estimez votre impact environnemental annuel et suivez votre progression vers un mode de vie plus durable grâce à notre calculateur intelligent.",
