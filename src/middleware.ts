@@ -14,6 +14,7 @@ const isPublicRoute = createRouteMatcher([
   '/en/sign-up(.*)',
   '/fr/pricing',      // Page pricing accessible sans connexion
   '/en/pricing',
+  '/sitemap.xml',     // Sitemap accessible publiquement
   '/api/trpc/getDebunkingPoints',  // Route API publique pour les points de débunking
   '/api/trpc/getTimelineEvents',   // Route API publique pour la timeline
   '/api/webhooks/(.*)'  // Webhooks publics
@@ -28,9 +29,19 @@ const intlMiddleware = createMiddleware({
 
 // On combine les deux middlewares
 export default clerkMiddleware(async (auth, request) => {
-  // Skip l'internationalisation pour les routes API
+  // Gérer les redirections spéciales
+  if (request.nextUrl.pathname.match(/^\/(en|fr)\/sitemap\.xml$/)) {
+    // Rediriger /en/sitemap.xml ou /fr/sitemap.xml vers /sitemap.xml
+    const sitemapUrl = new URL('/sitemap.xml', request.url);
+    return Response.redirect(sitemapUrl, 301);
+  }
+  
+  // Skip l'internationalisation pour les routes API, sitemap et autres fichiers spéciaux
   if (request.nextUrl.pathname.startsWith('/api') || 
-      request.nextUrl.pathname.startsWith('/trpc')) {
+      request.nextUrl.pathname.startsWith('/trpc') ||
+      request.nextUrl.pathname === '/sitemap.xml' ||
+      request.nextUrl.pathname === '/robots.txt' ||
+      request.nextUrl.pathname === '/favicon.ico') {
     // Vérifier l'authentification pour les routes API non publiques
     if (!isPublicRoute(request)) {
       const authData = await auth();
