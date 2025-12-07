@@ -50,6 +50,13 @@ export function VisualScanner({ locale = 'fr' }: { locale?: string }) {
     };
 
     const startCamera = async () => {
+        // Check if environment supports mediaDevices (requires HTTPS or localhost)
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            alert("La caméra nécéssite une connexion sécurisée (HTTPS). Ouverture de la galerie/caméra native à la place.");
+            fileInputRef.current?.click();
+            return;
+        }
+
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: { facingMode: 'environment' } // Prefer back camera
@@ -61,7 +68,9 @@ export function VisualScanner({ locale = 'fr' }: { locale?: string }) {
             }
         } catch (error) {
             console.error('Erreur accès caméra:', error);
-            alert('Impossible d\'accéder à la caméra. Veuillez autoriser l\'accès ou utiliser l\'import de fichier.');
+            // Fallback to file input if permission denied or other error
+            alert('Impossible d\'accéder à la caméra direct. Ouverture de l\'import...');
+            fileInputRef.current?.click();
         }
     };
 

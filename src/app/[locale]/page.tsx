@@ -1,7 +1,7 @@
 'use client';
 
 import { EcoFeatureShowcase } from "@/components/eco-feature-showcase";
-import { ConsensusLogos } from "@/components/consensus-logos";
+
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { MissionSection } from "@/components/landing/MissionSection";
 import { BenefitsSection } from "@/components/landing/BenefitsSection";
@@ -94,7 +94,7 @@ export default function HomePage() {
       </section>
 
       {/* Section Logos Clients / Partenaires Scientifiques */}
-      <ConsensusLogos />
+
 
       {/* Section Bénéfices */}
       <BenefitsSection />
