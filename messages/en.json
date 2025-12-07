@@ -26,11 +26,11 @@
     },
     "features": {
       "showcase": {
-        "title": "All our features at a glance",
-        "description": "Discover how EcoWarrior helps you understand and act for the climate",
+        "title": "Explore our scientific tools",
+        "description": "Beyond individual action, develop your understanding of climate mechanisms.",
         "cta": {
           "text": "Ready to become a true EcoWarrior?",
-          "primary": "Get started now",
+          "primary": "Start now",
           "secondary": "Learn more"
         }
       },
@@ -220,8 +220,8 @@
     "subtitle": "NASA, IPCC, CNRS, NOAA... Every major global scientific institution confirms the human origin of warming with a certainty level comparable to gravity. It's not an opinion, it's physics."
   },
   "MissionSection": {
-    "title": "Support Development",
-    "description": "If you enjoy this tool and want to see the project grow, your support is welcome! EcoWarrior is developed with passion to help everyone take climate action. Every contribution helps us maintain servers, improve AI, and develop new features for the community.",
+    "title": "A word from the founder",
+    "description": "EcoWarrior was born from frustration: helplessness in the face of numbers. I coded these tools so that everyone can understand and act concretely, without barriers. Your support keeps this technology free and independent.",
     "stats": {
       "members": "Contributors",
       "goal": "Funding Goal",
@@ -279,16 +279,16 @@
     "subtitle": "We give you the tools to understand and act on climate change.",
     "benefits": {
       "inform": {
-        "title": "Get Informed",
-        "description": "Access real-time climate data: CO₂, temperature, sea levels. Stay informed with reliable scientific sources."
+        "title": "Real-time Dashboard",
+        "description": "Follow the planet's vital signs (CO₂, Temperature, Ice) with live data updated from NASA/NOAA satellites."
       },
       "understand": {
-        "title": "Understand the Issues",
-        "description": "Debunk misconceptions with our Myths & Facts section based on IPCC work and recognized experts."
+        "title": "Smart AI Scanner",
+        "description": "Don't guess the impact of your purchases anymore. Scan any product or meal to reveal its instant carbon footprint."
       },
       "act": {
-        "title": "Take Action",
-        "description": "Calculate your carbon footprint, track your progress and receive personalized tips to reduce your impact."
+        "title": "Calculator & Tracking",
+        "description": "Measure your progress month after month with our precise tracking tools and receive personalized action recommendations."
       }
     }
   },
