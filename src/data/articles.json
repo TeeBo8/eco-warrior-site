@@ -1,0 +1,41 @@
+[
+    {
+        "id": 1,
+        "slug": "2024-annee-tous-les-records",
+        "titleFr": "2024 : L'année qui a tout changé",
+        "titleEn": "2024: The Year That Changed Everything",
+        "summaryFr": "Retour sur une année climatique hors norme où les records de température sont tombés les uns après les autres.",
+        "summaryEn": "A look back at an extraordinary climate year where temperature records fell one after another.",
+        "contentFr": "## Une chaleur inédite\n\nL'année 2024 restera gravée dans l'histoire climatique. Avec une anomalie globale dépassant temporairement **+1.5°C**, nous avons eu un aperçu concret de notre futur.\n\n### Les Océans en surchauffe\n\nCe n'est pas seulement l'air qui chauffe. Les océans, véritables régulateurs thermiques de la planète, ont absorbé une quantité d'énergie colossale, menaçant la vie marine et les coraux.\n\n## Pourquoi maintenant ?\n\nLa combinaison du réchauffement anthropique (gaz à effet de serre) et du phénomène El Niño a créé ce pic. Mais ne nous y trompons pas : la tendance de fond est bien humaine.",
+        "contentEn": "## Unprecedented Heat\n\n2024 will go down in climate history. With a global anomaly temporarily exceeding **+1.5°C**, we got a concrete glimpse of our future.\n\n### Oceans Overheating\n\nIt's not just the air warming up. The oceans, true thermal regulators of the planet, absorbed a colossal amount of energy, threatening marine life and corals.\n\n## Why Now?\n\nThe combination of anthropogenic warming (greenhouse gases) and El Niño created this peak. But make no mistake: the underlying trend is human-driven.",
+        "imageUrl": "https://images.unsplash.com/photo-1605218427368-35b8dd5a7461?auto=format&fit=crop&q=80",
+        "publishedAt": "2024-06-15T10:00:00Z",
+        "author": "Dr. Sarah Climat"
+    },
+    {
+        "id": 2,
+        "slug": "empreinte-carbone-individuelle",
+        "titleFr": "L'Empreinte Carbone : Mythe ou Levier ?",
+        "titleEn": "Carbon Footprint: Myth or Lever?",
+        "summaryFr": "L'action individuelle sert-elle vraiment à quelque chose face aux géants industriels ? Spoiler : Oui.",
+        "summaryEn": "Does individual action really matter against industrial giants? Spoiler: Yes.",
+        "contentFr": "## Le piège de l'inaction\n\nIl est facile de dire 'C'est la faute des 100 entreprises qui polluent'. C'est vrai, mais ces entreprises produisent pour... nous.\n\n### Le pouvoir du consommateur\n\nChaque achat est un vote. Refuser la fast-fashion, réduire la viande, choisir le train : ces choix envoient des signaux économiques puissants.\n\n## Systémique ET Individuel\n\nNous avons besoin de lois fortes, mais aussi de citoyens engagés pour les soutenir. L'un ne va pas sans l'autre.",
+        "contentEn": "## The Trap of Inaction\n\nIt's easy to say 'It's the fault of the 100 companies polluting'. True, but those companies produce for... us.\n\n### Consumer Power\n\nEvery purchase is a vote. Refusing fast fashion, reducing meat, choosing trains: these choices send powerful economic signals.\n\n## Systemic AND Individual\n\nWe need strong laws, but also committed citizens to support them. You can't have one without the other.",
+        "imageUrl": "https://images.unsplash.com/photo-1542601906990-b4d3fb7d5c73?auto=format&fit=crop&q=80",
+        "publishedAt": "2024-05-20T09:00:00Z",
+        "author": "EcoWarrior Team"
+    },
+    {
+        "id": 3,
+        "slug": "ocean-cry",
+        "titleFr": "Le cri silencieux de l'océan",
+        "titleEn": "The Ocean's Silent Cry",
+        "summaryFr": "L'acidification des océans est l'autre problème majeur du CO2, souvent oublié mais tout aussi mortel.",
+        "summaryEn": "Ocean acidification is the 'other' major CO2 problem, often forgotten but just as deadly.",
+        "contentFr": "## Une chimie qui change\n\nLe CO2 se dissout dans l'eau et forme de l'acide carbonique. Résultat : l'océan devient plus acide.\n\n### Coquilles en danger\n\nLes organismes à coquille calcaire (plancton, coraux, mollusques) peinent de plus en plus à fabriquer leur squelette. C'est la base de la chaîne alimentaire marine qui s'effondre.\n\n## Agir pour la mer\n\nProtéger les océans, c'est aussi réduire nos émissions. Tout est lié.",
+        "contentEn": "## Changing Chemistry\n\nCO2 dissolves in water forming carbonic acid. Result: the ocean becomes more acidic.\n\n### Shells in Danger\n\nCalcifying organisms (plankton, corals, mollusks) struggle more and more to build their skeletons. The base of the marine food chain is collapsing.\n\n## Act for the Sea\n\nProtecting oceans means reducing emissions. Everything is connected.",
+        "imageUrl": "https://images.unsplash.com/photo-1468581264429-2548ef9eb732?auto=format&fit=crop&q=80",
+        "publishedAt": "2024-04-12T14:00:00Z",
+        "author": "Marine Bio"
+    }
+]

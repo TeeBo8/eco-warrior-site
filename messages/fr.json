@@ -10,9 +10,20 @@
     "subscribeButton": "Devenir Membre"
   },
   "HomePage": {
-    "title": "Le changement climatique n'attend pas.",
-    "subtitle": "Et vous ?",
-    "description": "Découvrez les faits, comprenez les enjeux et agissez maintenant. Notre planète a besoin de guerriers.",
+    "title": "La science est formelle. L'urgence est réelle.",
+    "subtitle": "Et l'action doit être immédiate.",
+    "description": "Fini le débat. 99,9% des scientifiques s'accordent : l'heure n'est plus au doute, mais à la sauvegarde de notre habitat. Rejoignez la résistance climatique basée sur les faits.",
+    "hero": {
+      "badge": "Données climatiques en temps réel",
+      "cta": {
+        "exploreDashboard": "Explorer le Dashboard",
+        "discoverPlatform": "Découvrir la plateforme"
+      },
+      "preview": {
+        "title": "Dashboard climatique interactif",
+        "subtitle": "CO₂ • Température • Niveau des mers"
+      }
+    },
     "features": {
       "showcase": {
         "title": "Toutes nos fonctionnalités en un coup d'œil",
@@ -57,6 +68,11 @@
         "name": "Premium",
         "title": "Débloquez toutes les fonctionnalités",
         "description": "Accédez à l'assistant IA illimité, aux données avancées et aux outils exclusifs pour maximiser votre impact positif sur la planète."
+      },
+      "scanner": {
+        "name": "Scanner",
+        "title": "Scanner Carbone Visuel",
+        "description": "Analysez l'empreinte carbone de n'importe quel objet ou repas instantanément grâce à notre IA propulsée par Gemini 3 Pro."
       }
     }
   },
@@ -175,20 +191,13 @@
       "title": "Évolution de votre Empreinte Carbone",
       "chartLabel": "Émissions (tonnes CO₂e)"
     },
-    "premium": {
-      "title": "Découvrez le Calculateur Premium",
-      "description": "Suivez votre progression dans le temps avec notre calculateur avancé !",
-      "featureTitle": "Fonctionnalité Premium",
-      "featureDescription": "Visualisez votre évolution et atteignez vos objectifs climatiques",
-      "signInButton": "Se connecter",
-      "discoverButton": "Découvrir Premium",
-      "features": {
-        "history": "Historique de vos calculs",
-        "goals": "Objectifs personnalisés",
-        "tips": "Conseils personnalisés",
-        "badges": "Système de badges",
-        "reservedForPremium": "Fonctionnalité réservée aux membres Premium",
-        "signInAndUpgrade": "Connectez-vous et devenez Premium pour sauvegarder vos calculs"
+    "methodology": {
+      "title": "Méthodologie Scientifique",
+      "description": "Ce calculateur s'appuie sur la Base Carbone de l'ADEME et les rapports du GIEC. Nous prenons en compte l'analyse du cycle de vie complet.",
+      "factors": {
+        "transport": "Transport : inclut la combustion et la production du carburant/véhicule.",
+        "diet": "Alimentation : inclut la production agricole, la transformation et le transport.",
+        "energy": "Énergie : basé sur l'intensité carbone moyenne du réseau électrique."
       }
     }
   },
@@ -207,19 +216,25 @@
     }
   },
   "ConsensusSection": {
-    "title": "Un Consensus Scientifique Écrasant",
-    "subtitle": "Les plus grandes organisations scientifiques mondiales sont unanimes dans leurs conclusions : le changement climatique est réel, causé par l'homme et nécessite une action urgente."
+    "title": "Le débat scientifique est clos.",
+    "subtitle": "NASA, GIEC, CNRS, NOAA... Toutes les grandes institutions mondiales confirment l'origine humaine du réchauffement avec un niveau de certitude comparable à celui de la gravité. Ce n'est pas une opinion, c'est de la physique."
   },
   "MissionSection": {
-    "title": "Notre Prochaine Mission, Ensemble.",
-    "description": "Chez EcoWarrior, nous croyons à l'action concrète. C'est pourquoi je m'engage personnellement : dès que nous atteindrons 5000 membres premium, nous utiliserons une partie des fonds pour acquérir des terrains naturels et les sanctuariser, les protégeant ainsi définitivement de l'activité humaine. Chaque contrat d'acquisition vous sera partagé en toute transparence. Votre abonnement n'est pas une dépense, c'est un investissement pour la planète.",
+    "title": "Soutenez le Développement",
+    "description": "Si vous appréciez cet outil et souhaite voir le projet grandir, votre soutien est le bienvenu ! EcoWarrior est développé avec passion pour aider chacun à agir pour le climat. Chaque contribution nous aide à maintenir les serveurs, améliorer l'IA et développer de nouvelles fonctionnalités pour la communauté.",
     "stats": {
-      "members": "Membres",
-      "goal": "Objectif",
-      "progress": "de notre objectif atteint !"
+      "members": "Contributeurs",
+      "goal": "Objectif de financement",
+      "progress": "financé"
     },
-    "cta": "Devenir Membre et Protéger la Nature",
-    "photoPlaceholder": "Votre photo ici"
+    "cta": "Faire un don et soutenir le projet",
+    "photoPlaceholder": "Développeur"
+  },
+  "ScannerPage": {
+    "title": "Scanner Carbone Visuel",
+    "description": "Analysez l'empreinte carbone à partir d'images grâce à Gemini AI",
+    "subtitle": "Propulsé par Gemini 3 Pro. Prenez une photo de n'importe quel objet, repas ou activité pour révéler instantanément son impact environnemental.",
+    "badge": "IA Multimodale Native"
   },
   "ProfilePage": {
     "title": "Votre Profil",
@@ -252,11 +267,90 @@
       "promotion": "🔥 OFFRE DE LANCEMENT",
       "features": [
         "Accès à toutes les données climatiques en temps réel",
-        "Assistant IA personnalisé illimité", 
+        "Assistant IA personnalisé illimité",
         "Calculateur d'empreinte carbone avancé",
         "Priorité sur les nouvelles fonctionnalités"
       ],
       "button": "Profiter de l'offre maintenant"
+    }
+  },
+  "BenefitsSection": {
+    "title": "Pourquoi choisir EcoWarrior ?",
+    "subtitle": "Nous vous donnons les outils pour comprendre et agir face au changement climatique.",
+    "benefits": {
+      "inform": {
+        "title": "Informez-vous",
+        "description": "Accédez aux données climatiques en temps réel : CO₂, température, niveau des mers. Restez informé avec des sources scientifiques fiables."
+      },
+      "understand": {
+        "title": "Comprenez les enjeux",
+        "description": "Démystifiez les idées reçues grâce à notre section Mythes & Réalités basée sur les travaux du GIEC et d'experts reconnus."
+      },
+      "act": {
+        "title": "Passez à l'action",
+        "description": "Calculez votre empreinte carbone, suivez vos progrès et recevez des conseils personnalisés pour réduire votre impact."
+      }
+    }
+  },
+  "HowItWorksSection": {
+    "title": "Votre parcours en 3 étapes",
+    "subtitle": "Commencez votre transition écologique en quelques minutes seulement.",
+    "steps": {
+      "understand": {
+        "title": "Comprenez l'Urgence",
+        "description": "Accédez immédiatement aux données scientifiques réelles (CO2, Température) sans barrière. Pas de compte requis."
+      },
+      "measure": {
+        "title": "Mesurez votre Impact",
+        "description": "Utilisez notre calculateur carbone transparent pour évaluer votre empreinte personnelle."
+      },
+      "act": {
+        "title": "Rejoignez le Sanctuaire",
+        "description": "Participez à notre mission collective : acquérir et protéger définitivement des terres sauvages."
+      }
+    }
+  },
+  "TestimonialsSection": {
+    "title": "Ce que nos utilisateurs en pensent",
+    "subtitle": "Rejoignez des milliers de personnes qui agissent pour le climat avec EcoWarrior.",
+    "testimonials": {
+      "testimonial1": {
+        "name": "Marie Dupont",
+        "role": "Responsable RSE",
+        "quote": "EcoWarrior m'a permis de mieux comprendre mon impact et de le réduire concrètement. Les données sont claires et les conseils vraiment utiles."
+      },
+      "testimonial2": {
+        "name": "Thomas Bernard",
+        "role": "Enseignant en SVT",
+        "quote": "J'utilise EcoWarrior avec mes élèves. La section Mythes & Réalités est parfaite pour enseigner l'esprit critique face à la désinformation."
+      },
+      "testimonial3": {
+        "name": "Sophie Martin",
+        "role": "Étudiante en environnement",
+        "quote": "Le calculateur d'empreinte carbone est super précis. J'ai pu identifier exactement où agir pour diminuer mon impact de 30%."
+      }
+    }
+  },
+  "FAQSection": {
+    "title": "Questions fréquentes",
+    "subtitle": "Tout ce que vous devez savoir sur EcoWarrior avant de commencer.",
+    "faq": {
+      "q1": {
+        "question": "C'est quoi EcoWarrior exactement ?",
+        "answer": "EcoWarrior est une plateforme web qui vous aide à comprendre et agir face au changement climatique. Nous combinons des données scientifiques en temps réel, un contenu éducatif de qualité et des outils pratiques comme le calculateur d'empreinte carbone."
+      },
+      "q2": {
+        "question": "Est-ce que c'est gratuit ?",
+        "answer": "Oui ! L'inscription est gratuite et vous donne accès au dashboard climatique, à la section Mythes & Réalités, à la chronologie et à 3 messages gratuits avec notre assistant IA. L'offre Premium débloque l'accès illimité et des fonctionnalités avancées."
+      },
+      "q3": {
+        "question": "D'où viennent vos données ?",
+        "answer": "Toutes nos données proviennent de sources scientifiques reconnues : NASA, NOAA, GIEC, CNRS. Nous mettons à jour régulièrement nos informations pour vous fournir les données les plus récentes et fiables."
+      },
+      "q4": {
+        "question": "Comment devenir membre Premium ?",
+        "answer": "Vous pouvez passer Premium en un clic depuis votre profil ou la page tarifs. Votre abonnement soutient directement notre mission : à 5000 membres, nous sanctuarisons des terrains naturels pour les protéger définitivement."
+      }
     }
   },
   "Footer": {
@@ -280,4 +374,4 @@
     },
     "rights": "Tous droits réservés"
   }
-} 
+}

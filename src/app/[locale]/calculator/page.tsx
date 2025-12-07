@@ -27,6 +27,22 @@ export default async function CalculatorPage({
           <p className="text-lg text-muted-foreground mt-2">{t('subtitle')}</p>
         </div>
         <CarbonCalculatorForm />
+
+        <div className="mt-16 bg-muted/30 p-8 rounded-2xl border border-border">
+          <h2 className="text-2xl font-bold mb-4">{t('methodology.title')}</h2>
+          <p className="text-muted-foreground mb-6">{t('methodology.description')}</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-4 bg-card rounded-lg shadow-sm border border-border/50">
+              <p className="font-medium text-primary">{t('methodology.factors.transport')}</p>
+            </div>
+            <div className="p-4 bg-card rounded-lg shadow-sm border border-border/50">
+              <p className="font-medium text-primary">{t('methodology.factors.diet')}</p>
+            </div>
+            <div className="p-4 bg-card rounded-lg shadow-sm border border-border/50">
+              <p className="font-medium text-primary">{t('methodology.factors.energy')}</p>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   );

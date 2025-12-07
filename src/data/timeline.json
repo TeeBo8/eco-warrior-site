@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "year": 1824,
+        "titleFr": "Découverte de l'effet de serre",
+        "titleEn": "Discovery of the Greenhouse Effect",
+        "descriptionFr": "Joseph Fourier calcule que la Terre devrait être bien plus froide (-18°C) sans atmosphère pour retenir la chaleur.",
+        "descriptionEn": "Joseph Fourier calculates that Earth would be much colder (-18°C) without an atmosphere to retain heat."
+    },
+    {
+        "id": 2,
+        "year": 1896,
+        "titleFr": "Première alerte CO2",
+        "titleEn": "First CO2 Warning",
+        "descriptionFr": "Svante Arrhenius prédit que doubler le CO2 atmosphérique augmenterait la température mondiale de 5-6°C.",
+        "descriptionEn": "Svante Arrhenius predicts that doubling atmospheric CO2 would raise global temperatures by 5-6°C."
+    },
+    {
+        "id": 3,
+        "year": 1958,
+        "titleFr": "Courbe de Keeling",
+        "titleEn": "Keeling Curve",
+        "descriptionFr": "Charles Keeling commence les mesures continues du CO2 à Mauna Loa. La concentration grimpe année après année.",
+        "descriptionEn": "Charles Keeling begins continuous CO2 measurements at Mauna Loa. Concentration climbs year after year."
+    },
+    {
+        "id": 4,
+        "year": 1988,
+        "titleFr": "Création du GIEC",
+        "titleEn": "Formation of the IPCC",
+        "descriptionFr": "L'ONU fonde le Groupe d'experts intergouvernemental sur l'évolution du climat pour analyser la science climatique.",
+        "descriptionEn": "The UN founds the Intergovernmental Panel on Climate Change to analyze climate science."
+    },
+    {
+        "id": 5,
+        "year": 2015,
+        "titleFr": "Accord de Paris",
+        "titleEn": "Paris Agreement",
+        "descriptionFr": "196 nations s'engagent à limiter le réchauffement 'bien en dessous de 2°C' par rapport à l'ère préindustrielle.",
+        "descriptionEn": "196 nations pledge to limit warming 'well below 2°C' compared to pre-industrial levels."
+    },
+    {
+        "id": 6,
+        "year": 2023,
+        "titleFr": "L'Année de tous les records",
+        "titleEn": "Wait, did we break it?",
+        "descriptionFr": "2023 devient l'année la plus chaude jamais enregistrée (+1.48°C). Les océans surchauffent.",
+        "descriptionEn": "2023 becomes the hottest year ever recorded (+1.48°C). Oceans overheat globally."
+    },
+    {
+        "id": 7,
+        "year": 2024,
+        "titleFr": "Le Mur du 1.5°C",
+        "titleEn": "Breaching 1.5°C",
+        "descriptionFr": "Pour la première fois, la température mondiale dépasse le seuil critique de +1.5°C sur 12 mois glissants.",
+        "descriptionEn": "For the first time, global temperature exceeds the critical +1.5°C threshold over a 12-month period."
+    }
+]

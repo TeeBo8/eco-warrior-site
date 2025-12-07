@@ -7,8 +7,6 @@ import { z } from "zod";
 import { useTranslations, useLocale } from "next-intl";
 import { Linkedin, Twitter, Loader2, Leaf } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,7 +22,7 @@ const contactFormSchema = z.object({
 });
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
-// Composant logo simple en attendant
+// Composant logo simple
 const EcoWarriorLogo = ({ className }: { className?: string }) => (
   <div className={`flex items-center gap-2 ${className}`}>
     <Leaf className="h-8 w-8 text-green-600" />
@@ -35,11 +33,9 @@ const EcoWarriorLogo = ({ className }: { className?: string }) => (
 export function Footer() {
   const pathname = usePathname();
   const locale = useLocale();
-  const router = useRouter();
-  const { user } = useUser();
   const t = useTranslations('Footer');
   const { toast } = useToast();
-  
+
   const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
   });
@@ -62,9 +58,8 @@ export function Footer() {
   });
 
   // Ne pas afficher le footer si on n'est pas sur la page d'accueil
-  // On vérifie que l'URL se termine par juste la locale (ex: /fr ou /en)
   const isHomePage = pathname.match(/^\/[a-z]{2}$/);
-  
+
   if (!isHomePage) {
     return null;
   }
@@ -73,44 +68,32 @@ export function Footer() {
     mutate(data);
   }
 
-  // Fonction pour gérer les clics sur les liens protégés
-  const handleProtectedLinkClick = (href: string, e: React.MouseEvent) => {
-    if (!user) {
-      e.preventDefault();
-      // Rediriger vers la page de connexion avec l'URL de retour
-      router.push(`/${locale}/sign-in?redirect_url=${encodeURIComponent(href)}`);
-    }
-    // Si l'utilisateur est connecté, le lien fonctionne normalement
-  };
-
   const navLinks = [
-    { href: `/${locale}/dashboard`, label: t('links.dashboard'), protected: true },
-    { href: `/${locale}/debunk`, label: t('links.myths'), protected: true },
-    { href: `/${locale}/timeline`, label: t('links.timeline'), protected: true },
-    { href: `/${locale}/map`, label: t('links.impactMap'), protected: true },
-    { href: `/${locale}/calculator`, label: t('links.calculator'), protected: true },
-    { href: `/${locale}/profile`, label: t('links.profile'), protected: true },
+    { href: `/${locale}/dashboard`, label: t('links.dashboard') },
+    { href: `/${locale}/debunk`, label: t('links.myths') },
+    { href: `/${locale}/timeline`, label: t('links.timeline') },
+    { href: `/${locale}/map`, label: t('links.impactMap') },
+    { href: `/${locale}/calculator`, label: t('links.calculator') },
   ];
 
   return (
     <footer className="bg-slate-50 dark:bg-black border-t border-border">
       <div className="container mx-auto px-4 py-12 md:px-6">
         <div className="flex flex-col items-center text-center">
-          
+
           <Link href="/" className="mb-6">
             <EcoWarriorLogo />
           </Link>
 
           <nav className="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-2">
             {navLinks.map(link => (
-                <Link 
-                  key={link.href} 
-                  href={link.href} 
-                  className="text-sm font-medium hover:text-primary transition-colors"
-                  onClick={link.protected ? (e) => handleProtectedLinkClick(link.href, e) : undefined}
-                >
-                    {link.label}
-                </Link>
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
+                {link.label}
+              </Link>
             ))}
           </nav>
 
@@ -136,9 +119,9 @@ export function Footer() {
 
           <div className="mb-6 flex gap-4">
             <Button asChild variant="outline" size="icon" className="rounded-full">
-              <Link 
-                href="https://x.com/THIBAUL76280609" 
-                target="_blank" 
+              <Link
+                href="https://x.com/THIBAUL76280609"
+                target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visiter notre profil Twitter"
               >
@@ -146,9 +129,9 @@ export function Footer() {
               </Link>
             </Button>
             <Button asChild variant="outline" size="icon" className="rounded-full">
-              <Link 
-                href="https://www.linkedin.com/in/thibault-leture-5740242a1/" 
-                target="_blank" 
+              <Link
+                href="https://www.linkedin.com/in/thibault-leture-5740242a1/"
+                target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Visiter notre profil LinkedIn"
               >
@@ -166,4 +149,4 @@ export function Footer() {
       </div>
     </footer>
   );
-} 
+}

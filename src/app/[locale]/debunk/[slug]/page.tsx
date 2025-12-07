@@ -4,10 +4,10 @@ import { db } from '@/server/db';
 import { posts } from '@/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { CommentSection } from '@/components/comment-section';
-import { and } from 'drizzle-orm';
-import { likes } from '@/server/db/schema';
-import { auth } from '@clerk/nextjs/server';
-import LikeButton from '@/components/like-button';
+// import { and } from 'drizzle-orm';
+// import { likes } from '@/server/db/schema';
+// import { auth } from '@clerk/nextjs/server';
+// import LikeButton from '@/components/like-button';
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -43,9 +43,9 @@ export default async function MythPage({ params }: Props) {
   const title = resolvedParams.locale === 'fr' ? post.mythFr : post.mythEn;
   const reality = resolvedParams.locale === 'fr' ? post.realityFr : post.realityEn;
   const source = post.source;
-  const { userId } = await auth();
-  const isSignedIn = userId !== null;
-  const initialIsLiked = isSignedIn ? !!await db.query.likes.findFirst({ where: and(eq(likes.postId, post.id), eq(likes.userId, userId)) }) : false;
+  // const { userId } = await auth();
+  // const isSignedIn = userId !== null;
+  // const initialIsLiked = isSignedIn ? !!await db.query.likes.findFirst({ where: and(eq(likes.postId, post.id), eq(likes.userId, userId)) }) : false;
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-4 text-red-600">💭 {title}</h1>
@@ -58,8 +58,8 @@ export default async function MythPage({ params }: Props) {
           </div>
         )}
       </div>
-      <LikeButton postId={post.id} initialLikes={post.likes} initialIsLiked={initialIsLiked} />
-      <CommentSection postId={post.id} />
+      {/* <LikeButton postId={post.id} initialLikes={post.likes} initialIsLiked={initialIsLiked} /> */}
+      <CommentSection />
     </div>
   );
 } 

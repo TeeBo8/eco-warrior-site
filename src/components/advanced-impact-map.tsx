@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Droplets, Flame, Waves, TreePine, Wind, Zap, Thermometer, Leaf } from 'lucide-react';
 import { trpc } from "@/app/_trpc/client";
 import { useParams } from "next/navigation";
-import { usePremiumStatus } from "@/lib/test-mode-context";
+
 import Image from 'next/image';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -26,9 +26,9 @@ const dialogStyles = `
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
-    iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
-    iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
-    shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
 });
 
 interface ImpactPoint {
@@ -73,7 +73,7 @@ const createCustomIcon = (category: string | null) => {
 
 const CategoryIcon: React.FC<{ category: string | null }> = ({ category }) => {
   const iconProps = { className: "h-4 w-4" };
-  
+
   switch (category) {
     case 'drought':
       return <Droplets {...iconProps} />;
@@ -102,9 +102,9 @@ const SimpleBadge: React.FC<{ className?: string; children: React.ReactNode }> =
   );
 };
 
-const MapEvents: React.FC<{ onMarkerClick: (point: ImpactPoint) => void; points: ImpactPoint[] }> = ({ 
-  onMarkerClick, 
-  points 
+const MapEvents: React.FC<{ onMarkerClick: (point: ImpactPoint) => void; points: ImpactPoint[] }> = ({
+  onMarkerClick,
+  points
 }) => {
   const map = useMap();
 
@@ -134,17 +134,14 @@ const MapEvents: React.FC<{ onMarkerClick: (point: ImpactPoint) => void; points:
 const AdvancedImpactMap: React.FC<AdvancedImpactMapProps> = ({ points }) => {
   const params = useParams();
   const locale = typeof params.locale === 'string' ? params.locale : 'en';
-  
-  // 👇 NOUVEAU SYSTÈME DE TEST GLOBAL 👇
-  const isPremium = usePremiumStatus();
+
   const pointsQuery = trpc.map.getPoints.useQuery();
-  
+
   const [selectedPoint, setSelectedPoint] = useState<ImpactPoint | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  // Appliquer la limitation côté client selon le mode de test
-  const allPoints = points || pointsQuery.data || [];
-  const mapPoints = isPremium ? allPoints : allPoints.slice(0, 5);
+  // Tous les points sont disponibles
+  const mapPoints = points || pointsQuery.data || [];
 
   const handleMarkerClick = (point: ImpactPoint) => {
     setSelectedPoint(point);
@@ -195,23 +192,18 @@ const AdvancedImpactMap: React.FC<AdvancedImpactMapProps> = ({ points }) => {
     <div className="w-full space-y-4">
       {/* CSS personnalisé pour les z-index */}
       <style dangerouslySetInnerHTML={{ __html: dialogStyles }} />
-      
+
       {/* Légende déplacée au-dessus de la carte */}
       <Card className="p-4 bg-background border-border">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-semibold text-foreground">
             {locale === 'fr' ? 'Carte des Impacts Climatiques' : 'Climate Impact Map'}
           </h3>
-          
+
           {/* Indicateur nombre de points */}
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span>
               {mapPoints.length} {locale === 'fr' ? 'points d\'impact' : 'impact points'}
-              {!isPremium && (
-                <span className="text-orange-600 ml-1">
-                  ({locale === 'fr' ? 'aperçu limité' : 'limited preview'})
-                </span>
-              )}
             </span>
           </div>
         </div>
@@ -276,7 +268,7 @@ const AdvancedImpactMap: React.FC<AdvancedImpactMapProps> = ({ points }) => {
                   {locale === 'fr' ? selectedPoint.name_fr : selectedPoint.name_en}
                 </DialogTitle>
               </DialogHeader>
-              
+
               <div className="mt-6 space-y-6">
                 <SimpleBadge className={getCategoryColor(selectedPoint.category)}>
                   {getCategoryLabel(selectedPoint.category)}

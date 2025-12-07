@@ -1,21 +1,11 @@
 'use client';
 
-import { useTranslations, useLocale } from "next-intl";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { usePremiumStatus } from "@/lib/test-mode-context";
-import { useUser } from "@clerk/nextjs";
+import { useTranslations } from "next-intl";
 import MapWrapper from '@/components/map-wrapper';
 
 export default function MapPageContent() {
   const t = useTranslations("MapPage");
-  const tPremium = useTranslations("MapPage.premium");
-  const locale = useLocale();
-  const { isSignedIn } = useUser();
-  
-  // 👇 NOUVEAU SYSTÈME DE TEST GLOBAL 👇
-  const isPremium = usePremiumStatus();
-  
+
   return (
     <div>
       <main className="container mx-auto py-12">
@@ -26,36 +16,7 @@ export default function MapPageContent() {
         <div className="rounded-lg overflow-hidden border">
           <MapWrapper />
         </div>
-
-        {isSignedIn && !isPremium && (
-          <div className="text-center mt-8 p-6 bg-muted rounded-lg">
-            <h3 className="font-semibold">{tPremium('authenticatedTitle')}</h3>
-            <p className="text-muted-foreground mt-2">
-              {tPremium('authenticatedDescription')}
-            </p>
-            <Button asChild className="mt-4">
-              <Link href={`/${locale}/pricing`}>{tPremium('authenticatedButton')}</Link>
-            </Button>
-          </div>
-        )}
-
-        {!isSignedIn && (
-          <div className="text-center mt-8 p-6 bg-muted rounded-lg">
-            <h3 className="font-semibold">{tPremium('unauthenticatedTitle')}</h3>
-            <p className="text-muted-foreground mt-2">
-              {tPremium('unauthenticatedDescription')}
-            </p>
-            <div className="flex gap-4 justify-center mt-4">
-              <Button variant="outline" asChild>
-                <Link href={`/${locale}/sign-in`}>{tPremium('signInButton')}</Link>
-              </Button>
-              <Button asChild>
-                <Link href={`/${locale}/pricing`}>{tPremium('becomePremiumButton')}</Link>
-              </Button>
-            </div>
-          </div>
-        )}
       </main>
     </div>
   );
-} 
+}

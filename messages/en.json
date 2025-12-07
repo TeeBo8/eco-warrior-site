@@ -10,9 +10,20 @@
     "subscribeButton": "Become a Member"
   },
   "HomePage": {
-    "title": "Climate change isn't waiting.",
-    "subtitle": "Are you?",
-    "description": "Discover the facts, understand the stakes, and act now. Our planet needs warriors.",
+    "title": "Science is clear. The urgency is real.",
+    "subtitle": "And action must be immediate.",
+    "description": "Debate is over. 99.9% of scientists agree: time for doubt has passed, time for saving our habitat is now. Join the fact-based climate resistance.",
+    "hero": {
+      "badge": "Real-time climate data",
+      "cta": {
+        "exploreDashboard": "Explore Dashboard",
+        "discoverPlatform": "Discover the platform"
+      },
+      "preview": {
+        "title": "Interactive climate dashboard",
+        "subtitle": "CO₂ • Temperature • Sea Level"
+      }
+    },
     "features": {
       "showcase": {
         "title": "All our features at a glance",
@@ -57,6 +68,11 @@
         "name": "Premium",
         "title": "Unlock all features",
         "description": "Access unlimited AI assistant, advanced data and exclusive tools to maximize your positive impact on the planet."
+      },
+      "scanner": {
+        "name": "Scanner",
+        "title": "Visual Carbon Scanner",
+        "description": "Analyze the carbon footprint of any object or meal instantly with our Gemini 3 Pro powered AI."
       }
     }
   },
@@ -175,20 +191,13 @@
       "title": "Your Carbon Footprint Evolution",
       "chartLabel": "Emissions (tonnes CO₂e)"
     },
-    "premium": {
-      "title": "Discover the Premium Calculator",
-      "description": "Track your progress over time with our advanced calculator!",
-      "featureTitle": "Premium Feature",
-      "featureDescription": "Visualize your evolution and achieve your climate goals",
-      "signInButton": "Sign In",
-      "discoverButton": "Discover Premium",
-      "features": {
-        "history": "Your calculation history",
-        "goals": "Personalized goals",
-        "tips": "Personalized advice",
-        "badges": "Badge system",
-        "reservedForPremium": "Feature reserved for Premium members",
-        "signInAndUpgrade": "Sign in and upgrade to Premium to save your calculations"
+    "methodology": {
+      "title": "Scientific Methodology",
+      "description": "This calculator relies on the ADEME Carbon Database and IPCC reports. We consider the full life-cycle analysis.",
+      "factors": {
+        "transport": "Transport: includes fuel combustion and vehicle production.",
+        "diet": "Diet: includes agricultural production, processing, and transport.",
+        "energy": "Energy: based on the average carbon intensity of the power grid."
       }
     }
   },
@@ -207,22 +216,28 @@
     }
   },
   "ConsensusSection": {
-    "title": "An Overwhelming Scientific Consensus",
-    "subtitle": "The world's leading scientific organizations are unanimous in their conclusions: climate change is real, human-caused, and requires urgent action."
+    "title": "The scientific debate is over.",
+    "subtitle": "NASA, IPCC, CNRS, NOAA... Every major global scientific institution confirms the human origin of warming with a certainty level comparable to gravity. It's not an opinion, it's physics."
   },
   "MissionSection": {
-    "title": "Our Next Mission, Together.",
-    "description": "At EcoWarrior, we believe in concrete action. That's why I'm personally committed: as soon as we reach 5000 premium members, we'll use part of the funds to acquire natural lands and protect them, safeguarding them permanently from human activity. Every acquisition contract will be shared with you in complete transparency. Your subscription isn't an expense, it's an investment in the planet.",
+    "title": "Support Development",
+    "description": "If you enjoy this tool and want to see the project grow, your support is welcome! EcoWarrior is developed with passion to help everyone take climate action. Every contribution helps us maintain servers, improve AI, and develop new features for the community.",
     "stats": {
-      "members": "Members",
-      "goal": "Goal",
-      "progress": "of our goal achieved!"
+      "members": "Contributors",
+      "goal": "Funding Goal",
+      "progress": "funded"
     },
-    "cta": "Become a Member and Protect Nature",
-    "photoPlaceholder": "Your photo here"
+    "cta": "Donate and Support the Project",
+    "photoPlaceholder": "Developer"
+  },
+  "ScannerPage": {
+    "title": "Visual Carbon Scanner",
+    "description": "Analyze carbon footprint from images using Gemini AI",
+    "subtitle": "Powered by Gemini 3 Pro. Take a picture of any object, meal, or activity to instantly reveal its environmental impact.",
+    "badge": "Native Multimodal AI"
   },
   "ProfilePage": {
-    "title": "Your Profile", 
+    "title": "Your Profile",
     "subtitle": "Manage your account information and settings.",
     "stats": {
       "title": "My Statistics",
@@ -253,16 +268,95 @@
       "features": [
         "Access to all real-time climate data",
         "Unlimited personalized AI assistant",
-        "Advanced carbon footprint calculator", 
+        "Advanced carbon footprint calculator",
         "Priority access to new features"
       ],
       "button": "Take advantage of this offer now"
     }
   },
+  "BenefitsSection": {
+    "title": "Why choose EcoWarrior?",
+    "subtitle": "We give you the tools to understand and act on climate change.",
+    "benefits": {
+      "inform": {
+        "title": "Get Informed",
+        "description": "Access real-time climate data: CO₂, temperature, sea levels. Stay informed with reliable scientific sources."
+      },
+      "understand": {
+        "title": "Understand the Issues",
+        "description": "Debunk misconceptions with our Myths & Facts section based on IPCC work and recognized experts."
+      },
+      "act": {
+        "title": "Take Action",
+        "description": "Calculate your carbon footprint, track your progress and receive personalized tips to reduce your impact."
+      }
+    }
+  },
+  "HowItWorksSection": {
+    "title": "Your Journey in 3 Steps",
+    "subtitle": "Start your ecological transition in just a few minutes.",
+    "steps": {
+      "understand": {
+        "title": "Understand the Urgency",
+        "description": "Access real scientific data (CO2, Temp) immediately with no barriers. No account required."
+      },
+      "measure": {
+        "title": "Measure your Impact",
+        "description": "Use our transparent carbon calculator to assess your personal footprint."
+      },
+      "act": {
+        "title": "Join the Sanctuary",
+        "description": "Participate in our collective mission: to legally acquire and permanently protect wild lands."
+      }
+    }
+  },
+  "TestimonialsSection": {
+    "title": "What our users say",
+    "subtitle": "Join thousands of people taking action for the climate with EcoWarrior.",
+    "testimonials": {
+      "testimonial1": {
+        "name": "Marie Dupont",
+        "role": "CSR Manager",
+        "quote": "EcoWarrior helped me better understand my impact and reduce it concretely. The data is clear and the advice really useful."
+      },
+      "testimonial2": {
+        "name": "Thomas Bernard",
+        "role": "Science Teacher",
+        "quote": "I use EcoWarrior with my students. The Myths & Facts section is perfect for teaching critical thinking about misinformation."
+      },
+      "testimonial3": {
+        "name": "Sophie Martin",
+        "role": "Environmental Student",
+        "quote": "The carbon footprint calculator is super precise. I was able to identify exactly where to act to reduce my impact by 30%."
+      }
+    }
+  },
+  "FAQSection": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know about EcoWarrior before starting.",
+    "faq": {
+      "q1": {
+        "question": "What is EcoWarrior exactly?",
+        "answer": "EcoWarrior is a web platform that helps you understand and act on climate change. We combine real-time scientific data, quality educational content, and practical tools like the carbon footprint calculator."
+      },
+      "q2": {
+        "question": "Is it free?",
+        "answer": "Yes! Access is free and gives you access to the climate dashboard, Myths & Facts section, timeline and 3 free messages with our AI assistant. The Premium offer unlocks unlimited access and advanced features."
+      },
+      "q3": {
+        "question": "Where does your data come from?",
+        "answer": "All our data comes from recognized scientific sources: NASA, NOAA, IPCC, CNRS. We regularly update our information to provide you with the most recent and reliable data."
+      },
+      "q4": {
+        "question": "How do I become a Premium member?",
+        "answer": "You can go Premium in one click from your profile or the pricing page. Your subscription directly supports our mission: at 5000 members, we will sanctuary natural lands to protect them permanently."
+      }
+    }
+  },
   "Footer": {
     "links": {
       "dashboard": "Dashboard",
-      "myths": "Myths & Facts",
+      "myths": "Myths & Realities",
       "timeline": "Timeline",
       "impactMap": "Impact Map",
       "calculator": "Calculator",
@@ -280,4 +374,4 @@
     },
     "rights": "All rights reserved"
   }
-} 
+}

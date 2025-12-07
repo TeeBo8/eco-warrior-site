@@ -237,7 +237,7 @@ const StepImage = forwardRef<
 )
 StepImage.displayName = "StepImage"
 
-const MotionStepImage = motion(StepImage)
+const MotionStepImage = motion.create(StepImage)
 
 const AnimatedStepImage = ({
   preset = "fadeInScale",
@@ -303,7 +303,7 @@ function FeatureCard({
           bgClass
         )}
       >
-                <div className="px-8 py-16 min-h-[600px] w-full flex flex-col md:px-12 md:py-20">
+        <div className="px-8 py-16 min-h-[600px] w-full flex flex-col md:px-12 md:py-20">
           {/* Navigation badges en haut du contenu */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -311,9 +311,9 @@ function FeatureCard({
             transition={{ delay: 0.1 }}
             className="mb-8 flex justify-center"
           >
-            <Steps current={step} onChange={() => {}} steps={features} />
+            <Steps current={step} onChange={() => { }} steps={features} />
           </motion.div>
-          
+
           <div className="flex flex-col justify-between flex-1">
             <AnimatePresence mode="wait">
               <motion.div
@@ -339,7 +339,7 @@ function FeatureCard({
                 >
                   {features[step]?.title}
                 </motion.h2>
-                
+
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -355,7 +355,7 @@ function FeatureCard({
                 </motion.div>
               </motion.div>
             </AnimatePresence>
-          
+
             {/* Container for the image */}
             <div className="flex-1 relative">
               {mounted ? children : null}
@@ -415,9 +415,9 @@ function Steps({
                     className={cn(
                       "flex h-4 w-4 shrink-0 items-center justify-center rounded-full duration-300",
                       isCompleted &&
-                        "bg-green-400 text-white dark:bg-green-400",
+                      "bg-green-400 text-white dark:bg-green-400",
                       isCurrent &&
-                        "bg-green-300/80 text-neutral-400 dark:bg-green-500/50",
+                      "bg-green-300/80 text-neutral-400 dark:bg-green-500/50",
                       isFuture && "bg-green-300/10 dark:bg-green-500/20"
                     )}
                   >
@@ -607,7 +607,7 @@ export const Component = ({
   return (
     <FeatureCard {...props} step={step} features={features}>
       {renderStepContent()}
-      
+
       <motion.div
         className="absolute right-0 top-0 z-40 h-full w-full cursor-pointer"
         onClick={handleIncrement}

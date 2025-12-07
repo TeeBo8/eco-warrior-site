@@ -1,41 +1,28 @@
-import { privateProcedure, publicProcedure, router } from './trpc';
+import { publicProcedure, router } from './trpc';
+import timelineData from '@/data/timeline.json';
+
 import { getLiveClimateData } from '../services/climateDataService';
-import { db } from '../db';
-import { stripeRouter } from '../api/routers/stripe';
-import { chatRouter } from '../api/routers/chat';
-import { carbonRouter } from '../api/routers/carbon';
-import { gamificationRouter } from '../api/routers/gamification';
 import { postRouter } from '../api/routers/post';
-import { commentRouter } from '../api/routers/comment';
+import { contactRouter } from '../api/routers/contact';
 import { mapRouter } from '../api/routers/map';
 import { articleRouter } from '../api/routers/article';
-import { userRouter } from '../api/routers/user';
-import { contactRouter } from '../api/routers/contact';
 
 export const appRouter = router({
-  stripe: stripeRouter,
-  chat: chatRouter,
-  carbon: carbonRouter,
-  gamification: gamificationRouter,
   post: postRouter,
-  comment: commentRouter,
+  contact: contactRouter,
   map: mapRouter,
   article: articleRouter,
-  user: userRouter,
-  contact: contactRouter,
-  
-  getClimateIndicators: privateProcedure.query(async () => {
-    // On appelle notre service qui fait maintenant tout le travail !
+
+  // Données climatiques - maintenant public
+  getClimateIndicators: publicProcedure.query(async () => {
     return await getLiveClimateData();
   }),
 
-  // 👇 NOUVELLE PROCÉDURE POUR LA TIMELINE 👇
+  // Événements timeline
   getTimelineEvents: publicProcedure.query(async () => {
-    return await db.query.timelineEvents.findMany({
-      orderBy: (events, { asc }) => [asc(events.year)],
-    });
+    return timelineData.sort((a, b) => a.year - b.year);
   }),
 
 });
 
-export type AppRouter = typeof appRouter; 
+export type AppRouter = typeof appRouter;

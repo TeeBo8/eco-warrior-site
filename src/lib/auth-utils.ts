@@ -1,4 +1,10 @@
-import { type User } from "@clerk/nextjs/server";
+// import { type User } from "@clerk/nextjs/server";
+
+// Type stub pour User de Clerk
+type User = {
+  id: string;
+  publicMetadata?: Record<string, unknown>;
+};
 import { db } from "@/server/db";
 import { users } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
