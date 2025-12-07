@@ -9,11 +9,12 @@ const intlMiddleware = createMiddleware({
 });
 
 export default function middleware(request: NextRequest) {
-  // Skip l'internationalisation pour les routes API et fichiers spéciaux
+  // Skip l'internationalisation pour les routes API, fichiers statiques et Next.js internals
   const url = request.nextUrl;
 
   if (url.pathname.startsWith('/api') ||
     url.pathname.startsWith('/trpc') ||
+    url.pathname.startsWith('/_next') ||
     url.pathname === '/sitemap.xml' ||
     url.pathname === '/robots.txt' ||
     url.pathname === '/favicon.ico') {
@@ -27,8 +28,6 @@ export default function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Skip Next.js internals and all static files
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
-    '/(api|trpc)(.*)',
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js)).*)',
   ],
 };
