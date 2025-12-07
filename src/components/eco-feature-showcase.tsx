@@ -9,45 +9,27 @@ export function EcoFeatureShowcase() {
   const features = [
     {
       id: "1",
-      name: t('dashboard.name'),
-      title: t('dashboard.title'),
-      description: t('dashboard.description'),
-    },
-    {
-      id: "2",
       name: t('debunk.name'),
       title: t('debunk.title'),
       description: t('debunk.description'),
     },
     {
-      id: "3",
+      id: "2",
       name: t('timeline.name'),
       title: t('timeline.title'),
       description: t('timeline.description'),
     },
     {
-      id: "4",
+      id: "3",
       name: t('map.name'),
       title: t('map.title'),
       description: t('map.description'),
     },
     {
-      id: "5",
-      name: t('calculator.name'),
-      title: t('calculator.title'),
-      description: t('calculator.description'),
-    },
-    {
-      id: "6",
+      id: "4",
       name: t('articles.name'),
       title: t('articles.title'),
       description: t('articles.description'),
-    },
-    {
-      id: "7",
-      name: t('scanner.name'),
-      title: t('scanner.title'),
-      description: t('scanner.description'),
     },
   ];
 

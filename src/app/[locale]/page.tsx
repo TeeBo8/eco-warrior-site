@@ -5,8 +5,8 @@ import { EcoFeatureShowcase } from "@/components/eco-feature-showcase";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { MissionSection } from "@/components/landing/MissionSection";
 import { BenefitsSection } from "@/components/landing/BenefitsSection";
-import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
-import { FAQSection } from "@/components/landing/FAQSection";
+
+
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -71,36 +71,14 @@ export default function HomePage() {
               </Button>
             </Link>
           </div>
-
-          {/* Preview Image Placeholder */}
-          <div className="mt-16 relative">
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10 pointer-events-none" />
-            <div className="rounded-2xl border border-border bg-card/50 backdrop-blur-sm shadow-2xl overflow-hidden p-2">
-              <div className="bg-muted/50 rounded-xl aspect-video flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5" />
-                <div className="text-center z-10">
-                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-4">
-                    <svg className="w-10 h-10 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <p className="text-muted-foreground font-medium">{t('hero.preview.title')}</p>
-                  <p className="text-sm text-muted-foreground/70 mt-1">{t('hero.preview.subtitle')}</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
-
-      {/* Section Logos Clients / Partenaires Scientifiques */}
-
 
       {/* Section Bénéfices */}
       <BenefitsSection />
 
-      {/* Section Comment ça marche */}
-      <HowItWorksSection />
+
+
 
       {/* Section Carrousel de Fonctionnalités */}
       <div id="features">
@@ -110,7 +88,7 @@ export default function HomePage() {
 
 
       {/* Section FAQ */}
-      <FAQSection />
+
 
       {/* Section CTA Final - Mission */}
       <MissionSection />

@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { useTranslations } from 'next-intl';
 
+import Image from 'next/image';
+
 export function MissionSection() {
   const t = useTranslations('MissionSection');
   const premiumCount = 42; // Example contributor count
@@ -25,11 +27,13 @@ export function MissionSection() {
           {/* Colonne Photo */}
           <div className="flex justify-center lg:justify-start order-2 lg:order-1">
             <div className="relative group">
-              <div className="h-[300px] w-[300px] md:h-[400px] md:w-[400px] rounded-full overflow-hidden shadow-2xl backdrop-blur-sm border border-border/50 transition-all duration-300 group-hover:scale-105">
-                <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground">
-                  {/* Placeholder si l'image n'existe pas */}
-                  <span className="text-sm">{t('photoPlaceholder')}</span>
-                </div>
+              <div className="h-[300px] w-[300px] md:h-[400px] md:w-[400px] rounded-full overflow-hidden shadow-2xl backdrop-blur-sm border border-border/50 transition-all duration-300 group-hover:scale-105 relative">
+                <Image
+                  src="/images/founder-portrait.jpg"
+                  alt="Founder Portrait"
+                  fill
+                  className="object-cover"
+                />
               </div>
               {/* Décoration autour de la photo */}
               <div className="absolute -top-4 -right-4 w-8 h-8 bg-primary/30 rounded-full animate-pulse"></div>
