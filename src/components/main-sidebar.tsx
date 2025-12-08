@@ -109,7 +109,11 @@ export function MainSidebar({ children }: { children: React.ReactNode }) {
         </SidebarBody>
       </Sidebar>
       <div className="flex flex-1">
-        <div className="p-2 md:p-10 flex-1 w-full">
+        <div className={cn(
+          "flex-1 w-full",
+          // Pas de padding sur la landing page (home)
+          pathname.match(/^\/[a-z]{2}$/) ? "" : "p-2 md:p-10"
+        )}>
           {children}
         </div>
       </div>
