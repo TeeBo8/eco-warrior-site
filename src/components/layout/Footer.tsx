@@ -77,74 +77,90 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-slate-50 dark:bg-black border-t border-border">
-      <div className="container mx-auto px-4 py-12 md:px-6">
-        <div className="flex flex-col items-center text-center">
+    <footer className="w-full">
+      <div className="flex flex-col items-center text-center space-y-8">
+        {/* Logo */}
+        <Link href={`/${locale}`} className="hover:opacity-80 transition-opacity">
+          <EcoWarriorLogo />
+        </Link>
 
-          <Link href="/" className="mb-6">
-            <EcoWarriorLogo />
-          </Link>
+        {/* Navigation Links */}
+        <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+          {navLinks.map(link => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
-          <nav className="mb-8 flex flex-wrap justify-center gap-x-6 gap-y-2">
-            {navLinks.map(link => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium hover:text-primary transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="mb-8 w-full max-w-lg">
-            <h3 className="mb-4 text-lg font-semibold">{t('contact.title')}</h3>
-            <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-4">
-              <div>
-                <Label htmlFor="email" className="sr-only">Email</Label>
-                <Input id="email" placeholder={t('contact.emailPlaceholder')} type="email" {...register("email")} />
-                {errors.email && <p className="mt-1 text-xs text-destructive">{errors.email.message}</p>}
-              </div>
-              <div>
-                <Label htmlFor="message" className="sr-only">Message</Label>
-                <Textarea id="message" placeholder={t('contact.messagePlaceholder')} {...register("message")} />
-                {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message.message}</p>}
-              </div>
-              <Button type="submit" disabled={isPending}>
-                {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                {t('contact.sendButton')}
-              </Button>
-            </form>
-          </div>
-
-          <div className="mb-6 flex gap-4">
-            <Button asChild variant="outline" size="icon" className="rounded-full">
-              <Link
-                href="https://x.com/THIBAUL76280609"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visiter notre profil Twitter"
-              >
-                <Twitter className="h-4 w-4" />
-              </Link>
+        {/* Contact Form - Compact */}
+        <div className="w-full max-w-md">
+          <h3 className="mb-4 text-lg font-semibold text-foreground">{t('contact.title')}</h3>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div>
+              <Label htmlFor="email" className="sr-only">Email</Label>
+              <Input 
+                id="email" 
+                placeholder={t('contact.emailPlaceholder')} 
+                type="email" 
+                {...register("email")}
+                className="bg-card/80 backdrop-blur-sm border-border/60"
+              />
+              {errors.email && <p className="mt-1 text-xs text-destructive">{errors.email.message}</p>}
+            </div>
+            <div>
+              <Label htmlFor="message" className="sr-only">Message</Label>
+              <Textarea 
+                id="message" 
+                placeholder={t('contact.messagePlaceholder')} 
+                {...register("message")}
+                className="bg-card/80 backdrop-blur-sm border-border/60 min-h-[100px]"
+              />
+              {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message.message}</p>}
+            </div>
+            <Button type="submit" disabled={isPending} className="w-full">
+              {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+              {t('contact.sendButton')}
             </Button>
-            <Button asChild variant="outline" size="icon" className="rounded-full">
-              <Link
-                href="https://www.linkedin.com/in/thibault-leture-5740242a1/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visiter notre profil LinkedIn"
-              >
-                <Linkedin className="h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
+          </form>
+        </div>
 
-          <div>
-            <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} EcoWarrior. {t('rights')}.
-            </p>
-          </div>
+        {/* Social Links */}
+        <div className="flex gap-4">
+          <Button asChild variant="outline" size="icon" className="rounded-full border-border/60 bg-card/80 backdrop-blur-sm hover:bg-card">
+            <Link
+              href="https://x.com/THIBAUL76280609"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visiter notre profil Twitter"
+            >
+              <Twitter className="h-4 w-4" />
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="icon" className="rounded-full border-border/60 bg-card/80 backdrop-blur-sm hover:bg-card">
+            <Link
+              href="https://www.linkedin.com/in/thibault-leture-5740242a1/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visiter notre profil LinkedIn"
+            >
+              <Linkedin className="h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+
+        {/* Copyright & Project Mention */}
+        <div className="space-y-2 pt-4 border-t border-border/30">
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} EcoWarrior. {t('rights')}.
+          </p>
+          <p className="text-xs text-muted-foreground/70">
+            {t('projectMention')}
+          </p>
         </div>
       </div>
     </footer>

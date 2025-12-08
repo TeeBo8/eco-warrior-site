@@ -7,6 +7,8 @@
     "calculatorLink": "Calculateur",
     "mapLink": "Carte des Impacts",
     "profileLink": "Profil",
+    "articlesLink": "Analyses",
+    "scannerLink": "Scanner Visuel",
     "subscribeButton": "Devenir Membre"
   },
   "HomePage": {
@@ -17,7 +19,8 @@
       "badge": "Données climatiques en temps réel",
       "cta": {
         "exploreDashboard": "Explorer le Dashboard",
-        "discoverPlatform": "Découvrir la plateforme"
+        "discoverPlatform": "Découvrir la plateforme",
+        "tryScanner": "Essayer le scanner"
       },
       "preview": {
         "title": "Dashboard climatique interactif",
@@ -262,6 +265,7 @@
   "PricingPage": {
     "title": "Devenez Membre Premium",
     "subtitle": "Soutenez notre mission et accédez à des fonctionnalités exclusives",
+    "description": "Rejoignez l'offre Premium pour débloquer l'assistant IA illimité, les données avancées et les outils exclusifs.",
     "plan": {
       "title": "EcoGuerrier Premium",
       "promotion": "🔥 OFFRE DE LANCEMENT",
@@ -372,6 +376,7 @@
       "errorTitle": "Erreur",
       "errorDescription": "Le message n'a pas pu être envoyé."
     },
-    "rights": "Tous droits réservés"
+    "rights": "Tous droits réservés",
+    "projectMention": "Projet personnel développé avec Next.js"
   }
 }

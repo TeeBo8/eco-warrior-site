@@ -14,6 +14,7 @@ import {
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { useParams, useRouter, usePathname } from "next/navigation";
+import { useTranslations } from 'next-intl';
 
 import { Globe } from 'lucide-react';
 import { cn } from "@/lib/utils";
@@ -22,6 +23,7 @@ import { cn } from "@/lib/utils";
 export function MainSidebar({ children }: { children: React.ReactNode }) {
   const params = useParams();
   const locale = typeof params.locale === "string" ? params.locale : "fr";
+  const t = useTranslations('Header');
 
   const router = useRouter();
   const pathname = usePathname();
@@ -35,37 +37,37 @@ export function MainSidebar({ children }: { children: React.ReactNode }) {
 
   const links = [
     {
-      label: locale === 'fr' ? "Tableau de Bord" : "Dashboard",
+      label: t('dashboardLink'),
       href: `/${locale}/dashboard`,
       icon: <LayoutDashboard className="h-5 w-5" />
     },
     {
-      label: locale === 'fr' ? "Mythes & Réalités" : "Myths & Realities",
+      label: t('debunkLink'),
       href: `/${locale}/debunk`,
       icon: <ShieldCheck className="h-5 w-5" />
     },
     {
-      label: locale === 'fr' ? "Analyses" : "Analysis",
+      label: t('articlesLink'),
       href: `/${locale}/articles`,
       icon: <FileText className="h-5 w-5" />
     },
     {
-      label: locale === 'fr' ? "Chronologie" : "Timeline",
+      label: t('timelineLink'),
       href: `/${locale}/timeline`,
       icon: <Clock className="h-5 w-5" />
     },
     {
-      label: locale === 'fr' ? "Calculateur" : "Calculator",
+      label: t('calculatorLink'),
       href: `/${locale}/calculator`,
       icon: <Calculator className="h-5 w-5" />
     },
     {
-      label: locale === 'fr' ? "Carte des Impacts" : "Impact Map",
+      label: t('mapLink'),
       href: `/${locale}/map`,
       icon: <Map className="h-5 w-5" />
     },
     {
-      label: locale === 'fr' ? "Scanner Visuel" : "Visual Scanner",
+      label: t('scannerLink'),
       href: `/${locale}/scanner`,
       icon: <Scan className="h-5 w-5" />
     },

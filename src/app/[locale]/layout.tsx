@@ -6,7 +6,6 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { MainSidebar } from "@/components/main-sidebar";
 import { ThemeProvider } from "next-themes";
-import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/toaster";
 
 const montserrat = Montserrat({
@@ -58,7 +57,6 @@ export default async function RootLayout({
                   <div className="flex-1">
                     {children}
                   </div>
-                  <Footer />
                 </div>
               </MainSidebar>
               <Toaster />

@@ -7,6 +7,8 @@
     "calculatorLink": "Calculator",
     "mapLink": "Impact Map",
     "profileLink": "Profile",
+    "articlesLink": "Analysis",
+    "scannerLink": "Visual Scanner",
     "subscribeButton": "Become a Member"
   },
   "HomePage": {
@@ -17,7 +19,8 @@
       "badge": "Real-time climate data",
       "cta": {
         "exploreDashboard": "Explore Dashboard",
-        "discoverPlatform": "Discover the platform"
+        "discoverPlatform": "Discover the platform",
+        "tryScanner": "Try the scanner"
       },
       "preview": {
         "title": "Interactive climate dashboard",
@@ -262,6 +265,7 @@
   "PricingPage": {
     "title": "Become Premium Member",
     "subtitle": "Support our mission and access exclusive features",
+    "description": "Join the Premium offer to unlock unlimited AI assistant, advanced data, and exclusive tools.",
     "plan": {
       "title": "EcoWarrior Premium",
       "promotion": "🔥 LAUNCH OFFER",
@@ -372,6 +376,7 @@
       "errorTitle": "Error",
       "errorDescription": "The message could not be sent."
     },
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "projectMention": "Personal project built with Next.js"
   }
 }
