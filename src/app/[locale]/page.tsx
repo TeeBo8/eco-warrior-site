@@ -50,12 +50,12 @@ export default function HomePage() {
       </div>
 
       {/* Contenu principal centré */}
-      <section className="relative max-w-3xl mx-auto px-4 sm:px-5 flex-1 flex flex-col items-center justify-center text-center">
+      <section className="relative max-w-2xl mx-auto px-4 sm:px-5 flex-1 flex flex-col items-center justify-center text-center">
         {/* Espacement après badge */}
         <div className="h-8 sm:h-12"></div>
 
-        {/* Titre principal (à la place de la barre de recherche Perplexity) - SANS espace après */}
-        <div className="w-full">
+        {/* Titre principal (à la place de la barre de recherche Perplexity) */}
+        <div className="w-full mb-4 sm:mb-6">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground leading-tight">
             {t('title')}
           </h1>
@@ -81,7 +81,7 @@ export default function HomePage() {
 
       {/* Footer en bas (Contact + Switch + Mention) */}
       <div className="relative w-full pb-6">
-        <div className="max-w-3xl mx-auto px-4 sm:px-5">
+        <div className="max-w-2xl mx-auto px-4 sm:px-5">
           <div className="flex flex-row flex-wrap items-center justify-center gap-2.5">
             <ContactDialog />
             <ThemeSwitch />
