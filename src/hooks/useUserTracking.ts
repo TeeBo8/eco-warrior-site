@@ -4,10 +4,8 @@ import { useEffect, useState, useCallback } from 'react';
 import {
     getOrCreateSession,
     trackAction,
-    getSessionStats,
     updatePreferences,
     type AnonymousSession,
-    type TrackedAction
 } from '@/lib/anonymous-auth';
 
 /**

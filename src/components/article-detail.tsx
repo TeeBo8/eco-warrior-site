@@ -58,7 +58,7 @@ export default function ArticleDetail() {
           text: articleQuery.data.summaryFr,
           url: window.location.href,
         });
-      } catch (e) {
+      } catch {
         // User cancelled or error
       }
     } else {
@@ -96,7 +96,7 @@ export default function ArticleDetail() {
         <div className="text-center">
           <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-foreground mb-2">Article non trouvé</h2>
-          <p className="text-muted-foreground mb-6">Cet article n'existe pas ou a été supprimé.</p>
+          <p className="text-muted-foreground mb-6">Cet article n&apos;existe pas ou a été supprimé.</p>
           <Button asChild>
             <Link href="/articles">Voir tous les articles</Link>
           </Button>

@@ -34,7 +34,6 @@ export interface AnonymousSession {
 }
 
 const STORAGE_KEY = 'eco_warrior_session';
-const SESSION_VERSION = 1;
 
 /**
  * Génère un UUID v4 simple

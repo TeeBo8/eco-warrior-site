@@ -50,7 +50,6 @@ export function ArticlePageCard({
     summary,
     imageUrl,
     publishedAt,
-    author = "L'équipe EcoWarrior",
     className
 }: ArticlePageCardProps) {
     const relativeTime = getRelativeTime(new Date(publishedAt));
