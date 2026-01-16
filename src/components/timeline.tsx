@@ -4,7 +4,6 @@ import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeli
 import "react-vertical-timeline-component/style.min.css";
 import { trpc } from "@/app/_trpc/client";
 import * as LucideIcons from "lucide-react";
-import { useTranslations } from "next-intl";
 
 // Mappage pour les icônes dynamiques
 const Icon = ({ name }: { name: string | null }) => {
@@ -15,12 +14,11 @@ const Icon = ({ name }: { name: string | null }) => {
   return <LucideIcon className="h-6 w-6" />;
 };
 
-export function Timeline({ locale }: { locale: string }) {
-  const t = useTranslations("TimelinePage");
+export function Timeline() {
   const eventsQuery = trpc.getTimelineEvents.useQuery();
 
-  if (eventsQuery.isLoading) return <p className="text-center">{t('loading')}</p>;
-  if (eventsQuery.error) return <p className="text-center text-red-500">{t('error')}: {eventsQuery.error.message}</p>;
+  if (eventsQuery.isLoading) return <p className="text-center">Chargement de la chronologie...</p>;
+  if (eventsQuery.error) return <p className="text-center text-red-500">Erreur lors du chargement de la chronologie: {eventsQuery.error.message}</p>;
 
   return (
     <VerticalTimeline>
@@ -28,16 +26,16 @@ export function Timeline({ locale }: { locale: string }) {
         <VerticalTimelineElement
           key={event.id}
           className="vertical-timeline-element--work"
-          contentStyle={{ 
-            background: "hsl(var(--card))", 
+          contentStyle={{
+            background: "hsl(var(--card))",
             color: "hsl(var(--card-foreground))",
             border: "1px solid hsl(var(--border))",
             boxShadow: "0 4px 6px -1px hsl(var(--muted) / 0.1), 0 2px 4px -2px hsl(var(--muted) / 0.1)"
           }}
           contentArrowStyle={{ borderRight: "7px solid hsl(var(--card))" }}
           date={event.year.toString()}
-          iconStyle={{ 
-            background: "hsl(var(--primary))", 
+          iconStyle={{
+            background: "hsl(var(--primary))",
             color: "hsl(var(--primary-foreground))",
             zIndex: 100,
             position: "relative",
@@ -46,13 +44,13 @@ export function Timeline({ locale }: { locale: string }) {
           icon={<Icon name={('icon' in event && typeof event.icon === 'string' ? event.icon : null)} />}
         >
           <h3 className="vertical-timeline-element-title font-bold text-lg text-foreground">
-            {locale === 'fr' ? event.titleFr : event.titleEn}
+            {event.titleFr}
           </h3>
           <p className="text-muted-foreground mt-2">
-            {locale === 'fr' ? event.descriptionFr : event.descriptionEn}
+            {event.descriptionFr}
           </p>
         </VerticalTimelineElement>
       ))}
     </VerticalTimeline>
   );
-} 
+}

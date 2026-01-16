@@ -9,7 +9,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useTranslations } from "next-intl";
 
 // Facteurs d'émission simplifiés (kg CO2 par unité)
 const EMISSION_FACTORS = {
@@ -34,7 +33,6 @@ type CalculationResult = {
 };
 
 export function CarbonCalculatorForm() {
-  const t = useTranslations("CalculatorPage.form");
   const [result, setResult] = useState<CalculationResult | null>(null);
 
   const calculationSchema = z.object({
@@ -86,7 +84,7 @@ export function CarbonCalculatorForm() {
             name="distanceKm"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('transport.distanceLabel')} ({field.value} km/jour)</FormLabel>
+                <FormLabel>Distance quotidienne moyenne ({field.value} km/jour)</FormLabel>
                 <FormControl>
                   <Slider
                     min={0}
@@ -105,18 +103,18 @@ export function CarbonCalculatorForm() {
             name="transportMode"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('transport.modeLabel')}</FormLabel>
+                <FormLabel>Mode de transport principal</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder={t('transport.modePlaceholder')} />
+                      <SelectValue placeholder="Sélectionnez un mode..." />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="car_gasoline">{t('transport.modes.car_gasoline')}</SelectItem>
-                    <SelectItem value="car_electric">{t('transport.modes.car_electric')}</SelectItem>
-                    <SelectItem value="train">{t('transport.modes.train')}</SelectItem>
-                    <SelectItem value="plane">{t('transport.modes.plane')}</SelectItem>
+                    <SelectItem value="car_gasoline">Voiture (essence)</SelectItem>
+                    <SelectItem value="car_electric">Voiture (électrique)</SelectItem>
+                    <SelectItem value="train">Train</SelectItem>
+                    <SelectItem value="plane">Avion</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -130,18 +128,18 @@ export function CarbonCalculatorForm() {
             name="diet"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('diet.label')}</FormLabel>
+                <FormLabel>Régime alimentaire</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder={t('diet.placeholder')} />
+                      <SelectValue placeholder="Sélectionnez un régime..." />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="meat_lover">{t('diet.types.meat_lover')}</SelectItem>
-                    <SelectItem value="average">{t('diet.types.average')}</SelectItem>
-                    <SelectItem value="vegetarian">{t('diet.types.vegetarian')}</SelectItem>
-                    <SelectItem value="vegan">{t('diet.types.vegan')}</SelectItem>
+                    <SelectItem value="meat_lover">Riche en viande</SelectItem>
+                    <SelectItem value="average">Moyen</SelectItem>
+                    <SelectItem value="vegetarian">Végétarien</SelectItem>
+                    <SelectItem value="vegan">Végétalien</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -155,7 +153,7 @@ export function CarbonCalculatorForm() {
             name="energyKwh"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{t('energy.label')} ({field.value} kWh/mois)</FormLabel>
+                <FormLabel>Consommation d&apos;énergie du foyer ({field.value} kWh/mois)</FormLabel>
                 <FormControl>
                   <Slider
                     min={0}
@@ -171,7 +169,7 @@ export function CarbonCalculatorForm() {
           />
 
           <Button type="submit" className="w-full">
-            {t('calculateButton')}
+            Calculer mon empreinte
           </Button>
         </form>
       </Form>
@@ -179,15 +177,15 @@ export function CarbonCalculatorForm() {
       {result && (
         <Card className="mt-12">
           <CardHeader>
-            <CardTitle>{t('result.title')}</CardTitle>
+            <CardTitle>Votre Empreinte Carbone Annuelle Estimée</CardTitle>
           </CardHeader>
           <CardContent className="text-center">
             <p className="text-5xl font-bold text-primary">{result.totalEmissions.toFixed(2)}</p>
-            <p className="text-lg text-muted-foreground">{t('result.unit')}</p>
+            <p className="text-lg text-muted-foreground">tonnes de CO₂e</p>
             <div className="text-left mt-6 space-y-2">
-              <p>🚗 Transport: {result.breakdown.transport.toFixed(2)} {t('result.unit')}</p>
-              <p>🍽️ Alimentation: {result.breakdown.diet.toFixed(2)} {t('result.unit')}</p>
-              <p>⚡ Énergie: {result.breakdown.energy.toFixed(2)} {t('result.unit')}</p>
+              <p>🚗 Transport: {result.breakdown.transport.toFixed(2)} tonnes de CO₂e</p>
+              <p>🍽️ Alimentation: {result.breakdown.diet.toFixed(2)} tonnes de CO₂e</p>
+              <p>⚡ Énergie: {result.breakdown.energy.toFixed(2)} tonnes de CO₂e</p>
             </div>
           </CardContent>
         </Card>

@@ -3,7 +3,6 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
 import { Loader2 } from "lucide-react";
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
@@ -22,8 +21,6 @@ const contactFormSchema = z.object({
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 export function ContactDialog() {
-  const tContact = useTranslations("Footer.contact");
-  const tGlobal = useTranslations("Footer");
   const { toast } = useToast();
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactFormValues>({
@@ -33,15 +30,15 @@ export function ContactDialog() {
   const { mutate, isPending } = trpc.contact.send.useMutation({
     onSuccess: () => {
       toast({
-        title: tContact('successTitle'),
-        description: tContact('successDescription'),
+        title: "Message envoyé !",
+        description: "Merci, nous vous répondrons dès que possible.",
       });
       reset();
     },
     onError: (error: { message: string }) => {
       toast({
-        title: tContact('errorTitle'),
-        description: error.message ?? tContact('errorDescription'),
+        title: "Erreur",
+        description: error.message ?? "Le message n'a pas pu être envoyé.",
         variant: "destructive",
       });
     },
@@ -55,31 +52,31 @@ export function ContactDialog() {
     <Dialog>
       <DialogTrigger asChild>
         <Button size="lg" className="px-6 py-5 rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-md hover:shadow-lg transition-all duration-300">
-          {tContact('title')}
+          Contactez-nous
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-lg">
         <DialogHeader className="space-y-2">
-          <DialogTitle className="text-xl font-semibold">{tContact('title')}</DialogTitle>
-          <DialogDescription>{tGlobal('contact.messagePlaceholder')}</DialogDescription>
+          <DialogTitle className="text-xl font-semibold">Contactez-nous</DialogTitle>
+          <DialogDescription>Votre message...</DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="email">{tContact('emailPlaceholder')}</Label>
+            <Label htmlFor="email">Votre adresse email</Label>
             <Input
               id="email"
               type="email"
-              placeholder={tContact('emailPlaceholder')}
+              placeholder="Votre adresse email"
               {...register("email")}
               aria-invalid={!!errors.email}
             />
             {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
           </div>
           <div className="space-y-2">
-            <Label htmlFor="message">{tContact('messagePlaceholder')}</Label>
+            <Label htmlFor="message">Votre message</Label>
             <Textarea
               id="message"
-              placeholder={tContact('messagePlaceholder')}
+              placeholder="Votre message..."
               {...register("message")}
               aria-invalid={!!errors.message}
               className="min-h-[120px]"
@@ -88,11 +85,10 @@ export function ContactDialog() {
           </div>
           <Button type="submit" className="w-full" disabled={isPending}>
             {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-            {tContact('sendButton')}
+            Envoyer le message
           </Button>
         </form>
       </DialogContent>
     </Dialog>
   );
 }
-

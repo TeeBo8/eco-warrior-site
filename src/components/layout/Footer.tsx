@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useTranslations, useLocale } from "next-intl";
 import { Linkedin, Twitter, Loader2, Leaf } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -32,8 +31,6 @@ const EcoWarriorLogo = ({ className }: { className?: string }) => (
 
 export function Footer() {
   const pathname = usePathname();
-  const locale = useLocale();
-  const t = useTranslations('Footer');
   const { toast } = useToast();
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactFormValues>({
@@ -43,14 +40,14 @@ export function Footer() {
   const { mutate, isPending } = trpc.contact.send.useMutation({
     onSuccess: () => {
       toast({
-        title: t('contact.successTitle'),
-        description: t('contact.successDescription'),
+        title: "Message envoyé !",
+        description: "Merci, nous vous répondrons dès que possible.",
       });
       reset();
     },
     onError: (error: { message: string }) => {
       toast({
-        title: t('contact.errorTitle'),
+        title: "Erreur",
         description: error.message,
         variant: "destructive",
       });
@@ -58,7 +55,7 @@ export function Footer() {
   });
 
   // Ne pas afficher le footer si on n'est pas sur la page d'accueil
-  const isHomePage = pathname.match(/^\/[a-z]{2}$/);
+  const isHomePage = pathname === "/";
 
   if (!isHomePage) {
     return null;
@@ -69,18 +66,18 @@ export function Footer() {
   }
 
   const navLinks = [
-    { href: `/${locale}/dashboard`, label: t('links.dashboard') },
-    { href: `/${locale}/debunk`, label: t('links.myths') },
-    { href: `/${locale}/timeline`, label: t('links.timeline') },
-    { href: `/${locale}/map`, label: t('links.impactMap') },
-    { href: `/${locale}/calculator`, label: t('links.calculator') },
+    { href: "/dashboard", label: "Tableau de Bord" },
+    { href: "/debunk", label: "Mythes & Réalités" },
+    { href: "/timeline", label: "Chronologie" },
+    { href: "/map", label: "Carte des Impacts" },
+    { href: "/calculator", label: "Calculateur" },
   ];
 
   return (
     <footer className="w-full">
       <div className="flex flex-col items-center text-center space-y-8">
         {/* Logo */}
-        <Link href={`/${locale}`} className="hover:opacity-80 transition-opacity">
+        <Link href="/" className="hover:opacity-80 transition-opacity">
           <EcoWarriorLogo />
         </Link>
 
@@ -99,14 +96,14 @@ export function Footer() {
 
         {/* Contact Form - Compact */}
         <div className="w-full max-w-md">
-          <h3 className="mb-4 text-lg font-semibold text-foreground">{t('contact.title')}</h3>
+          <h3 className="mb-4 text-lg font-semibold text-foreground">Contactez-nous</h3>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
               <Label htmlFor="email" className="sr-only">Email</Label>
-              <Input 
-                id="email" 
-                placeholder={t('contact.emailPlaceholder')} 
-                type="email" 
+              <Input
+                id="email"
+                placeholder="Votre adresse email"
+                type="email"
                 {...register("email")}
                 className="bg-card/80 backdrop-blur-sm border-border/60"
               />
@@ -114,9 +111,9 @@ export function Footer() {
             </div>
             <div>
               <Label htmlFor="message" className="sr-only">Message</Label>
-              <Textarea 
-                id="message" 
-                placeholder={t('contact.messagePlaceholder')} 
+              <Textarea
+                id="message"
+                placeholder="Votre message..."
                 {...register("message")}
                 className="bg-card/80 backdrop-blur-sm border-border/60 min-h-[100px]"
               />
@@ -124,7 +121,7 @@ export function Footer() {
             </div>
             <Button type="submit" disabled={isPending} className="w-full">
               {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-              {t('contact.sendButton')}
+              Envoyer le message
             </Button>
           </form>
         </div>
@@ -156,10 +153,10 @@ export function Footer() {
         {/* Copyright & Project Mention */}
         <div className="space-y-2 pt-4 border-t border-border/30">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} EcoWarrior. {t('rights')}.
+            © {new Date().getFullYear()} EcoWarrior. Tous droits réservés.
           </p>
           <p className="text-xs text-muted-foreground/70">
-            {t('projectMention')}
+            Projet personnel développé avec Next.js
           </p>
         </div>
       </div>

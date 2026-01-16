@@ -1,12 +1,9 @@
 import { router, publicProcedure } from "../../trpc/trpc";
-import { desc } from "drizzle-orm";
-import { mapPoints } from "../../db/schema";
+import mapPointsData from "@/data/map-points.json";
 
 export const mapRouter = router({
-  getPoints: publicProcedure.query(async ({ ctx }) => {
-    // Retourner tous les points sans restriction
-    return await ctx.db.query.mapPoints.findMany({
-      orderBy: [desc(mapPoints.id)],
-    });
+  getPoints: publicProcedure.query(async () => {
+    // Retourner tous les points depuis le fichier JSON
+    return mapPointsData;
   }),
 });

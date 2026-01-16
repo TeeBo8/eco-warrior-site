@@ -4,7 +4,14 @@ import { Resend } from "resend";
 import { router, publicProcedure } from "@/server/trpc/trpc";
 import { TRPCError } from "@trpc/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialization to avoid build errors when API key is missing
+let resendInstance: Resend | null = null;
+const getResend = () => {
+  if (!resendInstance && process.env.RESEND_API_KEY) {
+    resendInstance = new Resend(process.env.RESEND_API_KEY);
+  }
+  return resendInstance;
+};
 
 export const contactRouter = router({
   send: publicProcedure
@@ -22,6 +29,11 @@ export const contactRouter = router({
           console.warn("RESEND_API_KEY manquante – le message est enregistré mais aucun e-mail n'a été envoyé.");
           console.log('📧 Message de contact reçu (mode test):', { email, message });
           return { success: true };
+        }
+
+        const resend = getResend();
+        if (!resend) {
+          throw new Error("Resend non initialisé");
         }
 
         // Adresse expéditrice et destinataire issues des variables d'environnement
@@ -44,4 +56,4 @@ export const contactRouter = router({
         });
       }
     }),
-}); 
+});

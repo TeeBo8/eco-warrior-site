@@ -3,7 +3,6 @@
 import { Card, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { ThumbsUp } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { CommentSection } from "./comment-section";
 
 // Type pour le post
@@ -19,8 +18,6 @@ type Post = {
 };
 
 export function PostCard({ post }: { post: Post }) {
-  const t = useTranslations("DebunkPage.card");
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -33,18 +30,18 @@ export function PostCard({ post }: { post: Post }) {
               <ThumbsUp className="h-5 w-5" />
               <span className="font-bold">{post.likes}</span>
             </div>
-            <span className="text-sm text-muted-foreground">{t('clickToRead')}</span>
+            <span className="text-sm text-muted-foreground">Cliquer pour lire</span>
           </CardFooter>
         </Card>
       </DialogTrigger>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
-          <DialogTitle className="text-red-600">{t('mythLabel')}</DialogTitle>
+          <DialogTitle className="text-red-600">💭 Mythe</DialogTitle>
           <p className="text-lg font-medium">{post.mythFr}</p>
         </DialogHeader>
         <div className="mt-4 space-y-4">
           <div>
-            <h4 className="text-green-600 font-semibold text-lg">{t('realityLabel')}</h4>
+            <h4 className="text-green-600 font-semibold text-lg">✅ Réalité</h4>
             <p className="text-gray-700 dark:text-gray-300 mt-2 leading-relaxed">{post.realityFr}</p>
           </div>
 

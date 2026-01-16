@@ -1,7 +1,6 @@
 "use client";
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { useTranslations } from 'next-intl';
 
 type HistoryData = {
   createdAt: string;
@@ -9,8 +8,6 @@ type HistoryData = {
 };
 
 export function HistoryChart({ data }: { data: HistoryData[] }) {
-  const t = useTranslations("CalculatorPage.history");
-  
   const formattedData = data.map(item => ({
     date: new Date(item.createdAt).toLocaleDateString(),
     emissions: item.totalEmissions.toFixed(2),
@@ -18,7 +15,7 @@ export function HistoryChart({ data }: { data: HistoryData[] }) {
 
   return (
     <div className="mt-8">
-      <h3 className="text-xl font-semibold mb-4">{t('title')}</h3>
+      <h3 className="text-xl font-semibold mb-4">Évolution de votre Empreinte Carbone</h3>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart data={formattedData}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -26,9 +23,9 @@ export function HistoryChart({ data }: { data: HistoryData[] }) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="emissions" name={t('chartLabel')} stroke="#16a34a" activeDot={{ r: 8 }} />
+          <Line type="monotone" dataKey="emissions" name="Émissions (tonnes CO₂e)" stroke="#16a34a" activeDot={{ r: 8 }} />
         </LineChart>
       </ResponsiveContainer>
     </div>
   );
-} 
+}

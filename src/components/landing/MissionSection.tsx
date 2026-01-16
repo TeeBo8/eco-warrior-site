@@ -1,15 +1,11 @@
 'use client';
 
-
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { useTranslations } from 'next-intl';
-
 import Image from 'next/image';
 
 export function MissionSection() {
-  const t = useTranslations('MissionSection');
   const premiumCount = 42; // Example contributor count
   const goal = 1000; // Example goal
   const progress = (premiumCount / goal) * 100;
@@ -49,13 +45,13 @@ export function MissionSection() {
             <div className="space-y-8">
               <div className="space-y-6">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-tight">
-                  {t('title')}
+                  Le mot du fondateur
                 </h2>
                 <div className="w-24 h-1.5 bg-gradient-to-r from-primary via-accent to-primary rounded-full"></div>
               </div>
 
               <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed">
-                {t('description')}
+                EcoWarrior est né d&apos;une frustration : l&apos;impuissance face aux chiffres. J&apos;ai codé ces outils pour que chacun puisse comprendre et agir concrètement, sans barrière. Votre soutien permet de garder cette technologie libre et indépendante.
               </p>
             </div>
 
@@ -64,17 +60,17 @@ export function MissionSection() {
               <div className="flex justify-between items-center font-mono text-base md:text-lg">
                 <span className="flex items-center gap-3">
                   <span className="w-3 h-3 bg-primary rounded-full animate-pulse shadow-lg shadow-primary/50"></span>
-                  <strong className="text-foreground">{premiumCount}</strong> <span className="text-muted-foreground">{t('stats.members')}</span>
+                  <strong className="text-foreground">{premiumCount}</strong> <span className="text-muted-foreground">Contributeurs</span>
                 </span>
                 <span className="text-muted-foreground">
-                  {t('stats.goal')}: <strong className="text-foreground">{goal}</strong>
+                  Objectif de financement: <strong className="text-foreground">{goal}</strong>
                 </span>
               </div>
 
               <div className="space-y-3">
                 <Progress value={progress} className="w-full h-4" />
                 <p className="text-center text-base font-medium text-muted-foreground">
-                  <span className="text-primary font-bold text-lg">{Math.round(progress)}%</span> {t('stats.progress')}
+                  <span className="text-primary font-bold text-lg">{Math.round(progress)}%</span> financé
                 </p>
               </div>
             </div>
@@ -86,7 +82,7 @@ export function MissionSection() {
                   size="lg"
                   className="w-full md:w-auto text-lg px-10 py-7 bg-gradient-to-r from-primary via-primary/90 to-accent hover:from-primary/90 hover:via-primary/80 hover:to-accent/90 transition-all duration-500 shadow-xl hover:shadow-2xl hover:scale-105 font-semibold"
                 >
-                  {t('cta')}
+                  Faire un don et soutenir le projet
                 </Button>
               </Link>
             </div>

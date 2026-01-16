@@ -7,7 +7,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Camera, Upload, Loader2, Leaf, AlertTriangle, CheckCircle } from 'lucide-react';
 import { analyzeCarbonFootprint } from '@/server/actions/scan-image';
 
-export function VisualScanner({ locale = 'fr' }: { locale?: string }) {
+export function VisualScanner() {
+    const locale = 'fr';
     const [image, setImage] = useState<string | null>(null);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [result, setResult] = useState<{

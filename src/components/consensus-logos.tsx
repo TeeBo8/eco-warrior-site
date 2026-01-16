@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 
 const logos = [
   { name: "NASA", path: "/logos/nasa.svg" },
@@ -9,13 +8,12 @@ const logos = [
 ];
 
 export function ConsensusLogos() {
-  const t = useTranslations("ConsensusSection");
   return (
     <section className="bg-muted py-16">
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold">{t('title')}</h2>
+        <h2 className="text-3xl font-bold">Le débat scientifique est clos.</h2>
         <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
-          {t('subtitle')}
+          NASA, GIEC, CNRS, NOAA... Toutes les grandes institutions mondiales confirment l&apos;origine humaine du réchauffement avec un niveau de certitude comparable à celui de la gravité. Ce n&apos;est pas une opinion, c&apos;est de la physique.
         </p>
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-10 items-center justify-items-center">
           {logos.map((logo) => (
@@ -34,4 +32,4 @@ export function ConsensusLogos() {
       </div>
     </section>
   );
-} 
+}

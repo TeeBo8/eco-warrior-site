@@ -1,39 +1,39 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { BookOpen, Calculator, ShieldCheck } from 'lucide-react';
 
 const steps = [
     {
         icon: BookOpen,
-        key: 'understand',
         step: '01',
+        title: "Comprenez l'Urgence",
+        description: "Accédez immédiatement aux données scientifiques réelles (CO2, Température) sans barrière. Pas de compte requis.",
     },
     {
         icon: Calculator,
-        key: 'measure',
         step: '02',
+        title: "Mesurez votre Impact",
+        description: "Utilisez notre calculateur carbone transparent pour évaluer votre empreinte personnelle.",
     },
     {
         icon: ShieldCheck,
-        key: 'act',
         step: '03',
+        title: "Rejoignez le Sanctuaire",
+        description: "Participez à notre mission collective : acquérir et protéger définitivement des terres sauvages.",
     },
 ];
 
 export function HowItWorksSection() {
-    const t = useTranslations('HowItWorksSection');
-
     return (
         <section className="py-20 bg-muted/30">
             <div className="container mx-auto px-4">
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                        {t('title')}
+                        Votre parcours en 3 étapes
                     </h2>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        {t('subtitle')}
+                        Commencez votre transition écologique en quelques minutes seulement.
                     </p>
                 </div>
 
@@ -47,7 +47,7 @@ export function HowItWorksSection() {
                             const Icon = step.icon;
                             return (
                                 <div
-                                    key={step.key}
+                                    key={step.step}
                                     className="flex flex-col items-center text-center group"
                                 >
                                     {/* Step Number & Icon Container */}
@@ -65,10 +65,10 @@ export function HowItWorksSection() {
 
                                     {/* Content */}
                                     <h3 className="text-xl font-bold text-foreground mb-3">
-                                        {t(`steps.${step.key}.title`)}
+                                        {step.title}
                                     </h3>
                                     <p className="text-muted-foreground leading-relaxed max-w-xs">
-                                        {t(`steps.${step.key}.description`)}
+                                        {step.description}
                                     </p>
 
                                     {/* Arrow (mobile only, except last) */}

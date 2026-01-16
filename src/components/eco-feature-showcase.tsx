@@ -1,35 +1,32 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
 
 export function EcoFeatureShowcase() {
-  const t = useTranslations("HomePage.features");
-
   const features = [
     {
       id: "1",
-      name: t('debunk.name'),
-      title: t('debunk.title'),
-      description: t('debunk.description'),
+      name: "Mythes & Réalités",
+      title: "Démontez les idées reçues",
+      description: "Explorez notre contenu éditorial basé sur des sources scientifiques fiables pour comprendre les véritables enjeux climatiques et déjouer la désinformation.",
     },
     {
       id: "2",
-      name: t('timeline.name'),
-      title: t('timeline.title'),
-      description: t('timeline.description'),
+      name: "Chronologie",
+      title: "L'histoire de la science du climat",
+      description: "Découvrez les étapes clés qui ont façonné notre compréhension du changement climatique, des premières découvertes aux consensus actuels.",
     },
     {
       id: "3",
-      name: t('map.name'),
-      title: t('map.title'),
-      description: t('map.description'),
+      name: "Carte d'impacts",
+      title: "Visualisez les impacts près de chez vous",
+      description: "Explorez une carte interactive des effets concrets du changement climatique dans votre région et partout dans le monde.",
     },
     {
       id: "4",
-      name: t('articles.name'),
-      title: t('articles.title'),
-      description: t('articles.description'),
+      name: "Articles",
+      title: "Analyses approfondies du climat",
+      description: "Explorez nos articles d'analyse détaillés sur les enjeux climatiques, les solutions innovantes et les dernières recherches scientifiques pour approfondir vos connaissances.",
     },
   ];
 
@@ -45,10 +42,10 @@ export function EcoFeatureShowcase() {
         {/* En-tête de section */}
         <div className="text-center mb-20 max-w-4xl mx-auto animate-fade-in-up">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-6 leading-tight">
-            {t('showcase.title')}
+            Explorez nos outils scientifiques
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-            {t('showcase.description')}
+            Au-delà de l&apos;action individuelle, développez votre compréhension des mécanismes climatiques.
           </p>
         </div>
 
@@ -63,7 +60,7 @@ export function EcoFeatureShowcase() {
               >
                 {/* Background gradient au survol */}
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/10 via-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                
+
                 {/* Badge avec numéro - Plus chaleureux */}
                 <div className="flex items-center gap-3 mb-8 relative z-10">
                   <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-lg font-bold border-2 border-primary/20 group-hover:border-primary/40 group-hover:bg-primary/15 transition-all duration-500 shadow-lg group-hover:shadow-xl group-hover:scale-110">

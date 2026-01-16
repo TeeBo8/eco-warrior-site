@@ -12,63 +12,49 @@ import {
   Scan
 } from "lucide-react";
 import Link from "next/link";
-import { Button } from "./ui/button";
-import { useParams, useRouter, usePathname } from "next/navigation";
-import { useTranslations } from 'next-intl';
+import { usePathname } from "next/navigation";
 
-import { Globe } from 'lucide-react';
 import { cn } from "@/lib/utils";
 
 
 export function MainSidebar({ children }: { children: React.ReactNode }) {
-  const params = useParams();
-  const locale = typeof params.locale === "string" ? params.locale : "fr";
-  const t = useTranslations('Header');
-
-  const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  const switchLanguage = () => {
-    const newLocale = locale === 'fr' ? 'en' : 'fr';
-    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
-    router.push(newPath);
-  };
-
   const links = [
     {
-      label: t('dashboardLink'),
-      href: `/${locale}/dashboard`,
+      label: "Tableau de Bord",
+      href: "/dashboard",
       icon: <LayoutDashboard className="h-5 w-5" />
     },
     {
-      label: t('debunkLink'),
-      href: `/${locale}/debunk`,
+      label: "Mythes & Réalités",
+      href: "/debunk",
       icon: <ShieldCheck className="h-5 w-5" />
     },
     {
-      label: t('articlesLink'),
-      href: `/${locale}/articles`,
+      label: "Analyses",
+      href: "/articles",
       icon: <FileText className="h-5 w-5" />
     },
     {
-      label: t('timelineLink'),
-      href: `/${locale}/timeline`,
+      label: "Chronologie",
+      href: "/timeline",
       icon: <Clock className="h-5 w-5" />
     },
     {
-      label: t('calculatorLink'),
-      href: `/${locale}/calculator`,
+      label: "Calculateur",
+      href: "/calculator",
       icon: <Calculator className="h-5 w-5" />
     },
     {
-      label: t('mapLink'),
-      href: `/${locale}/map`,
+      label: "Carte des Impacts",
+      href: "/map",
       icon: <Map className="h-5 w-5" />
     },
     {
-      label: t('scannerLink'),
-      href: `/${locale}/scanner`,
+      label: "Scanner Visuel",
+      href: "/scanner",
       icon: <Scan className="h-5 w-5" />
     },
   ];
@@ -80,7 +66,7 @@ export function MainSidebar({ children }: { children: React.ReactNode }) {
           <div className="flex flex-col flex-1 overflow-y-auto">
             {/* Logo dynamique selon l'état ouvert/fermé */}
             <div className="p-2">
-              {open ? <Logo locale={locale} /> : <LogoIcon locale={locale} />}
+              {open ? <Logo /> : <LogoIcon />}
             </div>
 
             {/* Navigation - toujours visible */}
@@ -90,29 +76,13 @@ export function MainSidebar({ children }: { children: React.ReactNode }) {
               ))}
             </div>
           </div>
-
-          {/* Section du bas */}
-          <div className="flex flex-col gap-2">
-            {/* Switch de langue */}
-            <div className="flex items-center justify-center py-2">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={switchLanguage}
-                className="text-sm flex items-center gap-1"
-              >
-                <Globe className="w-4 h-4" />
-                {open && (locale === 'fr' ? 'EN' : 'FR')}
-              </Button>
-            </div>
-          </div>
         </SidebarBody>
       </Sidebar>
       <div className="flex flex-1">
         <div className={cn(
           "flex-1 w-full",
           // Pas de padding sur la landing page (home)
-          pathname.match(/^\/[a-z]{2}$/) ? "" : "p-2 md:p-10"
+          pathname === "/" ? "" : "p-2 md:p-10"
         )}>
           {children}
         </div>
@@ -121,9 +91,9 @@ export function MainSidebar({ children }: { children: React.ReactNode }) {
   );
 }
 
-const Logo = ({ locale }: { locale: string }) => (
+const Logo = () => (
   <Link
-    href={`/${locale}`}
+    href="/"
     className="font-bold text-xl flex items-center text-green-600 py-1 relative z-20"
   >
     <Leaf className="h-7 w-7 mr-2" />
@@ -132,9 +102,9 @@ const Logo = ({ locale }: { locale: string }) => (
 );
 
 // Nouveau composant pour l'icône seule
-const LogoIcon = ({ locale }: { locale: string }) => (
+const LogoIcon = () => (
   <Link
-    href={`/${locale}`}
+    href="/"
     className="font-bold flex items-center justify-center py-1 relative z-20"
   >
     <Leaf className="h-7 w-7 text-green-600" />
