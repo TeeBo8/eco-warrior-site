@@ -20,46 +20,46 @@ import {
 export default function HomePage() {
   const featureCards = [
     {
-      title: "Surveillez le climat en temps réel",
+      title: "Les chiffres qui dérangent",
       href: "/dashboard",
       icon: <LayoutDashboard className="w-5 h-5" />,
-      description: "CO₂, température, niveau des mers"
+      description: "CO₂, température, niveau des mers - en temps réel"
     },
     {
-      title: "Démontez les idées reçues",
+      title: "Détruire les arguments bidons",
       href: "/debunk",
       icon: <ShieldCheck className="w-5 h-5" />,
-      description: "Mythes vs réalités scientifiques"
+      description: "Chaque mythe climatosceptique démonté par la science"
     },
     {
-      title: "L'histoire de la science du climat",
+      title: "200 ans de preuves ignorées",
       href: "/timeline",
       icon: <Clock className="w-5 h-5" />,
-      description: "200 ans de découvertes"
+      description: "L'histoire de la science qu'ils refusent de voir"
     },
     {
-      title: "Visualisez les impacts près de chez vous",
+      title: "Les dégâts sont déjà là",
       href: "/map",
       icon: <Map className="w-5 h-5" />,
-      description: "Carte interactive mondiale"
+      description: "Carte mondiale des impacts climatiques"
     },
     {
-      title: "Mesurez votre empreinte carbone",
+      title: "Calculez votre impact réel",
       href: "/calculator",
       icon: <Calculator className="w-5 h-5" />,
-      description: "Calculez et réduisez votre impact"
+      description: "Votre empreinte carbone en chiffres"
     },
     {
-      title: "Scanner Carbone Visuel",
+      title: "Scanner Carbone IA",
       href: "/scanner",
       icon: <Scan className="w-5 h-5" />,
-      description: "Analysez avec l'IA Gemini"
+      description: "Analysez n'importe quoi avec Gemini"
     },
     {
-      title: "Analyses approfondies du climat",
+      title: "Enquêtes & Analyses",
       href: "/articles",
       icon: <FileText className="w-5 h-5" />,
-      description: "Articles d'experts"
+      description: "Les dossiers qui font mal"
     },
   ];
 
@@ -79,12 +79,12 @@ export default function HomePage() {
 
       {/* Badge tout en haut (style Perplexity) */}
       <div className="relative w-full flex justify-center pt-6 pb-2">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium backdrop-blur-sm">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-sm font-medium backdrop-blur-sm">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
           </span>
-          Données climatiques en temps réel
+          Urgence climatique : les faits, pas les opinions
         </div>
       </div>
 
@@ -94,16 +94,16 @@ export default function HomePage() {
         <div className="w-full mb-6 sm:mb-8">
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-600 via-emerald-500 to-teal-500 dark:from-green-400 dark:via-emerald-300 dark:to-teal-400">
-              Agissez pour la planète
+              La science contre
             </span>
             <br />
             <span className="text-foreground">
-              avec des données fiables
+              les climatosceptiques
             </span>
           </h1>
           <p className="mt-4 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            L&apos;application tout-en-un pour comprendre, mesurer et réduire votre impact environnemental.
-            Basée sur la science, conçue pour l&apos;action.
+            Ils nient, on prouve. Chaque argument climatosceptique démonté par des données vérifiables.
+            <span className="block mt-2 text-foreground font-medium">NASA • NOAA • IPCC • GIEC</span>
           </p>
         </div>
 
@@ -125,11 +125,11 @@ export default function HomePage() {
         <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm text-muted-foreground mb-4">
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-primary" />
-            <span>Données de la NASA, NOAA, IPCC</span>
+            <span>Sources vérifiables uniquement</span>
           </div>
           <div className="flex items-center gap-2">
-            <Heart className="w-4 h-4 text-red-500" />
-            <span>100% open source</span>
+            <ShieldCheck className="w-4 h-4 text-primary" />
+            <span>Peer-reviewed science</span>
           </div>
         </div>
       </section>
