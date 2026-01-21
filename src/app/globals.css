@@ -291,3 +291,30 @@
   background-size: 200% 200%;
   animation: gradient-slow 20s ease infinite;
 }
+
+/* Animations pour le marquee (background nuages) */
+@keyframes marquee-horizontal {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--marquee-gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--marquee-gap)));
+  }
+}
+
+.animate-marquee-horizontal {
+  animation: marquee-horizontal var(--marquee-duration) linear infinite;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--marquee-duration) linear infinite;
+}

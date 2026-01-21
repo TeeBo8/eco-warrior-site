@@ -3,6 +3,7 @@
 import { FeatureCard } from "@/components/landing/FeatureCard";
 import { ContactDialog } from "@/components/landing/ContactDialog";
 import { ThemeSwitch } from "@/components/ui/theme-switch";
+import { Marquee } from "@/components/ui/marquee";
 import Link from "next/link";
 
 import {
@@ -64,21 +65,34 @@ export default function HomePage() {
   ];
 
   return (
-    <main className="relative h-screen w-full bg-background overflow-hidden flex flex-col">
-      {/* Background gradient animé */}
-      <div className="fixed inset-0 w-full h-full -z-10">
-        {/* Gradient de fond avec animation */}
-        <div className="absolute inset-0 bg-gradient-to-br from-green-900/30 via-emerald-800/20 to-teal-900/30 animate-gradient" />
-
-        {/* Deuxième couche de gradient pour effet de profondeur */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-teal-800/20 via-transparent to-green-900/20 animate-gradient-slow" />
-
-        {/* Overlay pour lisibilité */}
-        <div className="absolute inset-0 bg-background/75 dark:bg-background/85" />
+    <main className="relative h-screen w-full overflow-hidden flex flex-col">
+      {/* Background nuages animé - Light mode */}
+      <div className="fixed inset-0 -z-20 dark:hidden">
+        <Marquee duration={80} gap={0} repeat={4} className="h-full p-0">
+          <img
+            src="https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/hero/image-63.png"
+            alt="Background nuages"
+            className="h-full w-auto min-h-screen object-cover"
+          />
+        </Marquee>
       </div>
 
+      {/* Background nuages animé - Dark mode */}
+      <div className="fixed inset-0 -z-20 hidden dark:block">
+        <Marquee duration={80} gap={0} repeat={4} className="h-full p-0">
+          <img
+            src="https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/hero/image-63-dark.png"
+            alt="Background nuages"
+            className="h-full w-auto min-h-screen object-cover"
+          />
+        </Marquee>
+      </div>
+
+      {/* Overlay léger pour lisibilité */}
+      <div className="fixed inset-0 -z-10 bg-white/30 dark:bg-black/40" />
+
       {/* Badge tout en haut (style Perplexity) */}
-      <div className="relative w-full flex justify-center pt-6 pb-2">
+      <div className="relative z-10 w-full flex justify-center pt-6 pb-2">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-sm font-medium backdrop-blur-sm">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
@@ -89,7 +103,7 @@ export default function HomePage() {
       </div>
 
       {/* Contenu principal centré */}
-      <section className="relative max-w-3xl mx-auto px-4 sm:px-6 flex-1 flex flex-col items-center justify-center text-center">
+      <section className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 flex-1 flex flex-col items-center justify-center text-center">
         {/* Titre principal avec gradient */}
         <div className="w-full mb-6 sm:mb-8">
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-tight">
@@ -135,7 +149,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer en bas (Contact + Switch + Mention) */}
-      <div className="relative w-full pb-6">
+      <div className="relative z-10 w-full pb-6">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="flex flex-row flex-wrap items-center justify-center gap-3">
             <ContactDialog />
