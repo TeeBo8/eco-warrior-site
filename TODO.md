@@ -8,7 +8,6 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 ## Tâches à faire
 
 ### Priorité haute
-- [ ] **Enrichir la section Debunk** - Ajouter plus de mythes climatosceptiques avec leur démontage scientifique, améliorer la présentation
 - [ ] **Article Trump/Groenland** - Créer l'article viral sur l'ironie de Trump qui veut le Groenland dont les ressources sont accessibles grâce au réchauffement qu'il nie
 - [ ] **Système Quote Check** - Outil pour coller une citation climatosceptique et obtenir les sources pour la démonter
 
@@ -24,6 +23,8 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 
 ## Fait
 - [x] **Repositionnement du site** - Ton combatif direct "La science contre les climatosceptiques" (commit 691abf9)
+- [x] **Enrichir la section Debunk** - 20 mythes climatosceptiques avec sources scientifiques (8 → 20)
+- [x] **Badge "En développement"** - Ajout d'un badge visible dans la sidebar pour prévenir les utilisateurs
 
 ---
 

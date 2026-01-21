@@ -193,6 +193,83 @@ async function main() {
       mythEn: "Arctic sea ice is gaining area every year.",
       realityEn: "False. Arctic sea ice is losing about 13% of its area per decade since 1979. September 2023 recorded the 6th smallest extent since satellite measurements began.",
       source: "NSIDC (National Snow and Ice Data Center), NOAA Arctic Report Card"
+    },
+    {
+      mythFr: "Le climat a toujours changé, c'est naturel.",
+      realityFr: "Le climat a effectivement varié naturellement, mais jamais à cette vitesse. Le réchauffement actuel est 10 fois plus rapide que la sortie du dernier âge glaciaire. Et surtout, les causes sont identifiées : 100% du réchauffement depuis 1950 est attribuable aux activités humaines.",
+      mythEn: "The climate has always changed, it's natural.",
+      realityEn: "Climate has indeed varied naturally, but never at this speed. Current warming is 10 times faster than the exit from the last ice age. Most importantly, the causes are identified: 100% of warming since 1950 is attributable to human activities.",
+      source: "GIEC AR6 WG1, NASA Paleoclimatology"
+    },
+    {
+      mythFr: "Les scientifiques ne sont pas d'accord entre eux sur le réchauffement climatique.",
+      realityFr: "Faux. 97% des climatologues actifs s'accordent sur la réalité du réchauffement anthropique. Les études récentes montrent même un consensus proche de 99,9% dans les publications scientifiques. Le débat porte sur les détails, pas sur la réalité du phénomène.",
+      mythEn: "Scientists don't agree on climate change.",
+      realityEn: "False. 97% of active climate scientists agree on the reality of anthropogenic warming. Recent studies show consensus close to 99.9% in scientific publications. The debate is about details, not the reality of the phenomenon.",
+      source: "Cook et al. 2013, Lynas et al. 2021, Cornell Alliance for Science"
+    },
+    {
+      mythFr: "C'est le soleil qui cause le réchauffement climatique.",
+      realityFr: "L'activité solaire est stable ou en légère baisse depuis 1980, alors que les températures augmentent. Si le soleil était responsable, toute l'atmosphère se réchaufferait uniformément. Or, la stratosphère se refroidit tandis que la troposphère se réchauffe - signature typique de l'effet de serre.",
+      mythEn: "The sun is causing global warming.",
+      realityEn: "Solar activity has been stable or slightly declining since 1980, while temperatures rise. If the sun were responsible, the entire atmosphere would warm uniformly. But the stratosphere is cooling while the troposphere warms - a typical greenhouse effect signature.",
+      source: "NASA Solar Science, IPCC AR6, Royal Society"
+    },
+    {
+      mythFr: "La France ne représente que 1% des émissions mondiales, nos efforts sont inutiles.",
+      realityFr: "La France est le 19e émetteur mondial. Si chaque pays en dessous de 3% des émissions ne faisait rien, 80% des émissions mondiales seraient ignorées. De plus, l'empreinte carbone réelle des Français (incluant les importations) est 2 fois plus élevée que les émissions territoriales.",
+      mythEn: "France only represents 1% of global emissions, our efforts are useless.",
+      realityEn: "France is the 19th largest emitter globally. If every country below 3% of emissions did nothing, 80% of global emissions would be ignored. Moreover, the real carbon footprint of French people (including imports) is 2 times higher than territorial emissions.",
+      source: "Global Carbon Project, Haut Conseil pour le Climat 2023"
+    },
+    {
+      mythFr: "Les modèles climatiques ne sont pas fiables.",
+      realityFr: "Les modèles climatiques des années 1970-90 ont prédit avec précision le réchauffement observé aujourd'hui. Le modèle de James Hansen en 1988 prévoyait +0,5°C d'ici 2020 - nous avons mesuré exactement cela. Les modèles actuels sont encore plus précis.",
+      mythEn: "Climate models are not reliable.",
+      realityEn: "Climate models from the 1970s-90s accurately predicted the warming observed today. James Hansen's 1988 model predicted +0.5°C by 2020 - we measured exactly that. Current models are even more precise.",
+      source: "Hausfather et al. 2020 (Geophysical Research Letters), NASA GISS"
+    },
+    {
+      mythFr: "Le réchauffement climatique, c'est juste quelques degrés de plus, pas grave.",
+      realityFr: "Pendant l'âge glaciaire, la température moyenne n'était que 4-5°C plus basse qu'aujourd'hui, et des kilomètres de glace recouvraient l'Europe. Chaque degré compte énormément : +1,5°C = 70% des récifs coralliens morts, +2°C = 99% des récifs morts et 400 millions de personnes exposées à la pénurie d'eau.",
+      mythEn: "Global warming is just a few degrees more, no big deal.",
+      realityEn: "During the ice age, average temperature was only 4-5°C lower than today, and kilometers of ice covered Europe. Every degree matters enormously: +1.5°C = 70% of coral reefs dead, +2°C = 99% of reefs dead and 400 million people exposed to water scarcity.",
+      source: "GIEC Rapport Spécial 1.5°C, World Meteorological Organization"
+    },
+    {
+      mythFr: "Les pays pauvres doivent d'abord se développer avant de penser au climat.",
+      realityFr: "Les pays pauvres sont les premiers touchés par le changement climatique alors qu'ils en sont les moins responsables. Le Bangladesh subit les inondations, le Sahel la désertification. De plus, le développement via les énergies renouvelables est maintenant moins cher que via les fossiles.",
+      mythEn: "Poor countries must develop first before thinking about climate.",
+      realityEn: "Poor countries are the first hit by climate change while being the least responsible. Bangladesh suffers floods, the Sahel desertification. Moreover, development through renewable energy is now cheaper than through fossil fuels.",
+      source: "Banque Mondiale Climate Change, IRENA Renewable Cost Report 2023"
+    },
+    {
+      mythFr: "L'agriculture biologique ne peut pas nourrir le monde.",
+      realityFr: "Des études montrent qu'une agriculture mondiale agroécologique pourrait nourrir 9 milliards d'humains, à condition de réduire le gaspillage alimentaire (30% de la production actuelle) et la consommation de viande. Le problème n'est pas la production mais la distribution et nos modes de consommation.",
+      mythEn: "Organic farming cannot feed the world.",
+      realityEn: "Studies show that worldwide agroecological farming could feed 9 billion humans, provided we reduce food waste (30% of current production) and meat consumption. The problem is not production but distribution and our consumption patterns.",
+      source: "FAO Agroecology Report, IPES-Food 2016, Nature Plants 2017"
+    },
+    {
+      mythFr: "La technologie nous sauvera, pas besoin de changer nos habitudes.",
+      realityFr: "La technologie est nécessaire mais insuffisante. Même avec 100% d'électricité décarbonée, il faudrait encore réduire l'élevage, l'aviation, le béton, etc. Le GIEC est clair : sans sobriété énergétique ET technologies vertes, impossible de rester sous +2°C.",
+      mythEn: "Technology will save us, no need to change our habits.",
+      realityEn: "Technology is necessary but insufficient. Even with 100% decarbonized electricity, we would still need to reduce livestock, aviation, concrete, etc. The IPCC is clear: without energy sobriety AND green technologies, staying below +2°C is impossible.",
+      source: "GIEC AR6 WG3, Agence Internationale de l'Énergie Net Zero 2050"
+    },
+    {
+      mythFr: "Le Groenland était vert à l'époque des Vikings, preuve que le climat était plus chaud.",
+      realityFr: "Le nom 'Groenland' (Terre Verte) était du marketing d'Erik le Rouge pour attirer des colons. Les Vikings cultivaient quelques zones côtières très limitées. Aujourd'hui, la fonte actuelle du Groenland libère des sols qui n'avaient pas vu le jour depuis 400 000 ans.",
+      mythEn: "Greenland was green in Viking times, proof that climate was warmer.",
+      realityEn: "The name 'Greenland' was marketing by Erik the Red to attract settlers. Vikings cultivated only very limited coastal areas. Today, Greenland's current melting is exposing soils that haven't seen daylight for 400,000 years.",
+      source: "Nature 2016, Science Advances 2019, Archaeological Studies"
+    },
+    {
+      mythFr: "Les glaciers fondent à cause des variations naturelles, pas du CO2.",
+      realityFr: "Les glaciers du monde entier reculent de façon synchronisée depuis 1850, ce qui ne correspond à aucun cycle naturel connu. 90% des glaciers alpins ont reculé. Le glacier de la Mer de Glace à Chamonix a perdu 2,5 km depuis le début du XXe siècle.",
+      mythEn: "Glaciers are melting due to natural variations, not CO2.",
+      realityEn: "Glaciers worldwide are retreating synchronously since 1850, which doesn't match any known natural cycle. 90% of Alpine glaciers have retreated. The Mer de Glace glacier in Chamonix has lost 2.5 km since the early 20th century.",
+      source: "World Glacier Monitoring Service, CNRS Glaciologie"
     }
   ];
 
