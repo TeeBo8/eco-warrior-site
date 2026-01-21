@@ -3,7 +3,7 @@ import {
   router,
 } from "@/server/trpc/trpc";
 import { db } from "@/server/db";
-import { posts, likes } from "@/server/db/schema";
+import { posts, anonymousLikes } from "@/server/db/schema";
 import { z } from "zod";
 import { eq, and, sql } from "drizzle-orm";
 
@@ -18,9 +18,9 @@ export const postRouter = router({
 
       // Si on a un sessionId, on vérifie quels posts sont likés
       if (input?.sessionId) {
-        const userLikes = await db.query.likes.findMany({
-          where: eq(likes.userId, input.sessionId),
-        });
+        const userLikes = await db.select()
+          .from(anonymousLikes)
+          .where(eq(anonymousLikes.sessionId, input.sessionId));
         const likedPostIds = new Set(userLikes.map(l => l.postId));
         return postList.map(p => ({ ...p, isLiked: likedPostIds.has(p.id) }));
       }
@@ -37,20 +37,21 @@ export const postRouter = router({
     .mutation(async ({ input }) => {
       const { postId, sessionId } = input;
 
-      // Vérifier si l'utilisateur a déjà liké ce post
-      const existingLike = await db.query.likes.findFirst({
-        where: and(
-          eq(likes.userId, sessionId),
-          eq(likes.postId, postId)
-        ),
-      });
+      // Vérifier si la session a déjà liké ce post
+      const existingLike = await db.select()
+        .from(anonymousLikes)
+        .where(and(
+          eq(anonymousLikes.sessionId, sessionId),
+          eq(anonymousLikes.postId, postId)
+        ))
+        .limit(1);
 
-      if (existingLike) {
+      if (existingLike.length > 0) {
         // Retirer le like
-        await db.delete(likes).where(
+        await db.delete(anonymousLikes).where(
           and(
-            eq(likes.userId, sessionId),
-            eq(likes.postId, postId)
+            eq(anonymousLikes.sessionId, sessionId),
+            eq(anonymousLikes.postId, postId)
           )
         );
         // Décrémenter le compteur
@@ -61,8 +62,8 @@ export const postRouter = router({
         return { liked: false };
       } else {
         // Ajouter le like
-        await db.insert(likes).values({
-          userId: sessionId,
+        await db.insert(anonymousLikes).values({
+          sessionId: sessionId,
           postId: postId,
         });
         // Incrémenter le compteur

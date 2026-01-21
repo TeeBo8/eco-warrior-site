@@ -74,6 +74,18 @@ export const likes = pgTable("likes", {
   };
 });
 
+// 👇 TABLE LIKES ANONYMES (sans contrainte FK sur userId) 👇
+export const anonymousLikes = pgTable("anonymous_likes", {
+  id: serial("id").primaryKey(),
+  sessionId: text("session_id").notNull(), // ID de session localStorage, pas de FK
+  postId: integer("post_id").notNull().references(() => posts.id, { onDelete: 'cascade' }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => {
+  return {
+    unique_session_post_like: uniqueIndex("unique_session_post_like_idx").on(table.sessionId, table.postId),
+  };
+});
+
 // 👇 NOUVELLE TABLE `comments` 👇
 export const comments = pgTable("comments", {
   id: serial("id").primaryKey(),
