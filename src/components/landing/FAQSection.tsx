@@ -7,19 +7,19 @@ import { cn } from '@/lib/utils';
 const faqs = [
     {
         question: "C'est quoi EcoWarrior exactement ?",
-        answer: "EcoWarrior est une plateforme web qui vous aide à comprendre et agir face au changement climatique. Nous combinons des données scientifiques en temps réel, un contenu éducatif de qualité et des outils pratiques comme le calculateur d'empreinte carbone."
+        answer: "EcoWarrior est une plateforme web gratuite qui vous aide à comprendre et agir face au changement climatique. Nous combinons des données scientifiques en temps réel, un contenu éducatif de qualité et des outils pratiques comme le calculateur d'empreinte carbone."
     },
     {
         question: "Est-ce que c'est gratuit ?",
-        answer: "Oui ! L'inscription est gratuite et vous donne accès au dashboard climatique, à la section Mythes & Réalités, à la chronologie et à 3 messages gratuits avec notre assistant IA. L'offre Premium débloque l'accès illimité et des fonctionnalités avancées."
+        answer: "Oui, tout est gratuit ! Vous avez accès à l'ensemble des fonctionnalités : dashboard climatique, section Mythes & Réalités, chronologie, calculateur carbone et assistant IA. Si vous souhaitez nous soutenir, un lien de don est disponible."
     },
     {
         question: "D'où viennent vos données ?",
         answer: "Toutes nos données proviennent de sources scientifiques reconnues : NASA, NOAA, GIEC, CNRS. Nous mettons à jour régulièrement nos informations pour vous fournir les données les plus récentes et fiables."
     },
     {
-        question: "Comment devenir membre Premium ?",
-        answer: "Vous pouvez passer Premium en un clic depuis votre profil ou la page tarifs. Votre abonnement soutient directement notre mission : à 5000 membres, nous sanctuarisons des terrains naturels pour les protéger définitivement."
+        question: "Comment soutenir le projet ?",
+        answer: "Si vous aimez EcoWarrior, vous pouvez nous soutenir via le bouton de don sur le site. Votre contribution aide directement notre mission : démystifier les mensonges climatosceptiques et sensibiliser le plus grand nombre."
     }
 ];
 

@@ -60,10 +60,10 @@ export function MissionSection() {
               <div className="flex justify-between items-center font-mono text-base md:text-lg">
                 <span className="flex items-center gap-3">
                   <span className="w-3 h-3 bg-primary rounded-full animate-pulse shadow-lg shadow-primary/50"></span>
-                  <strong className="text-foreground">{premiumCount}</strong> <span className="text-muted-foreground">Contributeurs</span>
+                  <strong className="text-foreground">{premiumCount}</strong> <span className="text-muted-foreground">Supporters</span>
                 </span>
                 <span className="text-muted-foreground">
-                  Objectif de financement: <strong className="text-foreground">{goal}</strong>
+                  Objectif: <strong className="text-foreground">{goal}</strong> supporters
                 </span>
               </div>
 

@@ -1,10 +1,20 @@
 'use client';
 
+import { useEffect, useState } from "react";
 import { trpc } from "@/app/_trpc/client";
 import { PostCard } from "@/components/post-card";
+import { getSessionId, getOrCreateSession } from "@/lib/anonymous-auth";
 
 export function DebunkContent() {
-  const postsQuery = trpc.post.getPosts.useQuery();
+  const [sessionId, setSessionId] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    // Récupérer ou créer la session côté client
+    getOrCreateSession();
+    setSessionId(getSessionId() ?? undefined);
+  }, []);
+
+  const postsQuery = trpc.post.getPosts.useQuery({ sessionId });
 
   return (
     <div className="w-full">
