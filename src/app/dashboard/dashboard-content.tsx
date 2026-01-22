@@ -11,6 +11,7 @@ import { HumanImpactSection } from "@/components/climate-info";
 import { CountryRankings } from "@/components/country-rankings";
 import { ClimateAlerts } from "@/components/climate-alerts";
 import { ClimateEventsBanner } from "@/components/climate-events-banner";
+import { ClimateInsights } from "@/components/climate-insights";
 import { trpc } from "@/app/_trpc/client";
 import { climateHistoryData } from "@/data/climate-history";
 
@@ -272,6 +273,11 @@ export function DashboardContent() {
             {/* Données par Pays - Phase 5 */}
             <div className="mt-12">
               <CountryRankings />
+            </div>
+
+            {/* Analyses & Insights - Phase 7 */}
+            <div className="mt-12">
+              <ClimateInsights />
             </div>
           </>
         )}
