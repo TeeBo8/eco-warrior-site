@@ -32,7 +32,7 @@ import {
 } from "lucide-react";
 
 // Types
-type MetricKey = 'co2' | 'tempAnomaly' | 'seaLevel' | 'iceMelt';
+type MetricKey = 'co2' | 'tempAnomaly' | 'seaLevel' | 'iceMelt' | 'globalEmissions' | 'biodiversity' | 'airQuality' | 'renewableEnergy' | 'climateRefugees';
 
 interface MetricInfo {
   name: string;
@@ -306,6 +306,312 @@ const metricsInfo: Record<MetricKey, MetricInfo> = {
         journal: "PNAS",
         year: 2019,
         url: "https://www.pnas.org/doi/10.1073/pnas.1812883116"
+      }
+    ]
+  },
+  // Phase 9 - Indicateurs supplémentaires
+  globalEmissions: {
+    name: "Émissions CO₂",
+    fullName: "Émissions mondiales de CO₂",
+    description: "Total des émissions de dioxyde de carbone produites par l'activité humaine à l'échelle mondiale, principalement par la combustion de combustibles fossiles, l'industrie et la déforestation.",
+    howMeasured: "Calculé à partir des données de consommation énergétique, de production industrielle et de changement d'utilisation des terres de chaque pays. L'IEA compile ces données annuellement.",
+    whyMatters: "Les émissions globales déterminent directement la concentration de CO₂ dans l'atmosphère et donc l'ampleur du réchauffement climatique. Réduire ces émissions est essentiel pour atteindre les objectifs de l'Accord de Paris.",
+    unit: "Gt/an",
+    sources: [
+      {
+        name: "IEA - International Energy Agency",
+        url: "https://www.iea.org/data-and-statistics/data-browser",
+        description: "Données mondiales sur les émissions de CO₂"
+      },
+      {
+        name: "Global Carbon Project",
+        url: "https://www.globalcarbonproject.org/",
+        description: "Bilan carbone mondial annuel"
+      }
+    ],
+    lastUpdate: "Décembre 2025",
+    updateFrequency: "Annuelle",
+    humanImpact: [
+      {
+        icon: <Factory className="h-4 w-4" />,
+        text: "Industrie & énergie",
+        equivalent: "73% des émissions viennent de l'énergie et l'industrie"
+      },
+      {
+        icon: <Car className="h-4 w-4" />,
+        text: "Transport",
+        equivalent: "16% des émissions mondiales"
+      },
+      {
+        icon: <Users className="h-4 w-4" />,
+        text: "Par habitant",
+        equivalent: "Moyenne mondiale : 4.7 tonnes CO₂/personne/an"
+      }
+    ],
+    keyFacts: [
+      "Record historique de 37.4 Gt en 2025",
+      "Chine : 31%, USA : 14%, UE : 8% des émissions",
+      "Objectif 2030 : réduire de 45% pour limiter à 1.5°C",
+      "Besoin de zéro émission nette d'ici 2050"
+    ],
+    references: [
+      {
+        title: "Global Energy Review 2025",
+        authors: "IEA",
+        journal: "International Energy Agency",
+        year: 2025,
+        url: "https://www.iea.org/reports/global-energy-review-2025"
+      },
+      {
+        title: "Global Carbon Budget 2024",
+        authors: "Friedlingstein et al.",
+        journal: "Earth System Science Data",
+        year: 2024,
+        url: "https://essd.copernicus.org/articles/16/2249/2024/"
+      }
+    ]
+  },
+  biodiversity: {
+    name: "Biodiversité",
+    fullName: "Déclin de la biodiversité mondiale",
+    description: "Pourcentage de déclin des populations d'espèces sauvages depuis 1970, mesuré par l'Indice Planète Vivante du WWF qui suit près de 32 000 populations de plus de 5 000 espèces.",
+    howMeasured: "L'Indice Planète Vivante compile les données de milliers d'études scientifiques sur les populations de mammifères, oiseaux, reptiles, amphibiens et poissons à travers le monde.",
+    whyMatters: "La biodiversité est essentielle pour la santé des écosystèmes dont dépend l'humanité : pollinisation, purification de l'eau, régulation du climat, alimentation. Son effondrement menace notre survie.",
+    unit: "%",
+    sources: [
+      {
+        name: "WWF Living Planet Report",
+        url: "https://livingplanet.panda.org/",
+        description: "Rapport biennal sur l'état de la biodiversité"
+      },
+      {
+        name: "IPBES Global Assessment",
+        url: "https://ipbes.net/global-assessment",
+        description: "Évaluation mondiale de la biodiversité"
+      }
+    ],
+    lastUpdate: "Décembre 2025",
+    updateFrequency: "Biennale",
+    humanImpact: [
+      {
+        icon: <Users className="h-4 w-4" />,
+        text: "Alimentation",
+        equivalent: "75% des cultures dépendent des pollinisateurs"
+      },
+      {
+        icon: <Waves className="h-4 w-4" />,
+        text: "Océans",
+        equivalent: "90% des grands poissons ont disparu"
+      },
+      {
+        icon: <Factory className="h-4 w-4" />,
+        text: "Déforestation",
+        equivalent: "10 millions d'hectares perdus par an"
+      }
+    ],
+    keyFacts: [
+      "69% de déclin des populations sauvages depuis 1970",
+      "1 million d'espèces menacées d'extinction",
+      "Taux d'extinction 1000x plus rapide que naturel",
+      "Amérique latine : -94% de déclin"
+    ],
+    references: [
+      {
+        title: "Living Planet Report 2024",
+        authors: "WWF",
+        journal: "World Wildlife Fund",
+        year: 2024,
+        url: "https://livingplanet.panda.org/"
+      },
+      {
+        title: "Global Assessment Report on Biodiversity",
+        authors: "IPBES",
+        journal: "UN Environment Programme",
+        year: 2019,
+        url: "https://ipbes.net/global-assessment"
+      }
+    ]
+  },
+  airQuality: {
+    name: "Qualité air",
+    fullName: "Indice de qualité de l'air mondial (AQI)",
+    description: "L'indice de qualité de l'air (AQI) mesure la concentration de polluants atmosphériques. Un AQI de 0-50 est bon, 51-100 modéré, au-delà c'est nocif pour la santé.",
+    howMeasured: "Mesuré en temps réel par des milliers de stations dans le monde, basé sur les concentrations de PM2.5, PM10, ozone, NO₂, SO₂ et CO. IQAir agrège ces données globalement.",
+    whyMatters: "La pollution de l'air cause 7 millions de décès prématurés par an. Elle aggrave les maladies respiratoires, cardiovasculaires et augmente les risques de cancer.",
+    unit: "AQI",
+    sources: [
+      {
+        name: "IQAir World Air Quality",
+        url: "https://www.iqair.com/world-air-quality",
+        description: "Données en temps réel de qualité de l'air"
+      },
+      {
+        name: "WHO Air Quality Guidelines",
+        url: "https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health",
+        description: "Directives OMS sur la qualité de l'air"
+      }
+    ],
+    lastUpdate: "Décembre 2025",
+    updateFrequency: "Temps réel",
+    humanImpact: [
+      {
+        icon: <Users className="h-4 w-4" />,
+        text: "Santé publique",
+        equivalent: "7 millions de morts/an liées à la pollution"
+      },
+      {
+        icon: <Factory className="h-4 w-4" />,
+        text: "Villes polluées",
+        equivalent: "99% de la population respire un air pollué"
+      },
+      {
+        icon: <Wind className="h-4 w-4" />,
+        text: "PM2.5",
+        equivalent: "Particules fines : principal danger sanitaire"
+      }
+    ],
+    keyFacts: [
+      "AQI moyen mondial : 58 (modéré)",
+      "Asie du Sud : région la plus polluée (AQI > 100)",
+      "Coût économique : 8% du PIB mondial",
+      "Objectif OMS : AQI < 25"
+    ],
+    references: [
+      {
+        title: "World Air Quality Report 2024",
+        authors: "IQAir",
+        journal: "IQAir",
+        year: 2024,
+        url: "https://www.iqair.com/world-air-quality-report"
+      },
+      {
+        title: "Health Effects of Air Pollution",
+        authors: "WHO",
+        journal: "World Health Organization",
+        year: 2024,
+        url: "https://www.who.int/health-topics/air-pollution"
+      }
+    ]
+  },
+  renewableEnergy: {
+    name: "Renouvelables",
+    fullName: "Part d'énergie renouvelable mondiale",
+    description: "Pourcentage de l'électricité mondiale produite à partir de sources renouvelables : solaire, éolien, hydraulique, géothermie et biomasse.",
+    howMeasured: "L'IEA compile les données de production électrique de tous les pays, distinguant les sources fossiles (charbon, gaz, pétrole), nucléaire et renouvelables.",
+    whyMatters: "La transition vers les énergies renouvelables est essentielle pour décarboner l'économie. Chaque point de pourcentage gagné représente des millions de tonnes de CO₂ évitées.",
+    unit: "%",
+    sources: [
+      {
+        name: "IEA Renewables",
+        url: "https://www.iea.org/energy-system/renewables",
+        description: "Données mondiales sur les énergies renouvelables"
+      },
+      {
+        name: "IRENA Statistics",
+        url: "https://www.irena.org/Statistics",
+        description: "Statistiques de l'Agence internationale pour les énergies renouvelables"
+      }
+    ],
+    lastUpdate: "Décembre 2025",
+    updateFrequency: "Annuelle",
+    humanImpact: [
+      {
+        icon: <ThermometerSun className="h-4 w-4" />,
+        text: "Solaire",
+        equivalent: "Croissance de 25%/an, la plus rapide"
+      },
+      {
+        icon: <Wind className="h-4 w-4" />,
+        text: "Éolien",
+        equivalent: "Capacité doublée en 5 ans"
+      },
+      {
+        icon: <Factory className="h-4 w-4" />,
+        text: "Emplois",
+        equivalent: "13 millions d'emplois dans les renouvelables"
+      }
+    ],
+    keyFacts: [
+      "30.1% d'électricité renouvelable en 2025",
+      "Solaire + éolien : 15% du mix électrique",
+      "Objectif 2030 : tripler les capacités",
+      "Prix du solaire : -90% en 10 ans"
+    ],
+    references: [
+      {
+        title: "Renewables 2024",
+        authors: "IEA",
+        journal: "International Energy Agency",
+        year: 2024,
+        url: "https://www.iea.org/reports/renewables-2024"
+      },
+      {
+        title: "World Energy Transitions Outlook",
+        authors: "IRENA",
+        journal: "International Renewable Energy Agency",
+        year: 2024,
+        url: "https://www.irena.org/publications/2024/World-Energy-Transitions-Outlook-2024"
+      }
+    ]
+  },
+  climateRefugees: {
+    name: "Déplacés",
+    fullName: "Déplacés climatiques annuels",
+    description: "Nombre de personnes forcées de quitter leur foyer chaque année à cause d'événements climatiques extrêmes : tempêtes, inondations, sécheresses, montée des eaux.",
+    howMeasured: "L'IDMC (Internal Displacement Monitoring Centre) suit les déplacements causés par les catastrophes naturelles dans chaque pays, en distinguant les causes météorologiques.",
+    whyMatters: "Les déplacements climatiques créent des crises humanitaires, des tensions géopolitiques et menacent la stabilité de régions entières. Ce nombre va fortement augmenter.",
+    unit: "M/an",
+    sources: [
+      {
+        name: "IDMC Global Report",
+        url: "https://www.internal-displacement.org/",
+        description: "Rapport mondial sur les déplacements internes"
+      },
+      {
+        name: "UNHCR Climate Action",
+        url: "https://www.unhcr.org/climate-action",
+        description: "Action climatique du HCR"
+      }
+    ],
+    lastUpdate: "Décembre 2025",
+    updateFrequency: "Annuelle",
+    humanImpact: [
+      {
+        icon: <Waves className="h-4 w-4" />,
+        text: "Inondations",
+        equivalent: "Cause n°1 des déplacements climatiques"
+      },
+      {
+        icon: <Flame className="h-4 w-4" />,
+        text: "Tempêtes",
+        equivalent: "Cyclones de plus en plus intenses"
+      },
+      {
+        icon: <Users className="h-4 w-4" />,
+        text: "Projection 2050",
+        equivalent: "200+ millions de réfugiés climatiques"
+      }
+    ],
+    keyFacts: [
+      "26.4 millions de déplacés climatiques en 2025",
+      "3x plus de déplacés qu'il y a 20 ans",
+      "Asie : 80% des déplacements",
+      "1 personne déplacée toutes les 2 secondes"
+    ],
+    references: [
+      {
+        title: "Global Report on Internal Displacement 2024",
+        authors: "IDMC",
+        journal: "Internal Displacement Monitoring Centre",
+        year: 2024,
+        url: "https://www.internal-displacement.org/global-report"
+      },
+      {
+        title: "Climate Change and Displacement",
+        authors: "UNHCR",
+        journal: "UN Refugee Agency",
+        year: 2024,
+        url: "https://www.unhcr.org/climate-action"
       }
     ]
   }

@@ -32,6 +32,12 @@ export function DashboardContent() {
   const filteredTemp = filterDataByPeriod(climateHistoryData.tempAnomaly, period);
   const filteredSea = filterDataByPeriod(climateHistoryData.seaLevel, period);
   const filteredIce = filterDataByPeriod(climateHistoryData.iceMelt, period);
+  // Phase 9 - Indicateurs supplémentaires
+  const filteredEmissions = filterDataByPeriod(climateHistoryData.globalEmissions, period);
+  const filteredBiodiversity = filterDataByPeriod(climateHistoryData.biodiversity, period);
+  const filteredAirQuality = filterDataByPeriod(climateHistoryData.airQuality, period);
+  const filteredRenewable = filterDataByPeriod(climateHistoryData.renewableEnergy, period);
+  const filteredRefugees = filterDataByPeriod(climateHistoryData.climateRefugees, period);
 
   // Texte de la période pour les descriptions
   const periodText = period === 'all' ? 'depuis 2000' : `sur ${period} ans`;
@@ -125,6 +131,65 @@ export function DashboardContent() {
               trendIsGood={false}
               metricKey="iceMelt"
             />
+          </div>
+        );
+
+      case 'extra-indicators':
+        return (
+          <div key="extra-indicators" className="mt-8">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Indicateurs Supplémentaires</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+              <IndicatorCard
+                title="Émissions CO₂ Globales"
+                value={climateData.globalEmissions.value}
+                unit={climateData.globalEmissions.unit}
+                source={climateData.globalEmissions.source}
+                history={filteredEmissions}
+                trend="up"
+                trendIsGood={false}
+                metricKey="globalEmissions"
+              />
+              <IndicatorCard
+                title="Déclin Biodiversité"
+                value={climateData.biodiversity.value}
+                unit={climateData.biodiversity.unit}
+                source={climateData.biodiversity.source}
+                history={filteredBiodiversity}
+                trend="down"
+                trendIsGood={false}
+                metricKey="biodiversity"
+              />
+              <IndicatorCard
+                title="Qualité de l'Air"
+                value={climateData.airQuality.value}
+                unit={climateData.airQuality.unit}
+                source={climateData.airQuality.source}
+                history={filteredAirQuality}
+                trend="down"
+                trendIsGood={true}
+                metricKey="airQuality"
+              />
+              <IndicatorCard
+                title="Énergie Renouvelable"
+                value={climateData.renewableEnergy.value}
+                unit={climateData.renewableEnergy.unit}
+                source={climateData.renewableEnergy.source}
+                history={filteredRenewable}
+                trend="up"
+                trendIsGood={true}
+                metricKey="renewableEnergy"
+              />
+              <IndicatorCard
+                title="Déplacés Climatiques"
+                value={climateData.climateRefugees.value}
+                unit={climateData.climateRefugees.unit}
+                source={climateData.climateRefugees.source}
+                history={filteredRefugees}
+                trend="up"
+                trendIsGood={false}
+                metricKey="climateRefugees"
+              />
+            </div>
           </div>
         );
 

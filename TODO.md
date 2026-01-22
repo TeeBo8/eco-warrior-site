@@ -70,12 +70,12 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Export PDF/PNG du dashboard
 - [x] Optimisation responsive mobile/tablette
 
-### Phase 9 - Indicateurs Supplémentaires
-- [ ] Émissions CO₂ globales (tonnes/an - source IEA)
-- [ ] Biodiversité (perte d'espèces, déforestation)
-- [ ] Qualité de l'air (index AQI global)
-- [ ] % énergie renouvelable mondiale
-- [ ] Population affectée (réfugiés climatiques)
+### Phase 9 - Indicateurs Supplémentaires ✅
+- [x] Émissions CO₂ globales (tonnes/an - source IEA)
+- [x] Biodiversité (perte d'espèces, déforestation)
+- [x] Qualité de l'air (index AQI global)
+- [x] % énergie renouvelable mondiale
+- [x] Population affectée (réfugiés climatiques)
 
 ### Phase 10 - Stats de Performance Globale
 - [ ] Score durabilité globale (0-100 de l'état du climat)
