@@ -9,6 +9,8 @@ import { DashboardFilters, filterDataByPeriod, type PeriodFilter } from "@/compo
 import { AdvancedStats } from "@/components/advanced-stats";
 import { HumanImpactSection } from "@/components/climate-info";
 import { CountryRankings } from "@/components/country-rankings";
+import { ClimateAlerts } from "@/components/climate-alerts";
+import { ClimateEventsBanner } from "@/components/climate-events-banner";
 import { trpc } from "@/app/_trpc/client";
 import { climateHistoryData } from "@/data/climate-history";
 
@@ -63,6 +65,12 @@ export function DashboardContent() {
       <main className="container mx-auto py-8">
         <h1 className="text-3xl font-bold mb-4">Tableau de Bord du Climat</h1>
         <p className="text-muted-foreground mb-6">Les indicateurs clés de notre planète en temps réel.</p>
+
+        {/* Bannière événements climatiques majeurs - Phase 6 */}
+        <ClimateEventsBanner />
+
+        {/* Alertes climatiques - Phase 6 */}
+        <ClimateAlerts />
 
         {/* Filtres */}
         <DashboardFilters

@@ -1,4 +1,4 @@
- on fait ca bien , je test moi meme avec pnpm dev aprés chaque modif et si ca marche nickel ensuite on lint/build/commit/push, chef quand tout est carré
+ on fait ca bien , je test moi meme avec pnpm dev aprés chaque modif et si ca marche nickel ensuite on lint/build/commit/push, chef quand tout est carré. let's go pour laphase 6 on valide la todo une fois que c'est fait : 
 
 # Eco Warrior - Roadmap
 
@@ -54,9 +54,9 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Ranking progrès climatique par pays
 - [x] Tableau détaillé + export CSV
 
-### Phase 6 - Alertes & Notifications
-- [ ] Système d'alerte ("⚠️ Nouveau record CO₂ atteint")
-- [ ] Bannière événements climatiques majeurs du jour
+### Phase 6 - Alertes & Notifications ✅
+- [x] Système d'alerte ("⚠️ Nouveau record CO₂ atteint")
+- [x] Bannière événements climatiques majeurs du jour
 
 ### Phase 7 - Analyses & Insights
 - [ ] Widget "Insight du jour" (fait clé sur le climat)
