@@ -2,6 +2,7 @@
 
 import { IndicatorCard } from "@/components/indicator-card";
 import { trpc } from "@/app/_trpc/client";
+import { climateHistoryData } from "@/data/climate-history";
 
 export function DashboardContent() {
   const { data: climateData, isLoading, error } = trpc.getClimateIndicators.useQuery();
@@ -15,7 +16,7 @@ export function DashboardContent() {
         {isLoading && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[1, 2, 3, 4].map(i => (
-              <div key={i} className="h-32 bg-muted animate-pulse rounded-lg" />
+              <div key={i} className="h-48 bg-muted animate-pulse rounded-lg" />
             ))}
           </div>
         )}
@@ -31,24 +32,36 @@ export function DashboardContent() {
               value={climateData.co2.value}
               unit={climateData.co2.unit}
               source={climateData.co2.source}
+              history={climateHistoryData.co2}
+              trend="up"
+              trendIsGood={false}
             />
             <IndicatorCard
               title="Anomalie Température"
               value={climateData.tempAnomaly.value}
               unit={climateData.tempAnomaly.unit}
               source={climateData.tempAnomaly.source}
+              history={climateHistoryData.tempAnomaly}
+              trend="up"
+              trendIsGood={false}
             />
             <IndicatorCard
               title="Élévation Niveau Mer"
               value={climateData.seaLevel.value}
               unit={climateData.seaLevel.unit}
               source={climateData.seaLevel.source}
+              history={climateHistoryData.seaLevel}
+              trend="up"
+              trendIsGood={false}
             />
             <IndicatorCard
               title="Glace Antarctique"
               value={climateData.iceMelt.value}
               unit={climateData.iceMelt.unit}
               source={climateData.iceMelt.source}
+              history={climateHistoryData.iceMelt}
+              trend="down"
+              trendIsGood={false}
             />
           </div>
         )}
