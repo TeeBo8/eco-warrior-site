@@ -37,11 +37,11 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [ ] Filtre de source de données (choisir entre sources scientifiques) - une seule source actuellement
 - [x] Mode comparaison (2000 vs 2025 côte à côte avec graphique barres)
 
-### Phase 3 - Statistiques Avancées
-- [ ] Taux de variation (% d'augmentation/diminution sur différentes périodes)
-- [ ] Seuils d'alerte (rouge/orange/vert selon le danger)
-- [ ] Projections futures (2050, 2100)
-- [ ] Points de non-retour (seuils critiques)
+### Phase 3 - Statistiques Avancées ✅
+- [x] Taux de variation (% d'augmentation/diminution sur différentes périodes)
+- [x] Seuils d'alerte (rouge/orange/vert selon le danger)
+- [x] Projections futures (2050, 2100)
+- [x] Points de non-retour (seuils critiques)
 
 ### Phase 4 - Informations Contextuelles
 - [ ] Explications détaillées (modals/tooltips pour chaque métrique)

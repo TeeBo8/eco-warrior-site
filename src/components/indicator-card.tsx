@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Area, AreaChart, ResponsiveContainer } from "recharts";
 import { TrendingUp, TrendingDown } from "lucide-react";
+import { MetricInfoButton, type MetricKey } from "@/components/climate-info";
 
 type HistoryDataPoint = { year: number; value: number };
 
@@ -14,6 +15,7 @@ type IndicatorCardProps = {
   history?: HistoryDataPoint[];
   trend?: 'up' | 'down';
   trendIsGood?: boolean; // true si la tendance actuelle est bonne (ex: baisse des émissions)
+  metricKey?: MetricKey; // Pour le bouton info contextuel
 };
 
 export function IndicatorCard({
@@ -23,7 +25,8 @@ export function IndicatorCard({
   source,
   history,
   trend,
-  trendIsGood = false
+  trendIsGood = false,
+  metricKey
 }: IndicatorCardProps) {
   // Calcul du taux de variation si on a l'historique
   const changePercent = history && history.length >= 2
@@ -40,7 +43,10 @@ export function IndicatorCard({
   return (
     <Card className="relative overflow-hidden">
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
+          {metricKey && <MetricInfoButton metricKey={metricKey} />}
+        </div>
       </CardHeader>
       <CardContent>
         <div className="flex items-baseline gap-2">

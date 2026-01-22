@@ -7,6 +7,7 @@ import { ClimateGauge } from "@/components/climate-gauge";
 import { ClimateComparisonChart } from "@/components/climate-comparison-chart";
 import { DashboardFilters, filterDataByPeriod, type PeriodFilter } from "@/components/dashboard-filters";
 import { AdvancedStats } from "@/components/advanced-stats";
+import { HumanImpactSection } from "@/components/climate-info";
 import { trpc } from "@/app/_trpc/client";
 import { climateHistoryData } from "@/data/climate-history";
 
@@ -94,6 +95,7 @@ export function DashboardContent() {
                 history={filteredCo2}
                 trend="up"
                 trendIsGood={false}
+                metricKey="co2"
               />
               <IndicatorCard
                 title="Anomalie Température"
@@ -103,6 +105,7 @@ export function DashboardContent() {
                 history={filteredTemp}
                 trend="up"
                 trendIsGood={false}
+                metricKey="tempAnomaly"
               />
               <IndicatorCard
                 title="Élévation Niveau Mer"
@@ -112,6 +115,7 @@ export function DashboardContent() {
                 history={filteredSea}
                 trend="up"
                 trendIsGood={false}
+                metricKey="seaLevel"
               />
               <IndicatorCard
                 title="Glace Antarctique"
@@ -121,6 +125,7 @@ export function DashboardContent() {
                 history={filteredIce}
                 trend="down"
                 trendIsGood={false}
+                metricKey="iceMelt"
               />
             </div>
 
@@ -243,6 +248,11 @@ export function DashboardContent() {
                 thresholds={{ safe: 100, warning: 150 }}
                 description="Accélération de la fonte des glaciers"
               />
+            </div>
+
+            {/* Impact Humain Concret - Phase 4 */}
+            <div className="mt-12">
+              <HumanImpactSection />
             </div>
 
             {/* Statistiques Avancées - Phase 3 */}
