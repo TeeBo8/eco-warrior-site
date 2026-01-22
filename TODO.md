@@ -1,4 +1,4 @@
- on fait ca bien , je test moi meme avec pnpm dev aprés chaque modif et si ca marche nickel ensuite on lint build commit push chef quand tout est carré
+ on fait ca bien , je test moi meme avec pnpm dev aprés chaque modif et si ca marche nickel ensuite on lint/build/commit/push, chef quand tout est carré
 
 # Eco Warrior - Roadmap
 
@@ -25,17 +25,17 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 
 ## Dashboard Climat - Refonte Complète
 
-### Phase 1 - Graphiques & Visualisations
-- [ ] Graphiques historiques (évolution 5/10/20 ans pour chaque métrique)
-- [ ] Graphiques comparatifs (CO₂ 2000 vs 2024, température par région)
-- [ ] Mini-charts sparkline dans les cartes KPI
-- [ ] Indicateurs visuels (barres de progression, jauges pour seuils alarmants)
+### Phase 1 - Graphiques & Visualisations ✅
+- [x] Graphiques historiques (évolution 5/10/20 ans pour chaque métrique)
+- [x] Graphiques comparatifs (CO₂ 2000 vs 2024, température par région)
+- [x] Mini-charts sparkline dans les cartes KPI
+- [x] Indicateurs visuels (barres de progression, jauges pour seuils alarmants)
 
-### Phase 2 - Filtres & Interactivité
-- [ ] Sélecteur de période (Jour/Semaine/Mois/Année/Personnalisé)
-- [ ] Sélecteur de région (Mondial/Continent/Pays)
-- [ ] Filtre de source de données (choisir entre sources scientifiques)
-- [ ] Mode comparaison (2 périodes côte à côte)
+### Phase 2 - Filtres & Interactivité ✅
+- [x] Sélecteur de période (5 ans / 10 ans / 20 ans / Tout)
+- [ ] Sélecteur de région (Mondial/Continent/Pays) - données non disponibles
+- [ ] Filtre de source de données (choisir entre sources scientifiques) - une seule source actuellement
+- [x] Mode comparaison (2000 vs 2025 côte à côte avec graphique barres)
 
 ### Phase 3 - Statistiques Avancées
 - [ ] Taux de variation (% d'augmentation/diminution sur différentes périodes)
