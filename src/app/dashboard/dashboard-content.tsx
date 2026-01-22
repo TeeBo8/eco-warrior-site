@@ -2,6 +2,7 @@
 
 import { IndicatorCard } from "@/components/indicator-card";
 import { ClimateChart } from "@/components/climate-chart";
+import { ClimateGauge } from "@/components/climate-gauge";
 import { trpc } from "@/app/_trpc/client";
 import { climateHistoryData } from "@/data/climate-history";
 
@@ -102,6 +103,47 @@ export function DashboardContent() {
                 data={climateHistoryData.iceMelt}
                 unit=" Gt/an"
                 color="hsl(200, 80%, 60%)"
+              />
+            </div>
+
+            {/* Jauges de seuils critiques */}
+            <h2 className="text-2xl font-bold mt-12 mb-6">Seuils Critiques</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <ClimateGauge
+                title="CO₂ atmosphérique"
+                currentValue={parseFloat(climateData.co2.value)}
+                unit=" ppm"
+                minValue={350}
+                maxValue={500}
+                thresholds={{ safe: 400, warning: 450 }}
+                description="Seuil de 450 ppm = réchauffement de 2°C quasi certain"
+              />
+              <ClimateGauge
+                title="Température globale"
+                currentValue={parseFloat(climateData.tempAnomaly.value)}
+                unit="°C"
+                minValue={0}
+                maxValue={2.5}
+                thresholds={{ safe: 1.0, warning: 1.5 }}
+                description="Accord de Paris : limiter à 1.5°C max"
+              />
+              <ClimateGauge
+                title="Niveau de la mer"
+                currentValue={parseFloat(climateData.seaLevel.value)}
+                unit=" mm"
+                minValue={0}
+                maxValue={200}
+                thresholds={{ safe: 50, warning: 100 }}
+                description="Menace directe pour les zones côtières"
+              />
+              <ClimateGauge
+                title="Perte de glace"
+                currentValue={Math.abs(parseFloat(climateData.iceMelt.value))}
+                unit=" Gt/an"
+                minValue={0}
+                maxValue={250}
+                thresholds={{ safe: 100, warning: 150 }}
+                description="Accélération de la fonte des glaciers"
               />
             </div>
           </>
