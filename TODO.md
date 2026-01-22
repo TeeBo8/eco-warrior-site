@@ -43,16 +43,16 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Projections futures (2050, 2100)
 - [x] Points de non-retour (seuils critiques)
 
-### Phase 4 - Informations Contextuelles
-- [ ] Explications détaillées (modals/tooltips pour chaque métrique)
-- [ ] Sources + dernière mise à jour (date/heure précise)
-- [ ] Références scientifiques (liens vers études officielles)
-- [ ] Impact humain (équivalences concrètes: "X catastrophes naturelles", "Y voitures")
+### Phase 4 - Informations Contextuelles ✅
+- [x] Explications détaillées (modals/tooltips pour chaque métrique)
+- [x] Sources + dernière mise à jour (date/heure précise)
+- [x] Références scientifiques (liens vers études officielles)
+- [x] Impact humain (équivalences concrètes: "X catastrophes naturelles", "Y voitures")
 
-### Phase 5 - Tables de Données
-- [ ] Top 10 pays (plus grands émetteurs, plus affectés)
-- [ ] Ranking progrès climatique par pays
-- [ ] Tableau détaillé + export CSV
+### Phase 5 - Tables de Données ✅
+- [x] Top 10 pays (plus grands émetteurs, plus affectés)
+- [x] Ranking progrès climatique par pays
+- [x] Tableau détaillé + export CSV
 
 ### Phase 6 - Alertes & Notifications
 - [ ] Système d'alerte ("⚠️ Nouveau record CO₂ atteint")

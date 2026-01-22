@@ -8,6 +8,7 @@ import { ClimateComparisonChart } from "@/components/climate-comparison-chart";
 import { DashboardFilters, filterDataByPeriod, type PeriodFilter } from "@/components/dashboard-filters";
 import { AdvancedStats } from "@/components/advanced-stats";
 import { HumanImpactSection } from "@/components/climate-info";
+import { CountryRankings } from "@/components/country-rankings";
 import { trpc } from "@/app/_trpc/client";
 import { climateHistoryData } from "@/data/climate-history";
 
@@ -258,6 +259,11 @@ export function DashboardContent() {
             {/* Statistiques Avancées - Phase 3 */}
             <div className="mt-12">
               <AdvancedStats climateData={climateHistoryData} />
+            </div>
+
+            {/* Données par Pays - Phase 5 */}
+            <div className="mt-12">
+              <CountryRankings />
             </div>
           </>
         )}
