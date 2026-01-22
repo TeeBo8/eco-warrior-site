@@ -63,12 +63,12 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Articles recommandés liés
 - [x] Comparaisons intéressantes ("CO₂ en baisse cette année pour la 1ère fois")
 
-### Phase 8 - User Experience
-- [ ] Dark mode toggle
-- [ ] Personnalisation cartes (drag & drop, afficher/cacher)
-- [ ] Boutons partage réseaux sociaux
-- [ ] Export PDF/PNG du dashboard
-- [ ] Optimisation responsive mobile/tablette
+### Phase 8 - User Experience ✅
+- [x] Dark mode toggle
+- [x] Personnalisation cartes (drag & drop, afficher/cacher)
+- [x] Boutons partage réseaux sociaux
+- [x] Export PDF/PNG du dashboard
+- [x] Optimisation responsive mobile/tablette
 
 ### Phase 9 - Indicateurs Supplémentaires
 - [ ] Émissions CO₂ globales (tonnes/an - source IEA)
