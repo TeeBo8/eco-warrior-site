@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import { FeatureCard } from "@/components/landing/FeatureCard";
 import { ContactDialog } from "@/components/landing/ContactDialog";
 import { ThemeSwitch } from "@/components/ui/theme-switch";
@@ -69,22 +70,30 @@ export default function HomePage() {
       {/* Background nuages animé - Light mode */}
       <div className="fixed inset-0 -z-20 dark:hidden">
         <Marquee duration={80} gap={0} repeat={4} className="h-full p-0">
-          <img
-            src="https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/hero/image-63.png"
-            alt="Background nuages"
-            className="h-full w-auto min-h-screen object-cover"
-          />
+          <div className="relative h-full w-[200vw] min-h-screen">
+            <Image
+              src="https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/hero/image-63.png"
+              alt="Background nuages"
+              fill
+              className="object-cover"
+              unoptimized
+            />
+          </div>
         </Marquee>
       </div>
 
       {/* Background nuages animé - Dark mode */}
       <div className="fixed inset-0 -z-20 hidden dark:block">
         <Marquee duration={80} gap={0} repeat={4} className="h-full p-0">
-          <img
-            src="https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/hero/image-63-dark.png"
-            alt="Background nuages"
-            className="h-full w-auto min-h-screen object-cover"
-          />
+          <div className="relative h-full w-[200vw] min-h-screen">
+            <Image
+              src="https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/hero/image-63-dark.png"
+              alt="Background nuages"
+              fill
+              className="object-cover"
+              unoptimized
+            />
+          </div>
         </Marquee>
       </div>
 

@@ -42,27 +42,27 @@ export function IndicatorCard({
 
   return (
     <Card className="relative overflow-hidden">
-      <CardHeader className="pb-2">
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-sm font-medium text-muted-foreground">{title}</CardTitle>
+      <CardHeader className="p-3 sm:p-6 pb-2">
+        <div className="flex items-center justify-between gap-2">
+          <CardTitle className="text-xs sm:text-sm font-medium text-muted-foreground leading-tight">{title}</CardTitle>
           {metricKey && <MetricInfoButton metricKey={metricKey} />}
         </div>
       </CardHeader>
-      <CardContent>
-        <div className="flex items-baseline gap-2">
-          <p className="text-3xl font-bold">{value}</p>
-          <span className="text-lg text-muted-foreground">{unit}</span>
+      <CardContent className="p-3 sm:p-6 pt-0">
+        <div className="flex items-baseline gap-1 sm:gap-2">
+          <p className="text-2xl sm:text-3xl font-bold">{value}</p>
+          <span className="text-sm sm:text-lg text-muted-foreground">{unit}</span>
         </div>
 
         {changePercent && (
-          <div className={`flex items-center gap-1 mt-1 text-sm ${trendIsGood ? 'text-green-600' : 'text-red-500'}`}>
-            <TrendIcon className="h-4 w-4" />
+          <div className={`flex items-center gap-1 mt-1 text-xs sm:text-sm ${trendIsGood ? 'text-green-600' : 'text-red-500'}`}>
+            <TrendIcon className="h-3 w-3 sm:h-4 sm:w-4" />
             <span>{changePercent}% depuis 2000</span>
           </div>
         )}
 
         {history && history.length > 0 && (
-          <div className="h-16 mt-3 -mx-2">
+          <div className="h-12 sm:h-16 mt-2 sm:mt-3 -mx-2">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={history}>
                 <defs>
@@ -83,7 +83,7 @@ export function IndicatorCard({
           </div>
         )}
 
-        <p className="text-xs text-muted-foreground mt-2">Source: {source}</p>
+        <p className="text-xs text-muted-foreground mt-2 truncate">Source: {source}</p>
       </CardContent>
     </Card>
   );

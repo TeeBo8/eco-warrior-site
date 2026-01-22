@@ -76,41 +76,41 @@ export function ClimateGauge({
 
   return (
     <Card>
-      <CardHeader className="pb-2">
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-base">{title}</CardTitle>
-          <div className={`flex items-center gap-1 ${config.textColor}`}>
-            <StatusIcon className="h-4 w-4" />
-            <span className="text-sm font-medium">{config.label}</span>
+      <CardHeader className="p-3 sm:p-6 pb-2">
+        <div className="flex items-start sm:items-center justify-between gap-2">
+          <CardTitle className="text-sm sm:text-base leading-tight">{title}</CardTitle>
+          <div className={`flex items-center gap-1 ${config.textColor} flex-shrink-0`}>
+            <StatusIcon className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-sm font-medium hidden sm:inline">{config.label}</span>
           </div>
         </div>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-3">
+      <CardContent className="p-3 sm:p-6 pt-0">
+        <div className="space-y-2 sm:space-y-3">
           {/* Valeur actuelle */}
-          <div className="flex items-baseline gap-2">
-            <span className={`text-3xl font-bold ${config.textColor}`}>
+          <div className="flex items-baseline gap-1 sm:gap-2">
+            <span className={`text-xl sm:text-3xl font-bold ${config.textColor}`}>
               {currentValue}
             </span>
-            <span className="text-muted-foreground">{unit}</span>
+            <span className="text-xs sm:text-base text-muted-foreground">{unit}</span>
           </div>
 
           {/* Barre de progression avec marqueurs de seuil */}
           <div className="relative">
             <Progress
               value={clampedPercentage}
-              className="h-3"
+              className="h-2 sm:h-3"
               indicatorClassName={config.color}
             />
 
             {/* Marqueurs de seuil */}
             <div
-              className="absolute top-0 h-3 w-0.5 bg-orange-400"
+              className="absolute top-0 h-2 sm:h-3 w-0.5 bg-orange-400"
               style={{ left: `${safePosition}%` }}
               title={`Seuil d'alerte: ${thresholds.safe}${unit}`}
             />
             <div
-              className="absolute top-0 h-3 w-0.5 bg-red-400"
+              className="absolute top-0 h-2 sm:h-3 w-0.5 bg-red-400"
               style={{ left: `${warningPosition}%` }}
               title={`Seuil critique: ${thresholds.warning}${unit}`}
             />
@@ -123,7 +123,7 @@ export function ClimateGauge({
           </div>
 
           {/* Description */}
-          <p className="text-sm text-muted-foreground">{description}</p>
+          <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">{description}</p>
         </div>
       </CardContent>
     </Card>

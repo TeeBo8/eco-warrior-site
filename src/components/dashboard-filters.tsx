@@ -22,18 +22,18 @@ export function DashboardFilters({
   onComparisonModeChange,
 }: DashboardFiltersProps) {
   return (
-    <Card className="mb-6">
-      <CardContent className="py-4">
-        <div className="flex flex-wrap items-center gap-6">
+    <Card className="mb-4 sm:mb-6">
+      <CardContent className="py-3 sm:py-4">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-3 sm:gap-6">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4 text-muted-foreground" />
             <span className="text-sm font-medium">Filtres</span>
           </div>
 
-          <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4 text-muted-foreground" />
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <Calendar className="h-4 w-4 text-muted-foreground flex-shrink-0" />
             <Select value={period} onValueChange={(value) => onPeriodChange(value as PeriodFilter)}>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-full sm:w-[180px]">
                 <SelectValue placeholder="Période" />
               </SelectTrigger>
               <SelectContent>
@@ -52,7 +52,7 @@ export function DashboardFilters({
               checked={comparisonMode}
               onCheckedChange={onComparisonModeChange}
             />
-            <Label htmlFor="comparison-mode" className="text-sm cursor-pointer">
+            <Label htmlFor="comparison-mode" className="text-xs sm:text-sm cursor-pointer">
               Mode comparaison
             </Label>
           </div>

@@ -58,10 +58,10 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Système d'alerte ("⚠️ Nouveau record CO₂ atteint")
 - [x] Bannière événements climatiques majeurs du jour
 
-### Phase 7 - Analyses & Insights
-- [ ] Widget "Insight du jour" (fait clé sur le climat)
-- [ ] Articles recommandés liés
-- [ ] Comparaisons intéressantes ("CO₂ en baisse cette année pour la 1ère fois")
+### Phase 7 - Analyses & Insights ✅
+- [x] Widget "Insight du jour" (fait clé sur le climat)
+- [x] Articles recommandés liés
+- [x] Comparaisons intéressantes ("CO₂ en baisse cette année pour la 1ère fois")
 
 ### Phase 8 - User Experience
 - [ ] Dark mode toggle

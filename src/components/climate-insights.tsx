@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Lightbulb,
@@ -370,10 +371,13 @@ function RecommendedArticles() {
               href={`/articles/${article.slug}`}
               className="flex items-start gap-3 p-3 rounded-lg border hover:bg-accent/50 transition-colors group"
             >
-              <img
+              <Image
                 src={article.imageUrl}
                 alt={article.title}
+                width={64}
+                height={64}
                 className="w-16 h-16 object-cover rounded-md shrink-0"
+                unoptimized
               />
               <div className="flex-1 min-w-0">
                 <h4 className="font-semibold text-sm group-hover:text-primary transition-colors line-clamp-1">
