@@ -6,6 +6,7 @@ import { ClimateChart } from "@/components/climate-chart";
 import { ClimateGauge } from "@/components/climate-gauge";
 import { ClimateComparisonChart } from "@/components/climate-comparison-chart";
 import { DashboardFilters, filterDataByPeriod, type PeriodFilter } from "@/components/dashboard-filters";
+import { AdvancedStats } from "@/components/advanced-stats";
 import { trpc } from "@/app/_trpc/client";
 import { climateHistoryData } from "@/data/climate-history";
 
@@ -242,6 +243,11 @@ export function DashboardContent() {
                 thresholds={{ safe: 100, warning: 150 }}
                 description="Accélération de la fonte des glaciers"
               />
+            </div>
+
+            {/* Statistiques Avancées - Phase 3 */}
+            <div className="mt-12">
+              <AdvancedStats climateData={climateHistoryData} />
             </div>
           </>
         )}
