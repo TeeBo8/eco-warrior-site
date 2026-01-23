@@ -114,14 +114,14 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 
 ## Page Mythes & Réalités - Refonte Complète 🎯
 
-### Phase M1 - Quick Wins UI/UX (Facile ~4-5h) 🔥
-- [ ] Hero Section avec stats dynamiques (X mythes démontés, Y sources)
-- [ ] Search bar intelligent avec highlight résultats
-- [ ] Filtres visuels par catégorie (Science, Énergie, Solutions, Économie)
-- [ ] Filtres par difficulté (Débutant, Intermédiaire, Avancé)
-- [ ] Cards améliorées avec preview 2-3 lignes + badges
-- [ ] Animations Framer Motion (stagger entrée, hover states)
-- [ ] Progression utilisateur localStorage (mythes lus, favoris)
+### Phase M1 - Quick Wins UI/UX ✅
+- [x] Hero Section avec stats dynamiques (X mythes démontés, Y sources)
+- [x] Search bar intelligent avec highlight résultats
+- [x] Filtres visuels par catégorie (Science, Énergie, Solutions, Économie)
+- [x] Filtres par difficulté (Débutant, Intermédiaire, Avancé)
+- [x] Cards améliorées avec preview 2-3 lignes + badges
+- [x] Animations Framer Motion (stagger entrée, hover states)
+- [x] Progression utilisateur localStorage (mythes lus, favoris)
 
 ### Phase M2 - Contenu & BDD (Moyen ~5-6h)
 - [ ] Migration BDD : ajouter champs category, difficulty, keyFacts, shortExplanation
