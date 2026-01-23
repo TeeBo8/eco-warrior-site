@@ -96,13 +96,13 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Badge Live/Cache/Statique dans le header
 - [x] Bouton refresh manuel
 
-### Phase 13 - Événements Climatiques Temps Réel 🔥
-- [ ] Connecter API NASA EONET (catastrophes naturelles en cours)
-- [ ] Connecter API GDACS (alertes ONU catastrophes mondiales)
-- [ ] Remplacer bannière statique par événements réels
-- [ ] Filtrer par type (feux, inondations, tempêtes, volcans)
-- [ ] Liens vers sources officielles (NASA, NOAA, Copernicus)
-- [ ] Géolocalisation des événements sur la carte
+### Phase 13 - Événements Climatiques Temps Réel ✅
+- [x] Connecter API NASA EONET (catastrophes naturelles en cours)
+- [x] Connecter API GDACS (alertes ONU catastrophes mondiales)
+- [x] Remplacer bannière statique par événements réels
+- [x] Filtrer par type (feux, inondations, tempêtes, volcans)
+- [x] Liens vers sources officielles (NASA, NOAA, Copernicus)
+- [x] Géolocalisation des événements sur la carte
 
 ### Phase 14 - Bonus Pro (optionnel)
 - [ ] Benchmark empreinte carbone personnel
