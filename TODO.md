@@ -112,6 +112,64 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 
 ---
 
+## Page Mythes & Réalités - Refonte Complète 🎯
+
+### Phase M1 - Quick Wins UI/UX (Facile ~4-5h) 🔥
+- [ ] Hero Section avec stats dynamiques (X mythes démontés, Y sources)
+- [ ] Search bar intelligent avec highlight résultats
+- [ ] Filtres visuels par catégorie (Science, Énergie, Solutions, Économie)
+- [ ] Filtres par difficulté (Débutant, Intermédiaire, Avancé)
+- [ ] Cards améliorées avec preview 2-3 lignes + badges
+- [ ] Animations Framer Motion (stagger entrée, hover states)
+- [ ] Progression utilisateur localStorage (mythes lus, favoris)
+
+### Phase M2 - Contenu & BDD (Moyen ~5-6h)
+- [ ] Migration BDD : ajouter champs category, difficulty, keyFacts, shortExplanation
+- [ ] Migration BDD : ajouter champ relatedMyths (IDs connexes)
+- [ ] Enrichir les 19 mythes existants avec nouvelles données
+- [ ] Ajouter 10-15 nouveaux mythes :
+  - "Le méthane des vaches est négligeable"
+  - "Les énergies renouvelables ne sont pas fiables"
+  - "Le réchauffement s'est arrêté depuis 15 ans"
+  - "La couche d'ozone et le climat c'est pareil"
+  - "Planter des arbres suffit pour compenser"
+  - "Les panneaux solaires consomment plus qu'ils produisent"
+  - "L'hydrogène est la solution miracle"
+  - "Le recyclage résout le problème du plastique"
+  - "Les océans absorbent tout le CO2"
+  - "La fonte en Antarctique est normale"
+- [ ] Sources multiples par mythe (GIEC, Jancovici, Bon Pote, Le Réveilleur)
+- [ ] KeyFacts (3 bullet points) pour chaque mythe
+
+### Phase M3 - Features Avancées (Moyen/Complexe ~6-8h)
+- [ ] Mode comparaison (2-3 mythes côte à côte)
+- [ ] Mythes connexes en bas de modal
+- [ ] Modal enrichie avec sections visuelles
+- [ ] Quiz Mode "Vrai ou Faux" avec scoring
+- [ ] Partage social avec quotes pré-remplies
+- [ ] Bouton "J'ai appris quelque chose" (analytics)
+
+### Phase M4 - Polish & SEO (Optionnel ~4h)
+- [ ] Graphiques interactifs (Recharts) pour mythes avec data
+- [ ] Section "Sources & Méthodologie"
+- [ ] Form "Proposer un mythe" (avec modération)
+- [ ] Newsletter CTA "Mythe du mois"
+- [ ] SEO : Schema FAQ structured data
+- [ ] OpenGraph images dynamiques par mythe
+- [ ] Page dédiée par mythe (/debunk/[slug])
+
+### Sources à intégrer
+- GIEC (AR6)
+- Jean-Marc Jancovici (jancovici.com)
+- Le Réveilleur (YouTube)
+- Bon Pote (blog)
+- Carbon Brief
+- Our World in Data
+- NASA Climate
+- NOAA
+
+---
+
 ## Fait
 - [x] **Repositionnement du site** - Ton combatif direct "La science contre les climatosceptiques" (commit 691abf9)
 - [x] **Enrichir la section Debunk** - 20 mythes climatosceptiques avec sources scientifiques (8 → 20)
