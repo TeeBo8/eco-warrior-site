@@ -1,12 +1,11 @@
 /**
- * Route API Cron pour synchroniser les données climatiques
+ * Route API pour synchroniser les données climatiques
  *
- * Configuré pour être appelé par Vercel Cron Jobs toutes les heures
- * (Plan Hobby de Vercel = précision horaire uniquement)
- * Peut aussi être appelé manuellement pour un refresh immédiat
- *
- * Configuration dans vercel.json:
- * "crons": [{ "path": "/api/cron/sync-climate", "schedule": "0 * * * *" }]
+ * NOTE: Vercel Cron Jobs désactivés (nécessite plan Pro)
+ * Les données sont rafraîchies automatiquement à la demande via le cache (TTL 60min)
+ * 
+ * Cette route peut être appelée manuellement pour forcer un refresh immédiat
+ * Exemple: curl -X POST https://ton-site.vercel.app/api/cron/sync-climate
  */
 
 import { NextResponse } from 'next/server';
