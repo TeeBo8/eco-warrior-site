@@ -13,6 +13,7 @@ import { ClimateAlerts } from "@/components/climate-alerts";
 import { ClimateEventsBanner } from "@/components/climate-events-banner";
 import { ClimateInsights } from "@/components/climate-insights";
 import { GlobalPerformanceStats } from "@/components/global-performance-stats";
+import { DashboardFooter } from "@/components/dashboard-footer";
 import { ThemeSwitch } from "@/components/ui/theme-switch";
 import { DashboardCustomizer } from "@/components/dashboard-customizer";
 import { ShareButtons } from "@/components/share-buttons";
@@ -415,6 +416,9 @@ export function DashboardContent() {
               .map((section) => renderSection(section.id))}
           </>
         )}
+
+        {/* Footer Phase 11 - Crédibilité & Sources */}
+        <DashboardFooter />
       </main>
     </div>
   );

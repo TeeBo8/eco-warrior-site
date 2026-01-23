@@ -1,4 +1,5 @@
- on fait ca bien , je test moi meme avec pnpm dev aprés chaque modif et si ca marche nickel ensuite on lint/build/commit/push, chef quand tout est carré. let's go pour laphase 6 on valide la todo une fois que c'est fait : 
+ on fait ca bien tel le meilleur dev de l'univers (mdr), je test moi meme avec pnpm dev aprés chaque modif et si ca marche nickel ensuite on lint/build/commit/push, chef quand tout est carré. let's go pour laphase () de notre magnifique dashboard on valide la todo une fois que c'est fait chef : 
+ 
 
 # Eco Warrior - Roadmap
 
@@ -77,17 +78,23 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] % énergie renouvelable mondiale
 - [x] Population affectée (réfugiés climatiques)
 
-### Phase 10 - Stats de Performance Globale
-- [ ] Score durabilité globale (0-100 de l'état du climat)
-- [ ] Tendance générale ("S'améliore" ✅ ou "Empire" ❌)
-- [ ] Progression objectifs 2030/2050
+### Phase 10 - Stats de Performance Globale ✅
+- [x] Score durabilité globale (0-100 de l'état du climat)
+- [x] Tendance générale ("S'améliore" ✅ ou "Empire" ❌)
+- [x] Progression objectifs 2030/2050
 
-### Phase 11 - Footer & Crédibilité
-- [ ] Badge "Données vérifiées scientifiquement"
-- [ ] Logos partenaires (NOAA, NASA, GIEC)
-- [ ] Last sync + API status
+### Phase 11 - Footer & Crédibilité ✅
+- [x] Badge "Données vérifiées scientifiquement"
+- [x] Section Sources officielles (NASA, NOAA, GIEC, IEA, WWF) avec liens
+- [x] Last sync + API status
 
-### Phase 12 - Bonus Pro (optionnel)
+### Phase 12 - Données Temps Réel (API)
+- [ ] Connecter API météo/climat (Open-Meteo - gratuit)
+- [ ] Cron job pour sync données officielles (NASA/NOAA)
+- [ ] Cache serveur + fallback données statiques
+- [ ] Indicateur "Dernière MAJ" avec vraie date source
+
+### Phase 13 - Bonus Pro (optionnel)
 - [ ] Intégration temps réel (WebSocket)
 - [ ] Benchmark empreinte carbone personnel
 - [ ] Widget embeddable pour autres sites
