@@ -1,7 +1,7 @@
 // Service de données climatiques - Phase 12: Données Temps Réel (API)
 //
 // Architecture:
-// - Cache serveur avec TTL de 15 minutes
+// - Cache serveur avec TTL de 60 minutes (Vercel Hobby = cron horaire)
 // - Fallback automatique sur données statiques
 // - Indicateur de dernière mise à jour
 //

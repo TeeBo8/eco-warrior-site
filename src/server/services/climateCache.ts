@@ -143,7 +143,7 @@ interface CacheEntry {
 }
 
 let cache: CacheEntry | null = null;
-const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes
+const CACHE_TTL_MS = 60 * 60 * 1000; // 60 minutes (matches Vercel Hobby cron)
 
 /**
  * Récupère les données depuis le cache ou les rafraîchit
