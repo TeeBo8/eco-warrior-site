@@ -12,6 +12,7 @@ import { CountryRankings } from "@/components/country-rankings";
 import { ClimateAlerts } from "@/components/climate-alerts";
 import { ClimateEventsBanner } from "@/components/climate-events-banner";
 import { ClimateInsights } from "@/components/climate-insights";
+import { GlobalPerformanceStats } from "@/components/global-performance-stats";
 import { ThemeSwitch } from "@/components/ui/theme-switch";
 import { DashboardCustomizer } from "@/components/dashboard-customizer";
 import { ShareButtons } from "@/components/share-buttons";
@@ -190,6 +191,13 @@ export function DashboardContent() {
                 metricKey="climateRefugees"
               />
             </div>
+          </div>
+        );
+
+      case 'global-performance':
+        return (
+          <div key="global-performance" className="mt-8">
+            <GlobalPerformanceStats />
           </div>
         );
 
