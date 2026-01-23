@@ -4,9 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import { Card } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Droplets, Flame, Waves, TreePine, Wind, Zap, Thermometer, Leaf } from 'lucide-react';
+import { Droplets, Flame, Waves, TreePine, Wind, Zap, Thermometer, Leaf, Satellite, Loader2 } from 'lucide-react';
 import { trpc } from "@/app/_trpc/client";
 import { useParams } from "next/navigation";
+import { Switch } from "@/components/ui/switch";
+import type { ClimateEvent } from "@/server/services/climateEventsService";
 
 import Image from 'next/image';
 import L from 'leaflet';
@@ -71,6 +73,50 @@ const createCustomIcon = (category: string | null) => {
   });
 };
 
+// Icônes pour les événements climatiques en temps réel
+const createClimateEventIcon = (eventType: string, severity: string) => {
+  const colorMap: Record<string, string> = {
+    wildfire: '#ef4444',
+    flood: '#3b82f6',
+    hurricane: '#8b5cf6',
+    volcano: '#dc2626',
+    earthquake: '#f59e0b',
+    drought: '#eab308',
+    storm: '#6366f1',
+    iceberg: '#06b6d4',
+    other: '#6b7280',
+  };
+
+  const severityRing: Record<string, string> = {
+    extreme: '#dc2626',
+    severe: '#f97316',
+    moderate: '#eab308',
+    minor: '#22c55e',
+  };
+
+  const fillColor = colorMap[eventType] || colorMap.other;
+  const ringColor = severityRing[severity] || severityRing.moderate;
+
+  // SVG avec anneau de sévérité pulsant
+  const svgString = `<svg width="36" height="36" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="18" cy="18" r="16" fill="${ringColor}" opacity="0.3">
+      <animate attributeName="r" values="14;18;14" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="18" cy="18" r="12" fill="${fillColor}" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="18" cy="18" r="4" fill="#ffffff" opacity="0.6"/>
+  </svg>`;
+
+  const iconUrl = `data:image/svg+xml;base64,${btoa(svgString)}`;
+
+  return L.icon({
+    iconUrl,
+    iconSize: [36, 36],
+    iconAnchor: [18, 18],
+    popupAnchor: [0, -18],
+  });
+};
+
 const CategoryIcon: React.FC<{ category: string | null }> = ({ category }) => {
   const iconProps = { className: "h-4 w-4" };
 
@@ -131,21 +177,100 @@ const MapEvents: React.FC<{ onMarkerClick: (point: ImpactPoint) => void; points:
   return null;
 };
 
+// Composant pour afficher les événements climatiques en temps réel sur la carte
+const ClimateEventsLayer: React.FC<{
+  events: ClimateEvent[];
+  onEventClick: (event: ClimateEvent) => void;
+}> = ({ events, onEventClick }) => {
+  const map = useMap();
+
+  useEffect(() => {
+    const markers: L.Marker[] = [];
+
+    events.forEach((event) => {
+      if (!event.coordinates) return;
+
+      const marker = L.marker([event.coordinates.lat, event.coordinates.lng], {
+        icon: createClimateEventIcon(event.type, event.severity)
+      }).addTo(map);
+
+      marker.on('click', () => {
+        onEventClick(event);
+      });
+
+      markers.push(marker);
+    });
+
+    return () => {
+      markers.forEach(marker => map.removeLayer(marker));
+    };
+  }, [map, events, onEventClick]);
+
+  return null;
+};
+
 const AdvancedImpactMap: React.FC<AdvancedImpactMapProps> = ({ points }) => {
   const params = useParams();
   const locale = typeof params.locale === 'string' ? params.locale : 'en';
 
   const pointsQuery = trpc.map.getPoints.useQuery();
+  const climateEventsQuery = trpc.getClimateEvents.useQuery(undefined, {
+    refetchInterval: 15 * 60 * 1000, // Refresh toutes les 15 minutes
+  });
 
   const [selectedPoint, setSelectedPoint] = useState<ImpactPoint | null>(null);
+  const [selectedClimateEvent, setSelectedClimateEvent] = useState<ClimateEvent | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isClimateEventDialogOpen, setIsClimateEventDialogOpen] = useState(false);
+  const [showLiveEvents, setShowLiveEvents] = useState(true);
 
   // Tous les points sont disponibles
   const mapPoints = points || pointsQuery.data || [];
+  const climateEvents = climateEventsQuery.data?.events.filter(e => e.coordinates) || [];
 
   const handleMarkerClick = (point: ImpactPoint) => {
     setSelectedPoint(point);
     setIsDialogOpen(true);
+  };
+
+  const handleClimateEventClick = (event: ClimateEvent) => {
+    setSelectedClimateEvent(event);
+    setIsClimateEventDialogOpen(true);
+  };
+
+  const getEventTypeLabel = (type: string) => {
+    const labels: Record<string, string> = {
+      wildfire: locale === 'fr' ? 'Feu de forêt' : 'Wildfire',
+      flood: locale === 'fr' ? 'Inondation' : 'Flood',
+      hurricane: locale === 'fr' ? 'Ouragan/Cyclone' : 'Hurricane',
+      volcano: locale === 'fr' ? 'Volcan' : 'Volcano',
+      earthquake: locale === 'fr' ? 'Séisme' : 'Earthquake',
+      drought: locale === 'fr' ? 'Sécheresse' : 'Drought',
+      storm: locale === 'fr' ? 'Tempête' : 'Storm',
+      iceberg: locale === 'fr' ? 'Glace/Iceberg' : 'Ice/Iceberg',
+      other: locale === 'fr' ? 'Autre' : 'Other',
+    };
+    return labels[type] || labels.other;
+  };
+
+  const getSeverityColor = (severity: string) => {
+    const colors: Record<string, string> = {
+      extreme: 'bg-red-500 text-white',
+      severe: 'bg-orange-500 text-white',
+      moderate: 'bg-yellow-500 text-white',
+      minor: 'bg-green-500 text-white',
+    };
+    return colors[severity] || colors.moderate;
+  };
+
+  const getSeverityLabel = (severity: string) => {
+    const labels: Record<string, string> = {
+      extreme: locale === 'fr' ? 'Extrême' : 'Extreme',
+      severe: locale === 'fr' ? 'Sévère' : 'Severe',
+      moderate: locale === 'fr' ? 'Modéré' : 'Moderate',
+      minor: locale === 'fr' ? 'Mineur' : 'Minor',
+    };
+    return labels[severity] || labels.moderate;
   };
 
   const getCategoryColor = (category: string | null) => {
@@ -200,8 +325,27 @@ const AdvancedImpactMap: React.FC<AdvancedImpactMapProps> = ({ points }) => {
             {locale === 'fr' ? 'Carte des Impacts Climatiques' : 'Climate Impact Map'}
           </h3>
 
-          {/* Indicateur nombre de points */}
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          {/* Toggle événements en direct + Indicateur nombre de points */}
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Switch
+                checked={showLiveEvents}
+                onCheckedChange={setShowLiveEvents}
+                id="live-events"
+              />
+              <label htmlFor="live-events" className="flex items-center gap-1 cursor-pointer">
+                <Satellite className="h-4 w-4" />
+                <span className="hidden sm:inline">
+                  {locale === 'fr' ? 'Événements en direct' : 'Live events'}
+                </span>
+                {climateEventsQuery.isLoading && <Loader2 className="h-3 w-3 animate-spin" />}
+                {showLiveEvents && climateEvents.length > 0 && (
+                  <span className="bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full animate-pulse">
+                    {climateEvents.length}
+                  </span>
+                )}
+              </label>
+            </div>
             <span>
               {mapPoints.length} {locale === 'fr' ? 'points d\'impact' : 'impact points'}
             </span>
@@ -239,6 +383,41 @@ const AdvancedImpactMap: React.FC<AdvancedImpactMapProps> = ({ points }) => {
             </span>
           </div>
         </div>
+
+        {/* Légende événements en direct */}
+        {showLiveEvents && climateEvents.length > 0 && (
+          <div className="mt-4 pt-4 border-t border-border">
+            <div className="flex items-center gap-2 mb-2">
+              <Satellite className="h-4 w-4 text-red-500" />
+              <span className="font-medium text-sm text-foreground">
+                {locale === 'fr' ? 'Événements en temps réel' : 'Real-time events'}
+              </span>
+              <span className="text-xs text-muted-foreground">
+                (NASA EONET & GDACS)
+              </span>
+            </div>
+            <div className="flex flex-wrap gap-4 text-sm">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                <span className="text-muted-foreground">
+                  {locale === 'fr' ? 'Extrême' : 'Extreme'}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                <span className="text-muted-foreground">
+                  {locale === 'fr' ? 'Sévère' : 'Severe'}
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <span className="text-muted-foreground">
+                  {locale === 'fr' ? 'Modéré' : 'Moderate'}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
       </Card>
 
       {/* Carte avec hauteur ajustée */}
@@ -255,6 +434,12 @@ const AdvancedImpactMap: React.FC<AdvancedImpactMapProps> = ({ points }) => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
           />
           <MapEvents onMarkerClick={handleMarkerClick} points={mapPoints} />
+          {showLiveEvents && (
+            <ClimateEventsLayer
+              events={climateEvents}
+              onEventClick={handleClimateEventClick}
+            />
+          )}
         </MapContainer>
       </div>
 
@@ -309,6 +494,85 @@ const AdvancedImpactMap: React.FC<AdvancedImpactMapProps> = ({ points }) => {
                     <p className="text-muted-foreground">
                       {selectedPoint.lat.toFixed(4)}, {selectedPoint.lng.toFixed(4)}
                     </p>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* Dialog pour les événements climatiques en temps réel */}
+      <Dialog open={isClimateEventDialogOpen} onOpenChange={setIsClimateEventDialogOpen}>
+        <DialogContent className="w-[400px] sm:w-[540px] max-h-[80vh] overflow-y-auto" style={{ zIndex: 10000 }}>
+          {selectedClimateEvent && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-2">
+                  <Satellite className="h-5 w-5 text-red-500" />
+                  {selectedClimateEvent.title}
+                </DialogTitle>
+              </DialogHeader>
+
+              <div className="mt-6 space-y-6">
+                <div className="flex items-center gap-2">
+                  <SimpleBadge className={getSeverityColor(selectedClimateEvent.severity)}>
+                    {getSeverityLabel(selectedClimateEvent.severity)}
+                  </SimpleBadge>
+                  <SimpleBadge className="bg-slate-500 text-white">
+                    {getEventTypeLabel(selectedClimateEvent.type)}
+                  </SimpleBadge>
+                </div>
+
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">
+                      {locale === 'fr' ? 'Description' : 'Description'}
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {selectedClimateEvent.description}
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">
+                      {locale === 'fr' ? 'Localisation' : 'Location'}
+                    </h4>
+                    <p className="text-muted-foreground">
+                      {selectedClimateEvent.location}
+                    </p>
+                    {selectedClimateEvent.coordinates && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {selectedClimateEvent.coordinates.lat.toFixed(4)}°, {selectedClimateEvent.coordinates.lng.toFixed(4)}°
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-2">
+                      {locale === 'fr' ? 'Date' : 'Date'}
+                    </h4>
+                    <p className="text-muted-foreground">
+                      {new Date(selectedClimateEvent.date).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-border">
+                    <a
+                      href={selectedClimateEvent.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
+                    >
+                      <span>{locale === 'fr' ? 'Source:' : 'Source:'} {selectedClimateEvent.source}</span>
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
                   </div>
                 </div>
               </div>
