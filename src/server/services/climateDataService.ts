@@ -1,5 +1,9 @@
-// Service de données climatiques - Version utilisant des données statiques fiables
-// Les valeurs sont basées sur les dernières données publiques de NOAA/NASA/IEA (mise à jour: Décembre 2025)
+// Service de données climatiques - Phase 12: Données Temps Réel (API)
+//
+// Architecture:
+// - Cache serveur avec TTL de 15 minutes
+// - Fallback automatique sur données statiques
+// - Indicateur de dernière mise à jour
 //
 // Sources officielles:
 // - CO₂: NOAA Mauna Loa Observatory (https://gml.noaa.gov/ccgg/trends/)
@@ -8,17 +12,21 @@
 // - Glace: NASA GRACE satellite
 // - Émissions CO₂: IEA (https://www.iea.org/data-and-statistics)
 // - Biodiversité: WWF Living Planet Index
-// - Qualité air: IQAir World Air Quality
+// - Qualité air: Open-Meteo Air Quality API (temps réel)
 // - Énergie renouvelable: IEA Renewables
 // - Réfugiés climatiques: UNHCR/IDMC
+// - Météo: Open-Meteo (temps réel)
 
-interface ClimateIndicator {
+import { getCachedClimateData, type CachedClimateData } from './climateCache';
+
+export interface ClimateIndicator {
   value: string;
   unit: string;
   source: string;
+  isLive?: boolean;
 }
 
-interface ClimateData {
+export interface ClimateData {
   co2: ClimateIndicator;
   tempAnomaly: ClimateIndicator;
   seaLevel: ClimateIndicator;
@@ -29,64 +37,52 @@ interface ClimateData {
   airQuality: ClimateIndicator;
   renewableEnergy: ClimateIndicator;
   climateRefugees: ClimateIndicator;
+  // Phase 12 - Météo temps réel
+  currentWeather?: {
+    temperature: number;
+    humidity: number;
+    precipitation: number;
+    windSpeed: number;
+    location: string;
+  };
+  // Phase 12 - Métadonnées
+  lastUpdated: string;
+  nextUpdate: string;
+  dataSource: 'live' | 'cached' | 'static';
 }
 
 /**
- * Retourne les dernières données climatiques connues
- * Données mises à jour manuellement depuis les sources officielles
+ * Retourne les dernières données climatiques avec cache et temps réel
+ * Phase 12: Intégration API Open-Meteo + cache serveur
  */
 export async function getLiveClimateData(): Promise<ClimateData> {
-  // Valeurs réelles de Décembre 2025 basées sur les sources officielles
+  // Récupérer les données depuis le cache (ou les rafraîchir si expiré)
+  const cachedData: CachedClimateData = await getCachedClimateData();
+
+  // Transformer en format ClimateData
   const data: ClimateData = {
-    co2: {
-      value: '422.4',
-      unit: 'ppm',
-      source: 'NOAA Mauna Loa'
-    },
-    tempAnomaly: {
-      value: '1.29',
-      unit: '°C',
-      source: 'NASA GISS'
-    },
-    seaLevel: {
-      value: '101',
-      unit: 'mm',
-      source: 'NASA Satellite'
-    },
-    iceMelt: {
-      value: '-150',
-      unit: 'Gt/an',
-      source: 'NASA GRACE'
-    },
-    // Phase 9 - Indicateurs supplémentaires
-    globalEmissions: {
-      value: '37.4',
-      unit: 'Gt/an',
-      source: 'IEA'
-    },
-    biodiversity: {
-      value: '-69',
-      unit: '%',
-      source: 'WWF Living Planet'
-    },
-    airQuality: {
-      value: '58',
-      unit: 'AQI',
-      source: 'IQAir'
-    },
-    renewableEnergy: {
-      value: '30.1',
-      unit: '%',
-      source: 'IEA'
-    },
-    climateRefugees: {
-      value: '26.4',
-      unit: 'M/an',
-      source: 'IDMC'
-    },
+    co2: cachedData.co2,
+    tempAnomaly: cachedData.tempAnomaly,
+    seaLevel: cachedData.seaLevel,
+    iceMelt: cachedData.iceMelt,
+    globalEmissions: cachedData.globalEmissions,
+    biodiversity: cachedData.biodiversity,
+    airQuality: cachedData.airQuality,
+    renewableEnergy: cachedData.renewableEnergy,
+    climateRefugees: cachedData.climateRefugees,
+    currentWeather: cachedData.currentWeather,
+    lastUpdated: cachedData.lastUpdated,
+    nextUpdate: cachedData.nextUpdate,
+    dataSource: cachedData.dataSource,
   };
 
-  console.log('🌍 Climate data loaded with Phase 9 indicators');
+  const liveIndicators = [
+    data.co2.isLive,
+    data.airQuality.isLive,
+    !!data.currentWeather,
+  ].filter(Boolean).length;
+
+  console.log(`🌍 Climate data loaded (source: ${data.dataSource}, live indicators: ${liveIndicators}/3)`);
 
   return data;
 }

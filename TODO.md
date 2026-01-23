@@ -88,17 +88,27 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Section Sources officielles (NASA, NOAA, GIEC, IEA, WWF) avec liens
 - [x] Last sync + API status
 
-### Phase 12 - Données Temps Réel (API)
-- [ ] Connecter API météo/climat (Open-Meteo - gratuit)
-- [ ] Cron job pour sync données officielles (NASA/NOAA)
-- [ ] Cache serveur + fallback données statiques
-- [ ] Indicateur "Dernière MAJ" avec vraie date source
+### Phase 12 - Données Temps Réel (API) ✅
+- [x] Connecter API météo/climat (Open-Meteo - gratuit)
+- [x] Cron job pour sync données officielles (Vercel Cron toutes les 15min)
+- [x] Cache serveur + fallback données statiques
+- [x] Indicateur "Dernière MAJ" avec vraie date source
+- [x] Badge Live/Cache/Statique dans le header
+- [x] Bouton refresh manuel
 
-### Phase 13 - Bonus Pro (optionnel)
-- [ ] Intégration temps réel (WebSocket)
+### Phase 13 - Événements Climatiques Temps Réel 🔥
+- [ ] Connecter API NASA EONET (catastrophes naturelles en cours)
+- [ ] Connecter API GDACS (alertes ONU catastrophes mondiales)
+- [ ] Remplacer bannière statique par événements réels
+- [ ] Filtrer par type (feux, inondations, tempêtes, volcans)
+- [ ] Liens vers sources officielles (NASA, NOAA, Copernicus)
+- [ ] Géolocalisation des événements sur la carte
+
+### Phase 14 - Bonus Pro (optionnel)
 - [ ] Benchmark empreinte carbone personnel
 - [ ] Widget embeddable pour autres sites
 - [ ] Alertes email (résumé hebdo/mensuel)
+- [ ] Mode kiosk (affichage plein écran pour écrans publics)
 
 ---
 

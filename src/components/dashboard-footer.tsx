@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent } from "@/components/ui/card";
-import { ShieldCheck, ExternalLink, CheckCircle2, Clock, Wifi, WifiOff } from "lucide-react";
+import { ShieldCheck, ExternalLink, CheckCircle2, Clock, Wifi, WifiOff, RefreshCw, Database } from "lucide-react";
 import { trpc } from "@/app/_trpc/client";
 
 // Sources officielles des données
@@ -39,12 +39,12 @@ const officialSources = [
 ];
 
 export function DashboardFooter() {
-  const { data: climateData, isLoading, isError, dataUpdatedAt } = trpc.getClimateIndicators.useQuery();
+  const { data: climateData, isLoading, isError } = trpc.getClimateIndicators.useQuery();
 
-  // Formater la date de dernière mise à jour
+  // Formater la date de dernière mise à jour (depuis les métadonnées serveur)
   const formatLastSync = () => {
-    if (!dataUpdatedAt) return "...";
-    const date = new Date(dataUpdatedAt);
+    if (!climateData?.lastUpdated) return "...";
+    const date = new Date(climateData.lastUpdated);
     return date.toLocaleString('fr-FR', {
       day: '2-digit',
       month: '2-digit',
@@ -54,15 +54,27 @@ export function DashboardFooter() {
     });
   };
 
-  // Status de l'API
+  // Status de l'API basé sur dataSource
   const getApiStatus = () => {
-    if (isLoading) return { status: 'loading', label: 'Chargement...', color: 'text-yellow-500' };
-    if (isError) return { status: 'error', label: 'Erreur API', color: 'text-red-500' };
-    if (climateData) return { status: 'ok', label: 'Connecté', color: 'text-green-500' };
-    return { status: 'unknown', label: 'Inconnu', color: 'text-gray-500' };
+    if (isLoading) return { status: 'loading', label: 'Chargement...', color: 'text-yellow-500', icon: RefreshCw };
+    if (isError) return { status: 'error', label: 'Erreur API', color: 'text-red-500', icon: WifiOff };
+    if (climateData) {
+      switch (climateData.dataSource) {
+        case 'live':
+          return { status: 'live', label: 'Temps réel', color: 'text-green-500', icon: Wifi };
+        case 'cached':
+          return { status: 'cached', label: 'Cache', color: 'text-blue-500', icon: Database };
+        case 'static':
+          return { status: 'static', label: 'Statique', color: 'text-orange-500', icon: Database };
+        default:
+          return { status: 'ok', label: 'Connecté', color: 'text-green-500', icon: Wifi };
+      }
+    }
+    return { status: 'unknown', label: 'Inconnu', color: 'text-gray-500', icon: WifiOff };
   };
 
   const apiStatus = getApiStatus();
+  const StatusIcon = apiStatus.icon;
 
   return (
     <div className="mt-12 space-y-6">
@@ -91,12 +103,10 @@ export function DashboardFooter() {
             <span className="font-medium">{formatLastSync()}</span>
           </div>
           <div className={`flex items-center gap-2 text-sm ${apiStatus.color}`}>
-            {apiStatus.status === 'ok' ? (
-              <Wifi className="h-4 w-4" />
-            ) : apiStatus.status === 'error' ? (
-              <WifiOff className="h-4 w-4" />
+            {apiStatus.status === 'loading' ? (
+              <RefreshCw className="h-4 w-4 animate-spin" />
             ) : (
-              <div className="h-4 w-4 rounded-full bg-current animate-pulse" />
+              <StatusIcon className="h-4 w-4" />
             )}
             <span className="font-medium">{apiStatus.label}</span>
           </div>

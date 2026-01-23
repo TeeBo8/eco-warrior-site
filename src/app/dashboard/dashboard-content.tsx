@@ -15,6 +15,7 @@ import { ClimateInsights } from "@/components/climate-insights";
 import { GlobalPerformanceStats } from "@/components/global-performance-stats";
 import { DashboardFooter } from "@/components/dashboard-footer";
 import { ThemeSwitch } from "@/components/ui/theme-switch";
+import { LastUpdateIndicator, LastUpdateBadge } from "@/components/last-update-indicator";
 import { DashboardCustomizer } from "@/components/dashboard-customizer";
 import { ShareButtons } from "@/components/share-buttons";
 import { ExportDashboard } from "@/components/export-dashboard";
@@ -25,9 +26,16 @@ import { climateHistoryData } from "@/data/climate-history";
 export function DashboardContent() {
   const [period, setPeriod] = useState<PeriodFilter>('all');
   const [comparisonMode, setComparisonMode] = useState(false);
-  const { data: climateData, isLoading, error } = trpc.getClimateIndicators.useQuery();
+  const { data: climateData, isLoading, error, refetch, isFetching } = trpc.getClimateIndicators.useQuery(undefined, {
+    refetchInterval: 5 * 60 * 1000, // Auto-refresh toutes les 5 minutes
+  });
   const { sections } = useDashboardPreferences();
   const dashboardRef = useRef<HTMLDivElement>(null);
+
+  // Handler pour le refresh manuel
+  const handleRefresh = () => {
+    refetch();
+  };
 
   // Données filtrées par période
   const filteredCo2 = filterDataByPeriod(climateHistoryData.co2, period);
@@ -368,7 +376,15 @@ export function DashboardContent() {
         <div className="flex flex-col gap-4 mb-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold">Tableau de Bord du Climat</h1>
+              <div className="flex items-center gap-3 flex-wrap">
+                <h1 className="text-2xl sm:text-3xl font-bold">Tableau de Bord du Climat</h1>
+                {climateData && (
+                  <LastUpdateBadge
+                    lastUpdated={climateData.lastUpdated}
+                    dataSource={climateData.dataSource}
+                  />
+                )}
+              </div>
               <p className="text-sm sm:text-base text-muted-foreground mt-1">Les indicateurs clés de notre planète en temps réel.</p>
             </div>
             <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
@@ -396,6 +412,19 @@ export function DashboardContent() {
           comparisonMode={comparisonMode}
           onComparisonModeChange={setComparisonMode}
         />
+
+        {/* Phase 12 - Indicateur Dernière MAJ */}
+        {climateData && (
+          <div className="mb-4">
+            <LastUpdateIndicator
+              lastUpdated={climateData.lastUpdated}
+              nextUpdate={climateData.nextUpdate}
+              dataSource={climateData.dataSource}
+              onRefresh={handleRefresh}
+              isRefreshing={isFetching}
+            />
+          </div>
+        )}
 
         {isLoading && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

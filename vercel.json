@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/sync-climate",
+      "schedule": "*/15 * * * *"
+    }
+  ]
+}
