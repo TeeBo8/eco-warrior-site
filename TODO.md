@@ -123,23 +123,24 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Animations Framer Motion (stagger entrée, hover states)
 - [x] Progression utilisateur localStorage (mythes lus, favoris)
 
-### Phase M2 - Contenu & BDD (Moyen ~5-6h)
-- [ ] Migration BDD : ajouter champs category, difficulty, keyFacts, shortExplanation
-- [ ] Migration BDD : ajouter champ relatedMyths (IDs connexes)
-- [ ] Enrichir les 19 mythes existants avec nouvelles données
-- [ ] Ajouter 10-15 nouveaux mythes :
+### Phase M2 - Contenu & BDD ✅
+- [x] Migration BDD : ajouter champs category, difficulty, keyFacts, shortExplanation
+- [x] Migration BDD : ajouter champ relatedMyths (IDs connexes)
+- [x] Enrichir les 19 mythes existants avec nouvelles données
+- [x] Ajouter 10-15 nouveaux mythes (11 ajoutés, 30 total) :
   - "Le méthane des vaches est négligeable"
   - "Les énergies renouvelables ne sont pas fiables"
   - "Le réchauffement s'est arrêté depuis 15 ans"
-  - "La couche d'ozone et le climat c'est pareil"
   - "Planter des arbres suffit pour compenser"
   - "Les panneaux solaires consomment plus qu'ils produisent"
   - "L'hydrogène est la solution miracle"
   - "Le recyclage résout le problème du plastique"
   - "Les océans absorbent tout le CO2"
   - "La fonte en Antarctique est normale"
-- [ ] Sources multiples par mythe (GIEC, Jancovici, Bon Pote, Le Réveilleur)
-- [ ] KeyFacts (3 bullet points) pour chaque mythe
+  - "La transition écologique détruit l'emploi"
+  - "La Chine pollue, donc nos efforts sont inutiles"
+- [x] Sources multiples par mythe (GIEC, Jancovici, Bon Pote, Le Réveilleur)
+- [x] KeyFacts (3 bullet points) pour chaque mythe
 
 ### Phase M3 - Features Avancées (Moyen/Complexe ~6-8h)
 - [ ] Mode comparaison (2-3 mythes côte à côte)
