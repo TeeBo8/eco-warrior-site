@@ -1,4 +1,4 @@
- on fait ca bien tel le meilleur dev de l'univers (mdr), je test moi meme avec pnpm dev aprés chaque modif et si ca marche nickel ensuite on lint/build/commit/push, chef quand tout est carré. let's go pour laphase () de notre magnifique dashboard on valide la todo une fois que c'est fait chef : 
+  
  
 
 # Eco Warrior - Roadmap
@@ -123,32 +123,31 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Animations Framer Motion (stagger entrée, hover states)
 - [x] Progression utilisateur localStorage (mythes lus, favoris)
 
-### Phase M2 - Contenu & BDD ✅
+### Phase M2 - Contenu & BDD (Moyen ~5-6h)
 - [x] Migration BDD : ajouter champs category, difficulty, keyFacts, shortExplanation
 - [x] Migration BDD : ajouter champ relatedMyths (IDs connexes)
 - [x] Enrichir les 19 mythes existants avec nouvelles données
-- [x] Ajouter 10-15 nouveaux mythes (11 ajoutés, 30 total) :
+- [x] Ajouter 10-15 nouveaux mythes :
   - "Le méthane des vaches est négligeable"
   - "Les énergies renouvelables ne sont pas fiables"
   - "Le réchauffement s'est arrêté depuis 15 ans"
+  - "La couche d'ozone et le climat c'est pareil"
   - "Planter des arbres suffit pour compenser"
   - "Les panneaux solaires consomment plus qu'ils produisent"
   - "L'hydrogène est la solution miracle"
   - "Le recyclage résout le problème du plastique"
   - "Les océans absorbent tout le CO2"
   - "La fonte en Antarctique est normale"
-  - "La transition écologique détruit l'emploi"
-  - "La Chine pollue, donc nos efforts sont inutiles"
 - [x] Sources multiples par mythe (GIEC, Jancovici, Bon Pote, Le Réveilleur)
 - [x] KeyFacts (3 bullet points) pour chaque mythe
 
-### Phase M3 - Features Avancées (Moyen/Complexe ~6-8h)
-- [ ] Mode comparaison (2-3 mythes côte à côte)
-- [ ] Mythes connexes en bas de modal
-- [ ] Modal enrichie avec sections visuelles
-- [ ] Quiz Mode "Vrai ou Faux" avec scoring
-- [ ] Partage social avec quotes pré-remplies
-- [ ] Bouton "J'ai appris quelque chose" (analytics)
+### Phase M3 - Features Avancées ✅
+- [x] Mode comparaison (2-3 mythes côte à côte)
+- [x] Mythes connexes en bas de modal
+- [x] Modal enrichie avec sections visuelles
+- [x] Quiz Mode "Vrai ou Faux" avec scoring
+- [x] Partage social avec quotes pré-remplies
+- [x] Bouton "J'ai appris quelque chose" (analytics)
 
 ### Phase M4 - Polish & SEO (Optionnel ~4h)
 - [ ] Graphiques interactifs (Recharts) pour mythes avec data
