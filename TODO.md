@@ -149,14 +149,14 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Partage social avec quotes pré-remplies
 - [x] Bouton "J'ai appris quelque chose" (analytics)
 
-### Phase M4 - Polish & SEO (Optionnel ~4h)
-- [ ] Graphiques interactifs (Recharts) pour mythes avec data
-- [ ] Section "Sources & Méthodologie"
-- [ ] Form "Proposer un mythe" (avec modération)
-- [ ] Newsletter CTA "Mythe du mois"
-- [ ] SEO : Schema FAQ structured data
-- [ ] OpenGraph images dynamiques par mythe
-- [ ] Page dédiée par mythe (/debunk/[slug])
+### Phase M4 - Polish & SEO ✅ COMPLETED
+- [x] Graphiques interactifs (Recharts) pour mythes avec data
+- [x] Section "Sources & Méthodologie"
+- [x] Form "Proposer un mythe" (avec modération)
+- [x] Newsletter CTA "Mythe du mois"
+- [x] SEO : Schema FAQ structured data
+- [x] OpenGraph images dynamiques par mythe
+- [x] Page dédiée par mythe (/debunk/[slug])
 
 ### Sources à intégrer
 - GIEC (AR6)
