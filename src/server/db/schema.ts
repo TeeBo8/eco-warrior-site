@@ -235,4 +235,23 @@ export const userBadgesRelations = relations(userBadges, ({ one }) => ({
 
 export const badgesRelations = relations(badges, ({ many }) => ({
   userBadges: many(userBadges),
-})); 
+}));
+
+// 👇 NOUVELLE TABLE POUR LES SUGGESTIONS DE MYTHES (Phase M4) 👇
+export const mythSuggestions = pgTable("myth_suggestions", {
+  id: serial("id").primaryKey(),
+  myth: text("myth").notNull(),
+  category: varchar("category", { length: 50 }).notNull(),
+  source: text("source"),
+  email: text("email"),
+  status: varchar("status", { length: 20 }).default('pending').notNull(), // pending | approved | rejected
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// 👇 NOUVELLE TABLE POUR LES INSCRIPTIONS NEWSLETTER (Phase M4) 👇
+export const newsletterSubscriptions = pgTable("newsletter_subscriptions", {
+  id: serial("id").primaryKey(),
+  email: text("email").notNull().unique(),
+  source: varchar("source", { length: 50 }).default('debunk'), // Origine de l'inscription
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}); 

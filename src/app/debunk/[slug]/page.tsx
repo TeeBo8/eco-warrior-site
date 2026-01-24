@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation';
 import { db } from '@/server/db';
 import { posts } from '@/server/db/schema';
 import { eq } from 'drizzle-orm';
-import { CommentSection } from '@/components/comment-section';
+import { MythDetailContent } from './myth-detail-content';
+import { MythPageSchema } from '@/components/debunk/faq-schema';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -15,19 +16,53 @@ async function getPost(slug: string) {
   });
 }
 
+async function getRelatedPosts(relatedMythsJson: string | null) {
+  if (!relatedMythsJson) return [];
+  try {
+    const relatedIds: number[] = JSON.parse(relatedMythsJson);
+    if (relatedIds.length === 0) return [];
+
+    const allPosts = await db.query.posts.findMany();
+    return allPosts.filter(p => relatedIds.includes(p.id)).slice(0, 3);
+  } catch {
+    return [];
+  }
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const post = await getPost(resolvedParams.slug);
+
   if (!post) return { title: 'Mythe non trouvé' };
+
   const title = post.mythFr;
-  const description = post.realityFr.substring(0, 160) + '...';
+  const description = post.shortExplanation || post.realityFr.substring(0, 160) + '...';
+
+  // URL pour l'image OG dynamique
+  const ogImageUrl = `/api/og/myth?myth=${encodeURIComponent(title)}&category=${post.category || 'solutions'}&difficulty=${post.difficulty || 'debutant'}`;
+
   return {
-    title: `${title} | Mythes du Climat - EcoWarrior`,
+    title: `${title} - Vrai ou Faux ? | EcoWarrior`,
     description,
+    keywords: ['mythe climatique', 'changement climatique', 'fact-checking', post.category || 'climat'],
     openGraph: {
-      title: `${title} | EcoWarrior`,
+      title: `${title} - Vrai ou Faux ?`,
       description,
       type: 'article',
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} - Vrai ou Faux ?`,
+      description,
+      images: [ogImageUrl],
     },
   };
 }
@@ -35,24 +70,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function MythPage({ params }: Props) {
   const resolvedParams = await params;
   const post = await getPost(resolvedParams.slug);
+
   if (!post) notFound();
-  const title = post.mythFr;
-  const reality = post.realityFr;
-  const source = post.source;
+
+  const relatedPosts = await getRelatedPosts(post.relatedMyths);
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://ecowarrior.fr';
+  const pageUrl = `${baseUrl}/debunk/${post.slug}`;
 
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-4 text-red-600">💭 {title}</h1>
-      <div className="mt-4 space-y-4">
-        <h2 className="text-2xl font-semibold text-green-600">✅ Réalité</h2>
-        <p className="text-gray-700 dark:text-gray-300">{reality}</p>
-        {source && (
-          <div className="text-sm text-muted-foreground bg-muted p-3 rounded-lg">
-            <strong>Source:</strong> {source}
-          </div>
-        )}
-      </div>
-      <CommentSection />
-    </div>
+    <>
+      <MythPageSchema myth={post} url={pageUrl} />
+      <MythDetailContent post={post} relatedPosts={relatedPosts} />
+    </>
   );
+}
+
+// Générer les routes statiques pour tous les mythes
+export async function generateStaticParams() {
+  const allPosts = await db.query.posts.findMany({
+    columns: { slug: true },
+  });
+
+  return allPosts
+    .filter(post => post.slug)
+    .map(post => ({
+      slug: post.slug!,
+    }));
 }

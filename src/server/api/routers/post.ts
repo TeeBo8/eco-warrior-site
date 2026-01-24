@@ -3,7 +3,7 @@ import {
   router,
 } from "@/server/trpc/trpc";
 import { db } from "@/server/db";
-import { posts, anonymousLikes } from "@/server/db/schema";
+import { posts, anonymousLikes, mythSuggestions, newsletterSubscriptions } from "@/server/db/schema";
 import { z } from "zod";
 import { eq, and, sql } from "drizzle-orm";
 
@@ -72,6 +72,49 @@ export const postRouter = router({
           .where(eq(posts.id, postId));
 
         return { liked: true };
+      }
+    }),
+
+  // Soumettre une suggestion de mythe
+  proposeMythSuggestion: publicProcedure
+    .input(z.object({
+      myth: z.string().min(10).max(300),
+      category: z.enum(['science', 'energie', 'solutions', 'economie']),
+      source: z.string().max(500).optional(),
+      email: z.string().email().optional(),
+    }))
+    .mutation(async ({ input }) => {
+      const { myth, category, source, email } = input;
+
+      await db.insert(mythSuggestions).values({
+        myth,
+        category,
+        source: source || null,
+        email: email || null,
+        status: 'pending',
+      });
+
+      return { success: true };
+    }),
+
+  // S'inscrire à la newsletter
+  subscribeNewsletter: publicProcedure
+    .input(z.object({
+      email: z.string().email(),
+      source: z.string().optional(),
+    }))
+    .mutation(async ({ input }) => {
+      const { email, source } = input;
+
+      try {
+        await db.insert(newsletterSubscriptions).values({
+          email,
+          source: source || 'debunk',
+        });
+        return { success: true, alreadySubscribed: false };
+      } catch {
+        // L'email existe déjà (contrainte unique)
+        return { success: true, alreadySubscribed: true };
       }
     }),
 });

@@ -43,6 +43,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CommentSection } from "@/components/comment-section";
 import { cn } from "@/lib/utils";
+import { MythStatsCharts } from "@/components/debunk/myth-stats-charts";
+import { SourcesMethodology } from "@/components/debunk/sources-methodology";
+import { ProposeMythForm } from "@/components/debunk/propose-myth-form";
+import { NewsletterCTA } from "@/components/debunk/newsletter-cta";
 
 // Types
 interface SourceItem {
@@ -1448,6 +1452,47 @@ export function DebunkContent() {
           posts={postsQuery.data}
           onClose={() => setShowQuiz(false)}
         />
+      )}
+
+      {/* Sections Phase M4 */}
+      {postsQuery.data && postsQuery.data.length > 0 && (
+        <main className="container mx-auto px-4 space-y-12 pb-12">
+          {/* Statistiques */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <MythStatsCharts
+              posts={postsQuery.data}
+              readCount={readMyths.size}
+              totalLearned={typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('eco-debunk-learned') || '[]').length : 0}
+            />
+          </motion.section>
+
+          {/* Proposer un mythe + Newsletter */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="grid md:grid-cols-2 gap-6"
+          >
+            <ProposeMythForm />
+            <NewsletterCTA />
+          </motion.section>
+
+          {/* Sources & Méthodologie */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <SourcesMethodology />
+          </motion.section>
+        </main>
       )}
     </div>
   );
