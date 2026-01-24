@@ -185,7 +185,61 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 
 ---
 
+---
+
+## Page Articles - Refonte Complète 🎯
+
+### Phase A1 - Quick Wins & Fixes (~2-3h)
+- [ ] Fixer images avec next/image + placeholder blur
+- [ ] Fallback images gradient si erreur de chargement
+- [ ] Animations staggerées cards (Framer Motion)
+- [ ] Hover effects améliorés (glow + elevation)
+- [ ] Progress bar de lecture dans article détail
+
+### Phase A2 - Structure & Filtres (~4-5h)
+- [ ] Migration BDD : ajouter champ `category` aux articles
+- [ ] Migration BDD : ajouter champ `featured` (boolean) pour À la une
+- [ ] Migration BDD : ajouter champ `views` pour compteur lectures
+- [ ] Système de filtres par catégorie (Climat, Océans, Énergie, Biodiversité, Solutions)
+- [ ] Section "À la une" avec article featured plus grand
+- [ ] Pagination ou infinite scroll
+- [ ] Sidebar "Articles populaires" (triés par vues)
+- [ ] Breadcrumb navigation dans les articles
+
+### Phase A3 - Composants Enrichis (~3-4h)
+- [ ] `<CategoryBadge />` avec couleurs dynamiques par catégorie
+- [ ] `<StatHighlight />` pour les chiffres clés (ex: +1.5°C)
+- [ ] `<SourceCitation />` pour les références scientifiques
+- [ ] `<TableOfContents />` sticky pour les longs articles
+- [ ] `<RelatedArticles />` carousel en fin d'article
+- [ ] `<ShareButtons />` améliorés (Twitter, LinkedIn, copie lien)
+
+### Phase A4 - Engagement & Polish (~3-4h)
+- [ ] Système de réactions (😱 Alarmant / 💡 Éclairant / 💪 Motivant)
+- [ ] Compteur de lectures visible sur les cards
+- [ ] Bookmarks/favoris (localStorage)
+- [ ] Newsletter CTA en fin d'article (réutiliser composant debunk)
+- [ ] Grain/noise background subtle
+- [ ] Typography distinctive (Playfair Display pour titres)
+- [ ] SEO : Schema Article structured data
+- [ ] OpenGraph images dynamiques par article
+
+### Catégories d'Articles Prévues
+| Catégorie | Icône | Couleur |
+|-----------|-------|---------|
+| 🌡️ Climat | thermomètre | blue |
+| 🌊 Océans | vague | cyan |
+| 🔥 Énergie | éclair | yellow |
+| 🌳 Biodiversité | feuille | green |
+| 💡 Solutions | ampoule | emerald |
+| 🔬 Science | microscope | purple |
+
+---
+
 ## Idées futures
 - Fiches sur les personnalités climatosceptiques connues
 - Système de gamification (badges pour utilisateurs actifs)
 - API publique pour partager les données de debunk
+- Commentaires modérés avec système de vote
+- Quiz interactif en fin d'article
+- Widget embeddable pour autres sites
