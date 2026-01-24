@@ -20,7 +20,21 @@ import {
   Filter,
   X,
   ChevronDown,
-  Sparkles
+  Sparkles,
+  Link2,
+  Share2,
+  Twitter,
+  Facebook,
+  Copy,
+  Check,
+  ArrowRight,
+  Brain,
+  GitCompare,
+  CheckCircle2,
+  Circle,
+  HelpCircle,
+  RotateCcw,
+  Award
 } from "lucide-react";
 import { Card, CardFooter, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -87,6 +101,16 @@ const parseSources = (sources: string | null | undefined): SourceItem[] => {
   if (!sources) return [];
   try {
     return JSON.parse(sources);
+  } catch {
+    return [];
+  }
+};
+
+// Parse les IDs de mythes connexes
+const parseRelatedMyths = (relatedMyths: string | null | undefined): number[] => {
+  if (!relatedMyths) return [];
+  try {
+    return JSON.parse(relatedMyths);
   } catch {
     return [];
   }
@@ -301,8 +325,8 @@ function Filters({
         <ChevronDown className={cn("h-4 w-4 transition-transform", showFilters && "rotate-180")} />
       </Button>
 
-      <AnimatePresence>
-        {(showFilters || typeof window !== 'undefined' && window.innerWidth >= 768) && (
+      <AnimatePresence initial={false}>
+        {showFilters && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
@@ -393,7 +417,14 @@ function MythCard({
   isFavorite,
   onRead,
   onToggleFavorite,
-  index
+  index,
+  allPosts,
+  onOpenMyth,
+  forceOpen,
+  onForceOpenHandled,
+  compareMode,
+  isSelectedForCompare,
+  onToggleCompare
 }: {
   post: Post;
   search: string;
@@ -402,13 +433,35 @@ function MythCard({
   onRead: () => void;
   onToggleFavorite: () => void;
   index: number;
+  allPosts: Post[];
+  onOpenMyth: (id: number) => void;
+  forceOpen?: boolean;
+  onForceOpenHandled?: () => void;
+  compareMode?: boolean;
+  isSelectedForCompare?: boolean;
+  onToggleCompare?: () => void;
 }) {
   const [isLiked, setIsLiked] = useState(post.isLiked ?? false);
   const [likeCount, setLikeCount] = useState(post.likes);
   const [isLiking, setIsLiking] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  // Ouvrir automatiquement si forceOpen est true
+  useEffect(() => {
+    if (forceOpen && !isOpen) {
+      setIsOpen(true);
+      onRead();
+      onForceOpenHandled?.();
+    }
+  }, [forceOpen, isOpen, onRead, onForceOpenHandled]);
+  const [hasLearned, setHasLearned] = useState(false);
+  const [copied, setCopied] = useState(false);
+
   const toggleLikeMutation = trpc.post.toggleLike.useMutation();
+
+  // Mythes connexes
+  const relatedMythIds = parseRelatedMyths(post.relatedMyths);
+  const relatedMyths = allPosts.filter(p => relatedMythIds.includes(p.id));
 
   const category = getCategoryForPost(post);
   const difficulty = getDifficultyForPost(post);
@@ -453,20 +506,95 @@ function MythCard({
     }
   };
 
+  // Partage social
+  const shareText = `${post.mythFr} ? C'est FAUX ! Découvrez la réalité scientifique sur Eco Warrior.`;
+  const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/debunk` : '';
+
+  const handleShare = (platform: 'twitter' | 'facebook' | 'copy') => {
+    const encodedText = encodeURIComponent(shareText);
+    const encodedUrl = encodeURIComponent(shareUrl);
+
+    switch (platform) {
+      case 'twitter':
+        window.open(`https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`, '_blank');
+        break;
+      case 'facebook':
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`, '_blank');
+        break;
+      case 'copy':
+        navigator.clipboard.writeText(`${shareText}\n\n${shareUrl}`);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+        break;
+    }
+  };
+
+  // Bouton "J'ai appris quelque chose" - analytics
+  const handleLearned = () => {
+    setHasLearned(true);
+    // Track l'événement (peut être étendu avec analytics)
+    if (typeof window !== 'undefined') {
+      const learnedMyths = JSON.parse(localStorage.getItem('eco-debunk-learned') || '[]');
+      if (!learnedMyths.includes(post.id)) {
+        learnedMyths.push(post.id);
+        localStorage.setItem('eco-debunk-learned', JSON.stringify(learnedMyths));
+      }
+    }
+  };
+
+  // Ouvrir un mythe connexe
+  const handleOpenRelated = (mythId: number) => {
+    setIsOpen(false);
+    setTimeout(() => onOpenMyth(mythId), 100);
+  };
+
+  // En mode comparaison, cliquer sur la carte sélectionne/désélectionne
+  const handleCardClick = () => {
+    if (compareMode) {
+      onToggleCompare?.();
+    }
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild disabled={compareMode}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.05, duration: 0.3 }}
           whileHover={{ y: -4, transition: { duration: 0.2 } }}
+          onClick={compareMode ? handleCardClick : undefined}
         >
           <Card className={cn(
-            "flex flex-col cursor-pointer h-full transition-all border-2",
-            "hover:border-green-500 hover:shadow-lg",
-            isRead && "bg-muted/30"
+            "flex flex-col h-full transition-all border-2 relative",
+            compareMode
+              ? isSelectedForCompare
+                ? "border-blue-500 bg-blue-50/50 dark:bg-blue-950/30"
+                : "hover:border-blue-300 cursor-pointer"
+              : "hover:border-green-500 hover:shadow-lg cursor-pointer",
+            isRead && !compareMode && "bg-muted/30"
           )}>
+            {/* Bouton de sélection en mode comparaison */}
+            {compareMode && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onToggleCompare?.();
+                }}
+                className={cn(
+                  "absolute top-3 right-3 z-10 w-7 h-7 rounded-full flex items-center justify-center transition-all",
+                  isSelectedForCompare
+                    ? "bg-blue-600 text-white"
+                    : "bg-white dark:bg-gray-800 border-2 border-gray-300 hover:border-blue-500"
+                )}
+              >
+                {isSelectedForCompare ? (
+                  <CheckCircle2 className="h-4 w-4" />
+                ) : (
+                  <Circle className="h-4 w-4 text-gray-400" />
+                )}
+              </button>
+            )}
             <CardHeader className="pb-2">
               {/* Badges */}
               <div className="flex flex-wrap gap-2 mb-3">
@@ -534,82 +662,108 @@ function MythCard({
         </motion.div>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <div className="flex flex-wrap gap-2 mb-2">
-            <Badge variant="secondary" className={cn("text-white", categoryConfig.color)}>
-              <categoryConfig.icon className="h-3 w-3 mr-1" />
-              {categoryConfig.label}
-            </Badge>
-            <Badge variant="outline" className={difficultyConfig.color}>
-              <difficultyConfig.icon className="h-3 w-3 mr-1" />
-              {difficultyConfig.label}
-            </Badge>
-          </div>
-          <DialogTitle className="text-red-600 flex items-center gap-2">
-            <span>💭</span> Mythe
-          </DialogTitle>
-          <p className="text-lg font-medium mt-2">{post.mythFr}</p>
-        </DialogHeader>
+      <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto p-0">
+        {/* Header avec gradient */}
+        <div className="bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-950/30 dark:to-orange-950/30 p-6 border-b">
+          <DialogHeader>
+            <div className="flex flex-wrap gap-2 mb-3">
+              <Badge variant="secondary" className={cn("text-white", categoryConfig.color)}>
+                <categoryConfig.icon className="h-3 w-3 mr-1" />
+                {categoryConfig.label}
+              </Badge>
+              <Badge variant="outline" className={difficultyConfig.color}>
+                <difficultyConfig.icon className="h-3 w-3 mr-1" />
+                {difficultyConfig.label}
+              </Badge>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="shrink-0 w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/50 flex items-center justify-center">
+                <span className="text-xl">💭</span>
+              </div>
+              <div>
+                <DialogTitle className="text-red-600 dark:text-red-400 text-sm font-medium uppercase tracking-wide">
+                  Le Mythe
+                </DialogTitle>
+                <p className="text-lg font-semibold mt-1 text-foreground">{post.mythFr}</p>
+              </div>
+            </div>
+          </DialogHeader>
+        </div>
 
-        <div className="mt-4 space-y-4">
-          <div>
-            <h4 className="text-green-600 font-semibold text-lg flex items-center gap-2">
-              <span>✅</span> Réalité
-            </h4>
-            <p className="text-gray-700 dark:text-gray-300 mt-2 leading-relaxed whitespace-pre-line">
-              {post.realityFr}
-            </p>
+        {/* Corps de la modal */}
+        <div className="p-6 space-y-6">
+          {/* Section Réalité */}
+          <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 p-5 rounded-xl border border-green-200 dark:border-green-800">
+            <div className="flex items-start gap-3">
+              <div className="shrink-0 w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/50 flex items-center justify-center">
+                <span className="text-xl">✅</span>
+              </div>
+              <div className="flex-1">
+                <h4 className="text-green-700 dark:text-green-400 text-sm font-medium uppercase tracking-wide mb-2">
+                  La Réalité Scientifique
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
+                  {post.realityFr}
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* Key Facts - Points clés */}
+          {/* Key Facts - Points clés avec numéros */}
           {parseKeyFacts(post.keyFacts).length > 0 && (
-            <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 p-4 rounded-lg">
-              <h5 className="font-semibold text-green-700 dark:text-green-400 mb-2 flex items-center gap-2">
+            <div className="bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-950/30 dark:to-indigo-950/30 p-5 rounded-xl border border-purple-200 dark:border-purple-800">
+              <h5 className="font-semibold text-purple-700 dark:text-purple-400 mb-4 flex items-center gap-2 text-sm uppercase tracking-wide">
                 <Sparkles className="h-4 w-4" />
-                Points clés
+                Points clés à retenir
               </h5>
-              <ul className="space-y-1.5">
+              <div className="space-y-3">
                 {parseKeyFacts(post.keyFacts).map((fact, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
-                    <span className="text-green-600 mt-0.5">•</span>
-                    {fact}
-                  </li>
+                  <div key={i} className="flex items-start gap-3">
+                    <div className="shrink-0 w-6 h-6 rounded-full bg-purple-200 dark:bg-purple-800 flex items-center justify-center">
+                      <span className="text-xs font-bold text-purple-700 dark:text-purple-300">{i + 1}</span>
+                    </div>
+                    <p className="text-sm text-gray-700 dark:text-gray-300 flex-1">{fact}</p>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           )}
 
-          {/* Sources multiples */}
+          {/* Sources multiples avec icônes */}
           {parseSources(post.sources).length > 0 ? (
-            <div className="text-sm bg-muted p-4 rounded-lg">
-              <strong className="text-foreground">Sources :</strong>
-              <ul className="mt-2 space-y-1">
+            <div className="bg-gradient-to-br from-slate-50 to-gray-50 dark:from-slate-950/30 dark:to-gray-950/30 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+              <h5 className="font-semibold text-slate-700 dark:text-slate-400 mb-3 text-sm uppercase tracking-wide flex items-center gap-2">
+                <BookOpen className="h-4 w-4" />
+                Sources scientifiques
+              </h5>
+              <div className="grid gap-2">
                 {parseSources(post.sources).map((src, i) => (
-                  <li key={i} className="text-muted-foreground">
+                  <div key={i} className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-slate-400" />
                     {src.url ? (
                       <a
                         href={src.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:text-green-600 hover:underline transition-colors"
+                        className="text-sm text-slate-600 dark:text-slate-400 hover:text-green-600 dark:hover:text-green-400 hover:underline transition-colors"
                       >
                         {src.name} ↗
                       </a>
                     ) : (
-                      src.name
+                      <span className="text-sm text-slate-600 dark:text-slate-400">{src.name}</span>
                     )}
-                  </li>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           ) : post.source && (
-            <div className="text-sm text-muted-foreground bg-muted p-4 rounded-lg">
+            <div className="text-sm text-muted-foreground bg-muted p-4 rounded-lg flex items-center gap-2">
+              <BookOpen className="h-4 w-4" />
               <strong>Source:</strong> {post.source}
             </div>
           )}
-        </div>
 
+          {/* Actions principales */}
         <div className="mt-6 flex items-center gap-3 flex-wrap">
           <button
             onClick={handleLike}
@@ -639,9 +793,369 @@ function MythCard({
             )}
             <span className="font-medium">{isFavorite ? 'Favori' : 'Ajouter aux favoris'}</span>
           </button>
+
+          {/* Bouton J'ai appris quelque chose */}
+          <button
+            onClick={handleLearned}
+            disabled={hasLearned}
+            className={cn(
+              "flex items-center gap-2 transition-all rounded-md px-3 py-2 border",
+              hasLearned
+                ? "bg-purple-100 dark:bg-purple-900/30 text-purple-600 border-purple-600"
+                : "hover:bg-purple-100 dark:hover:bg-purple-900/30 text-muted-foreground border-muted"
+            )}
+          >
+            <Brain className={cn("h-5 w-5", hasLearned && "fill-current")} />
+            <span className="font-medium">
+              {hasLearned ? 'Merci !' : "J'ai appris quelque chose"}
+            </span>
+          </button>
         </div>
 
+        {/* Partage social */}
+        <div className="mt-4 pt-4 border-t">
+          <p className="text-sm font-medium text-muted-foreground mb-2 flex items-center gap-2">
+            <Share2 className="h-4 w-4" />
+            Partager ce debunk
+          </p>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handleShare('twitter')}
+              className="flex items-center gap-2 hover:bg-sky-50 hover:border-sky-500 hover:text-sky-600 dark:hover:bg-sky-900/30"
+            >
+              <Twitter className="h-4 w-4" />
+              Twitter
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handleShare('facebook')}
+              className="flex items-center gap-2 hover:bg-blue-50 hover:border-blue-500 hover:text-blue-600 dark:hover:bg-blue-900/30"
+            >
+              <Facebook className="h-4 w-4" />
+              Facebook
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => handleShare('copy')}
+              className={cn(
+                "flex items-center gap-2",
+                copied && "bg-green-50 border-green-500 text-green-600"
+              )}
+            >
+              {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+              {copied ? 'Copié !' : 'Copier'}
+            </Button>
+          </div>
+        </div>
+
+        {/* Mythes connexes */}
+        {relatedMyths.length > 0 && (
+          <div className="mt-4 pt-4 border-t">
+            <p className="text-sm font-medium text-muted-foreground mb-3 flex items-center gap-2">
+              <Link2 className="h-4 w-4" />
+              Mythes connexes à explorer
+            </p>
+            <div className="grid gap-2">
+              {relatedMyths.slice(0, 3).map((related) => {
+                const relatedCategory = getCategoryForPost(related);
+                const relatedCategoryConfig = CATEGORIES.find(c => c.id === relatedCategory)!;
+                return (
+                  <button
+                    key={related.id}
+                    onClick={() => handleOpenRelated(related.id)}
+                    className="flex items-center justify-between p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors text-left group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Badge variant="secondary" className={cn("text-white text-xs", relatedCategoryConfig.color)}>
+                        <relatedCategoryConfig.icon className="h-3 w-3" />
+                      </Badge>
+                      <span className="text-sm font-medium line-clamp-1">{related.mythFr}</span>
+                    </div>
+                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         <CommentSection />
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+// Composant de comparaison
+function CompareModal({
+  selectedMyths,
+  onClose
+}: {
+  selectedMyths: Post[];
+  onClose: () => void;
+}) {
+  return (
+    <Dialog open={selectedMyths.length >= 2} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="sm:max-w-5xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <GitCompare className="h-5 w-5 text-blue-600" />
+            Comparaison de {selectedMyths.length} mythes
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className={cn(
+          "grid gap-4 mt-4",
+          selectedMyths.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
+        )}>
+          {selectedMyths.map((myth) => {
+            const cat = getCategoryForPost(myth);
+            const catConfig = CATEGORIES.find(c => c.id === cat)!;
+            const diff = getDifficultyForPost(myth);
+            const diffConfig = DIFFICULTIES.find(d => d.id === diff)!;
+
+            return (
+              <div key={myth.id} className="border rounded-xl overflow-hidden">
+                {/* Header */}
+                <div className="bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-950/30 dark:to-orange-950/30 p-4 border-b">
+                  <div className="flex gap-2 mb-2">
+                    <Badge variant="secondary" className={cn("text-white text-xs", catConfig.color)}>
+                      <catConfig.icon className="h-3 w-3 mr-1" />
+                      {catConfig.label}
+                    </Badge>
+                    <Badge variant="outline" className={cn("text-xs", diffConfig.color)}>
+                      {diffConfig.label}
+                    </Badge>
+                  </div>
+                  <p className="font-semibold text-sm">{myth.mythFr}</p>
+                </div>
+
+                {/* Réalité */}
+                <div className="p-4 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30">
+                  <h5 className="text-xs font-medium text-green-700 dark:text-green-400 uppercase tracking-wide mb-2">
+                    Réalité
+                  </h5>
+                  <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-6">
+                    {myth.realityFr}
+                  </p>
+                </div>
+
+                {/* Points clés */}
+                {parseKeyFacts(myth.keyFacts).length > 0 && (
+                  <div className="p-4 border-t">
+                    <h5 className="text-xs font-medium text-purple-700 dark:text-purple-400 uppercase tracking-wide mb-2">
+                      Points clés
+                    </h5>
+                    <ul className="space-y-1">
+                      {parseKeyFacts(myth.keyFacts).slice(0, 2).map((fact, i) => (
+                        <li key={i} className="text-xs text-gray-600 dark:text-gray-400 flex items-start gap-1">
+                          <span className="text-purple-500">•</span>
+                          <span className="line-clamp-2">{fact}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-4 pt-4 border-t flex justify-end">
+          <Button variant="outline" onClick={onClose}>
+            Fermer la comparaison
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+// Composant Quiz Mode
+function QuizMode({
+  posts,
+  onClose
+}: {
+  posts: Post[];
+  onClose: () => void;
+}) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [answered, setAnswered] = useState<boolean | null>(null);
+  const [showResult, setShowResult] = useState(false);
+  const [quizMyths] = useState(() => {
+    // Sélectionner 10 mythes aléatoires
+    const shuffled = [...posts].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, Math.min(10, posts.length));
+  });
+
+  const currentMyth = quizMyths[currentIndex];
+  const totalQuestions = quizMyths.length;
+
+  const handleAnswer = (answer: boolean) => {
+    // La bonne réponse est toujours FAUX (c'est un mythe donc c'est faux)
+    const isCorrect = answer === false;
+    if (isCorrect) {
+      setScore(s => s + 1);
+    }
+    setAnswered(isCorrect);
+  };
+
+  const nextQuestion = () => {
+    if (currentIndex + 1 >= totalQuestions) {
+      setShowResult(true);
+    } else {
+      setCurrentIndex(i => i + 1);
+      setAnswered(null);
+    }
+  };
+
+  const restartQuiz = () => {
+    setCurrentIndex(0);
+    setScore(0);
+    setAnswered(null);
+    setShowResult(false);
+  };
+
+  if (!currentMyth) {
+    return null;
+  }
+
+  const category = getCategoryForPost(currentMyth);
+  const categoryConfig = CATEGORIES.find(c => c.id === category)!;
+
+  return (
+    <Dialog open onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="sm:max-w-xl">
+        {showResult ? (
+          // Écran de résultat
+          <div className="text-center py-6">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 mx-auto mb-4 flex items-center justify-center">
+              <Award className="h-10 w-10 text-green-600" />
+            </div>
+            <DialogTitle className="text-2xl mb-2">Quiz terminé !</DialogTitle>
+            <p className="text-lg text-muted-foreground mb-4">
+              Vous avez obtenu <span className="font-bold text-green-600">{score}</span> sur <span className="font-bold">{totalQuestions}</span>
+            </p>
+            <div className="w-full bg-muted rounded-full h-4 mb-6">
+              <div
+                className="bg-gradient-to-r from-green-500 to-emerald-500 h-4 rounded-full transition-all"
+                style={{ width: `${(score / totalQuestions) * 100}%` }}
+              />
+            </div>
+            <p className="text-sm text-muted-foreground mb-6">
+              {score === totalQuestions ? "🎉 Parfait ! Vous êtes un expert !" :
+               score >= totalQuestions * 0.7 ? "👏 Excellent ! Vous maîtrisez bien le sujet." :
+               score >= totalQuestions * 0.5 ? "👍 Pas mal ! Continuez à apprendre." :
+               "📚 Continuez à explorer nos mythes pour progresser !"}
+            </p>
+            <div className="flex gap-3 justify-center">
+              <Button variant="outline" onClick={onClose}>
+                Quitter
+              </Button>
+              <Button onClick={restartQuiz} className="bg-green-600 hover:bg-green-700">
+                <RotateCcw className="h-4 w-4 mr-2" />
+                Rejouer
+              </Button>
+            </div>
+          </div>
+        ) : (
+          // Question
+          <>
+            <DialogHeader>
+              <div className="flex items-center justify-between mb-2">
+                <Badge variant="secondary" className={cn("text-white", categoryConfig.color)}>
+                  <categoryConfig.icon className="h-3 w-3 mr-1" />
+                  {categoryConfig.label}
+                </Badge>
+                <span className="text-sm text-muted-foreground">
+                  Question {currentIndex + 1}/{totalQuestions}
+                </span>
+              </div>
+              <div className="w-full bg-muted rounded-full h-2 mb-4">
+                <div
+                  className="bg-green-500 h-2 rounded-full transition-all"
+                  style={{ width: `${((currentIndex + 1) / totalQuestions) * 100}%` }}
+                />
+              </div>
+              <DialogTitle className="flex items-center gap-2 text-lg">
+                <HelpCircle className="h-5 w-5 text-blue-600" />
+                Cette affirmation est-elle vraie ou fausse ?
+              </DialogTitle>
+            </DialogHeader>
+
+            <div className="my-6 p-4 bg-gradient-to-br from-slate-50 to-gray-50 dark:from-slate-950/30 dark:to-gray-950/30 rounded-xl border">
+              <p className="text-lg font-medium text-center">
+                &quot;{currentMyth.mythFr}&quot;
+              </p>
+            </div>
+
+            {answered === null ? (
+              <div className="flex gap-4 justify-center">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="flex-1 h-14 text-lg hover:bg-green-50 hover:border-green-500 hover:text-green-700"
+                  onClick={() => handleAnswer(true)}
+                >
+                  <Check className="h-5 w-5 mr-2" />
+                  Vrai
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="flex-1 h-14 text-lg hover:bg-red-50 hover:border-red-500 hover:text-red-700"
+                  onClick={() => handleAnswer(false)}
+                >
+                  <X className="h-5 w-5 mr-2" />
+                  Faux
+                </Button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div className={cn(
+                  "p-4 rounded-xl border-2",
+                  answered
+                    ? "bg-green-50 border-green-500 dark:bg-green-950/30"
+                    : "bg-red-50 border-red-500 dark:bg-red-950/30"
+                )}>
+                  <div className="flex items-center gap-2 mb-2">
+                    {answered ? (
+                      <>
+                        <CheckCircle2 className="h-5 w-5 text-green-600" />
+                        <span className="font-semibold text-green-700 dark:text-green-400">Correct !</span>
+                      </>
+                    ) : (
+                      <>
+                        <X className="h-5 w-5 text-red-600" />
+                        <span className="font-semibold text-red-700 dark:text-red-400">Incorrect</span>
+                      </>
+                    )}
+                  </div>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
+                    C&apos;est bien un <strong>mythe</strong> ! La réalité : {currentMyth.realityFr.slice(0, 150)}...
+                  </p>
+                </div>
+
+                <Button onClick={nextQuestion} className="w-full bg-green-600 hover:bg-green-700">
+                  {currentIndex + 1 >= totalQuestions ? 'Voir le résultat' : 'Question suivante'}
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Button>
+              </div>
+            )}
+
+            <div className="mt-4 pt-4 border-t flex justify-between items-center text-sm text-muted-foreground">
+              <span>Score actuel : {score}/{currentIndex + (answered !== null ? 1 : 0)}</span>
+              <Button variant="ghost" size="sm" onClick={onClose}>
+                Quitter le quiz
+              </Button>
+            </div>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );
@@ -655,7 +1169,49 @@ export function DebunkContent() {
   const [difficulty, setDifficulty] = useState<Difficulty>('all');
   const [showFilters, setShowFilters] = useState(false);
 
+  // Afficher les filtres par défaut sur desktop (après mount pour éviter erreur d'hydratation)
+  useEffect(() => {
+    if (window.innerWidth >= 768) {
+      setShowFilters(true);
+    }
+  }, []);
+
+  const [openMythId, setOpenMythId] = useState<number | null>(null);
+
+  // Mode comparaison
+  const [compareMode, setCompareMode] = useState(false);
+  const [selectedForCompare, setSelectedForCompare] = useState<number[]>([]);
+  const [showCompareModal, setShowCompareModal] = useState(false);
+
+  // Mode Quiz
+  const [showQuiz, setShowQuiz] = useState(false);
+
   const { readMyths, favorites, markAsRead, toggleFavorite } = useUserProgress();
+
+  // Fonction pour ouvrir un mythe par son ID (utilisé par les mythes connexes)
+  const handleOpenMyth = useCallback((mythId: number) => {
+    setOpenMythId(mythId);
+  }, []);
+
+  // Toggle sélection pour comparaison
+  const toggleCompareSelection = useCallback((mythId: number) => {
+    setSelectedForCompare(prev => {
+      if (prev.includes(mythId)) {
+        return prev.filter(id => id !== mythId);
+      }
+      if (prev.length >= 3) {
+        return prev; // Max 3 mythes
+      }
+      return [...prev, mythId];
+    });
+  }, []);
+
+  // Quitter le mode comparaison
+  const exitCompareMode = useCallback(() => {
+    setCompareMode(false);
+    setSelectedForCompare([]);
+    setShowCompareModal(false);
+  }, []);
 
   useEffect(() => {
     getOrCreateSession();
@@ -706,6 +1262,83 @@ export function DebunkContent() {
           totalSources={totalSources}
           readCount={readCount}
         />
+
+        {/* Boutons de mode */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.25 }}
+          className="flex flex-wrap gap-3 mb-6"
+        >
+          <Button
+            variant={compareMode ? "default" : "outline"}
+            onClick={() => {
+              if (compareMode) {
+                exitCompareMode();
+              } else {
+                setCompareMode(true);
+              }
+            }}
+            className={cn(
+              compareMode && "bg-blue-600 hover:bg-blue-700"
+            )}
+          >
+            <GitCompare className="h-4 w-4 mr-2" />
+            {compareMode ? 'Annuler comparaison' : 'Comparer des mythes'}
+          </Button>
+
+          <Button
+            variant="outline"
+            onClick={() => setShowQuiz(true)}
+            className="hover:bg-purple-50 hover:border-purple-500 hover:text-purple-700 dark:hover:bg-purple-900/30"
+          >
+            <HelpCircle className="h-4 w-4 mr-2" />
+            Quiz Vrai ou Faux
+          </Button>
+        </motion.div>
+
+        {/* Barre d'action mode comparaison */}
+        <AnimatePresence>
+          {compareMode && (
+            <motion.div
+              initial={{ opacity: 0, y: -10, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: 'auto' }}
+              exit={{ opacity: 0, y: -10, height: 0 }}
+              className="mb-6 overflow-hidden"
+            >
+              <div className="bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-xl p-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <GitCompare className="h-5 w-5 text-blue-600" />
+                  <span className="font-medium">
+                    {selectedForCompare.length === 0
+                      ? 'Sélectionnez 2 à 3 mythes à comparer'
+                      : `${selectedForCompare.length}/3 mythe${selectedForCompare.length > 1 ? 's' : ''} sélectionné${selectedForCompare.length > 1 ? 's' : ''}`
+                    }
+                  </span>
+                </div>
+                <div className="flex gap-2">
+                  {selectedForCompare.length > 0 && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setSelectedForCompare([])}
+                    >
+                      Tout désélectionner
+                    </Button>
+                  )}
+                  <Button
+                    size="sm"
+                    disabled={selectedForCompare.length < 2}
+                    onClick={() => setShowCompareModal(true)}
+                    className="bg-blue-600 hover:bg-blue-700"
+                  >
+                    Comparer
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Search Bar */}
         <SearchBar value={search} onChange={setSearch} />
@@ -788,11 +1421,34 @@ export function DebunkContent() {
                 onRead={() => markAsRead(post.id)}
                 onToggleFavorite={() => toggleFavorite(post.id)}
                 index={index}
+                allPosts={postsQuery.data || []}
+                onOpenMyth={handleOpenMyth}
+                forceOpen={openMythId === post.id}
+                onForceOpenHandled={() => setOpenMythId(null)}
+                compareMode={compareMode}
+                isSelectedForCompare={selectedForCompare.includes(post.id)}
+                onToggleCompare={() => toggleCompareSelection(post.id)}
               />
             ))}
           </AnimatePresence>
         </div>
       </main>
+
+      {/* Modal de comparaison */}
+      {showCompareModal && postsQuery.data && (
+        <CompareModal
+          selectedMyths={postsQuery.data.filter(p => selectedForCompare.includes(p.id))}
+          onClose={exitCompareMode}
+        />
+      )}
+
+      {/* Quiz Mode */}
+      {showQuiz && postsQuery.data && (
+        <QuizMode
+          posts={postsQuery.data}
+          onClose={() => setShowQuiz(false)}
+        />
+      )}
     </div>
   );
 }
