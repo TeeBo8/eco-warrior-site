@@ -51,7 +51,7 @@ export const posts = pgTable("posts", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
   slug: varchar("slug", { length: 255 }).unique(),
-  
+
   mythFr: text("myth_fr").notNull(),
   realityFr: text("reality_fr").notNull(),
   mythEn: text("myth_en").notNull(),
@@ -59,6 +59,20 @@ export const posts = pgTable("posts", {
   source: text("source"),
 
   likes: integer("likes").default(0).notNull(),
+
+  // 👇 NOUVEAUX CHAMPS PHASE M2 - Mythes & Réalités 👇
+  // Catégorie du mythe : 'science' | 'energie' | 'solutions' | 'economie'
+  category: varchar("category", { length: 50 }).default('solutions'),
+  // Niveau de difficulté : 'debutant' | 'intermediaire' | 'avance'
+  difficulty: varchar("difficulty", { length: 50 }).default('debutant'),
+  // Explication courte (2-3 lignes pour la preview card)
+  shortExplanation: text("short_explanation"),
+  // Points clés (JSON array de 3 bullet points max)
+  keyFacts: text("key_facts"), // Stocké en JSON: ["fact1", "fact2", "fact3"]
+  // Mythes connexes (JSON array des IDs)
+  relatedMyths: text("related_myths"), // Stocké en JSON: [1, 5, 12]
+  // Sources multiples (JSON array avec name + url)
+  sources: text("sources"), // Stocké en JSON: [{"name": "GIEC AR6", "url": "..."}, ...]
 });
 
 // 👇 NOUVELLE TABLE `likes` (remplace votes) 👇

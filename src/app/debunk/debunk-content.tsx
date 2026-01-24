@@ -31,6 +31,11 @@ import { CommentSection } from "@/components/comment-section";
 import { cn } from "@/lib/utils";
 
 // Types
+interface SourceItem {
+  name: string;
+  url?: string;
+}
+
 type Post = {
   id: number;
   mythFr: string;
@@ -40,6 +45,13 @@ type Post = {
   source?: string | null;
   likes: number;
   isLiked?: boolean;
+  // Nouveaux champs Phase M2
+  category?: string | null;
+  difficulty?: string | null;
+  shortExplanation?: string | null;
+  keyFacts?: string | null; // JSON stringifié
+  sources?: string | null; // JSON stringifié
+  relatedMyths?: string | null; // JSON stringifié
 };
 
 type Category = 'all' | 'science' | 'energie' | 'solutions' | 'economie';
@@ -61,8 +73,31 @@ const DIFFICULTIES: { id: Difficulty; label: string; icon: typeof BookOpen; colo
   { id: 'avance', label: 'Avancé', icon: Trophy, color: 'text-red-500' },
 ];
 
-// Mapping temporaire des catégories (sera remplacé par BDD en M2)
+// Helpers pour parser les données JSON de la BDD
+const parseKeyFacts = (keyFacts: string | null | undefined): string[] => {
+  if (!keyFacts) return [];
+  try {
+    return JSON.parse(keyFacts);
+  } catch {
+    return [];
+  }
+};
+
+const parseSources = (sources: string | null | undefined): SourceItem[] => {
+  if (!sources) return [];
+  try {
+    return JSON.parse(sources);
+  } catch {
+    return [];
+  }
+};
+
+// Récupère la catégorie depuis la BDD ou fallback intelligent
 const getCategoryForPost = (post: Post): Category => {
+  if (post.category && ['science', 'energie', 'solutions', 'economie'].includes(post.category)) {
+    return post.category as Category;
+  }
+  // Fallback si pas de catégorie en BDD
   const myth = post.mythFr.toLowerCase();
   if (myth.includes('soleil') || myth.includes('scientifique') || myth.includes('consensus') || myth.includes('température') || myth.includes('modèle') || myth.includes('climatolog')) return 'science';
   if (myth.includes('nucléaire') || myth.includes('énergie') || myth.includes('éolien') || myth.includes('solaire') || myth.includes('renouvelable')) return 'energie';
@@ -70,8 +105,12 @@ const getCategoryForPost = (post: Post): Category => {
   return 'solutions';
 };
 
-// Mapping temporaire des difficultés
+// Récupère la difficulté depuis la BDD ou fallback
 const getDifficultyForPost = (post: Post): Difficulty => {
+  if (post.difficulty && ['debutant', 'intermediaire', 'avance'].includes(post.difficulty)) {
+    return post.difficulty as Difficulty;
+  }
+  // Fallback si pas de difficulté en BDD
   const length = post.realityFr.length;
   if (length < 300) return 'debutant';
   if (length < 600) return 'intermediaire';
@@ -376,8 +415,8 @@ function MythCard({
   const categoryConfig = CATEGORIES.find(c => c.id === category)!;
   const difficultyConfig = DIFFICULTIES.find(d => d.id === difficulty)!;
 
-  // Preview du texte (2-3 lignes)
-  const preview = post.realityFr.slice(0, 120) + (post.realityFr.length > 120 ? '...' : '');
+  // Preview du texte - utilise shortExplanation si disponible, sinon fallback
+  const preview = post.shortExplanation || (post.realityFr.slice(0, 120) + (post.realityFr.length > 120 ? '...' : ''));
 
   const handleLike = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -523,7 +562,48 @@ function MythCard({
             </p>
           </div>
 
-          {post.source && (
+          {/* Key Facts - Points clés */}
+          {parseKeyFacts(post.keyFacts).length > 0 && (
+            <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 p-4 rounded-lg">
+              <h5 className="font-semibold text-green-700 dark:text-green-400 mb-2 flex items-center gap-2">
+                <Sparkles className="h-4 w-4" />
+                Points clés
+              </h5>
+              <ul className="space-y-1.5">
+                {parseKeyFacts(post.keyFacts).map((fact, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
+                    <span className="text-green-600 mt-0.5">•</span>
+                    {fact}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Sources multiples */}
+          {parseSources(post.sources).length > 0 ? (
+            <div className="text-sm bg-muted p-4 rounded-lg">
+              <strong className="text-foreground">Sources :</strong>
+              <ul className="mt-2 space-y-1">
+                {parseSources(post.sources).map((src, i) => (
+                  <li key={i} className="text-muted-foreground">
+                    {src.url ? (
+                      <a
+                        href={src.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-green-600 hover:underline transition-colors"
+                      >
+                        {src.name} ↗
+                      </a>
+                    ) : (
+                      src.name
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : post.source && (
             <div className="text-sm text-muted-foreground bg-muted p-4 rounded-lg">
               <strong>Source:</strong> {post.source}
             </div>
