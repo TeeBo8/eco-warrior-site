@@ -189,12 +189,12 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 
 ## Page Articles - Refonte Complète 🎯
 
-### Phase A1 - Quick Wins & Fixes (~2-3h)
-- [ ] Fixer images avec next/image + placeholder blur
-- [ ] Fallback images gradient si erreur de chargement
-- [ ] Animations staggerées cards (Framer Motion)
-- [ ] Hover effects améliorés (glow + elevation)
-- [ ] Progress bar de lecture dans article détail
+### Phase A1 - Quick Wins & Fixes (~2-3h) ✅
+- [x] Fixer images avec next/image + placeholder blur
+- [x] Fallback images gradient si erreur de chargement
+- [x] Animations staggerées cards (Framer Motion)
+- [x] Hover effects améliorés (glow + elevation)
+- [x] Progress bar de lecture dans article détail
 
 ### Phase A2 - Structure & Filtres (~4-5h)
 - [ ] Migration BDD : ajouter champ `category` aux articles
