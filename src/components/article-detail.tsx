@@ -5,10 +5,11 @@ import { useParams, useRouter } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { ArrowLeft, Calendar, User, Clock, Share2, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useUserTracking } from '@/hooks/useUserTracking';
+import { motion, useSpring } from 'framer-motion';
 
 // Fonction pour calculer le temps de lecture
 function calculateReadingTime(content: string): number {
@@ -34,13 +35,63 @@ function getRelativeTime(date: Date): string {
   });
 }
 
+// Hook personnalisé pour la progression de lecture
+function useReadingProgress() {
+  const [progress, setProgress] = useState(0);
+  const articleRef = useRef<HTMLElement>(null);
+
+  const calculateProgress = useCallback(() => {
+    if (!articleRef.current) return;
+
+    const article = articleRef.current;
+    const articleTop = article.offsetTop;
+    const articleHeight = article.scrollHeight;
+    const windowHeight = window.innerHeight;
+    const scrollY = window.scrollY;
+
+    // Calculate how much of the article has been scrolled past
+    const scrolledPast = scrollY - articleTop + windowHeight * 0.3;
+    const scrollableHeight = articleHeight - windowHeight * 0.3;
+
+    if (scrolledPast <= 0) {
+      setProgress(0);
+    } else if (scrolledPast >= scrollableHeight) {
+      setProgress(100);
+    } else {
+      setProgress((scrolledPast / scrollableHeight) * 100);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener('scroll', calculateProgress, { passive: true });
+    window.addEventListener('resize', calculateProgress);
+    calculateProgress();
+
+    return () => {
+      window.removeEventListener('scroll', calculateProgress);
+      window.removeEventListener('resize', calculateProgress);
+    };
+  }, [calculateProgress]);
+
+  return { progress, articleRef };
+}
+
 export default function ArticleDetail() {
   const params = useParams();
   const router = useRouter();
   const slug = typeof params.slug === 'string' ? params.slug : '';
   const { trackArticleRead, isLoaded } = useUserTracking();
+  const { progress, articleRef } = useReadingProgress();
+
+  // Smooth spring animation for progress bar
+  const smoothProgress = useSpring(progress, { stiffness: 100, damping: 30 });
 
   const articleQuery = trpc.article.getBySlug.useQuery({ slug }, { enabled: !!slug, retry: 1 });
+
+  // Update smooth progress when progress changes
+  useEffect(() => {
+    smoothProgress.set(progress);
+  }, [progress, smoothProgress]);
 
   // Tracker la lecture de l'article
   useEffect(() => {
@@ -111,8 +162,26 @@ export default function ArticleDetail() {
 
   return (
     <div className="w-full min-h-screen bg-background">
+      {/* Reading Progress Bar - Fixed at top */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 z-50 h-1 bg-muted/30"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      >
+        <motion.div
+          className="h-full bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500"
+          style={{ width: `${progress}%` }}
+        />
+        {/* Glow effect */}
+        <motion.div
+          className="absolute top-0 h-1 w-20 bg-gradient-to-r from-transparent via-white/50 to-transparent blur-sm"
+          style={{ left: `calc(${progress}% - 40px)` }}
+        />
+      </motion.div>
+
       {/* Back button - sticky */}
-      <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-md border-b border-border/50">
+      <div className="sticky top-1 z-40 bg-background/80 backdrop-blur-md border-b border-border/50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
           <Button
             variant="ghost"
@@ -123,6 +192,18 @@ export default function ArticleDetail() {
             <ArrowLeft className="w-4 h-4" />
             Retour
           </Button>
+
+          {/* Progress indicator in header */}
+          <div className="hidden sm:flex items-center gap-2 text-xs text-muted-foreground">
+            <div className="w-16 h-1.5 bg-muted rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-primary rounded-full"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <span>{Math.round(progress)}%</span>
+          </div>
+
           <Button
             variant="ghost"
             size="sm"
@@ -135,7 +216,7 @@ export default function ArticleDetail() {
         </div>
       </div>
 
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+      <article ref={articleRef} className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         {/* Header */}
         <header className="mb-8">
           {/* Category badge */}
@@ -176,6 +257,9 @@ export default function ArticleDetail() {
               fill
               className="object-cover"
               priority
+              placeholder="blur"
+              blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIGZpbGw9InVybCgjZ3JhZGllbnQpIi8+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkaWVudCIgeDE9IjAiIHkxPSIwIiB4Mj0iNDAiIHkyPSIzMCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIHN0b3AtY29sb3I9IiMxNjY1MzQiIHN0b3Atb3BhY2l0eT0iMC4zIi8+PHN0b3Agb2Zmc2V0PSIwLjUiIHN0b3AtY29sb3I9IiMxMGI5ODEiIHN0b3Atb3BhY2l0eT0iMC4yIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMTRiOGE2IiBzdG9wLW9wYWNpdHk9IjAuMyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg=="
+              sizes="(max-width: 896px) 100vw, 896px"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>
