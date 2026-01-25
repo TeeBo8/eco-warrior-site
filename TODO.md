@@ -196,15 +196,15 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Hover effects améliorés (glow + elevation)
 - [x] Progress bar de lecture dans article détail
 
-### Phase A2 - Structure & Filtres (~4-5h)
-- [ ] Migration BDD : ajouter champ `category` aux articles
-- [ ] Migration BDD : ajouter champ `featured` (boolean) pour À la une
-- [ ] Migration BDD : ajouter champ `views` pour compteur lectures
-- [ ] Système de filtres par catégorie (Climat, Océans, Énergie, Biodiversité, Solutions)
-- [ ] Section "À la une" avec article featured plus grand
-- [ ] Pagination ou infinite scroll
-- [ ] Sidebar "Articles populaires" (triés par vues)
-- [ ] Breadcrumb navigation dans les articles
+### Phase A2 - Structure & Filtres (~4-5h) ✅
+- [x] Migration BDD : ajouter champ `category` aux articles
+- [x] Migration BDD : ajouter champ `featured` (boolean) pour À la une
+- [x] Migration BDD : ajouter champ `views` pour compteur lectures
+- [x] Système de filtres par catégorie (Climat, Océans, Énergie, Biodiversité, Solutions)
+- [x] Section "À la une" avec article featured plus grand
+- [x] Pagination ou infinite scroll
+- [x] Sidebar "Articles populaires" (triés par vues)
+- [x] Breadcrumb navigation dans les articles
 
 ### Phase A3 - Composants Enrichis (~3-4h)
 - [ ] `<CategoryBadge />` avec couleurs dynamiques par catégorie
