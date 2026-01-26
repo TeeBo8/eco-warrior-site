@@ -206,13 +206,13 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Sidebar "Articles populaires" (triés par vues)
 - [x] Breadcrumb navigation dans les articles
 
-### Phase A3 - Composants Enrichis (~3-4h)
-- [ ] `<CategoryBadge />` avec couleurs dynamiques par catégorie
-- [ ] `<StatHighlight />` pour les chiffres clés (ex: +1.5°C)
-- [ ] `<SourceCitation />` pour les références scientifiques
-- [ ] `<TableOfContents />` sticky pour les longs articles
-- [ ] `<RelatedArticles />` carousel en fin d'article
-- [ ] `<ShareButtons />` améliorés (Twitter, LinkedIn, copie lien)
+### Phase A3 - Composants Enrichis (~3-4h) ✅
+- [x] `<CategoryBadge />` avec couleurs dynamiques par catégorie
+- [x] `<StatHighlight />` pour les chiffres clés (ex: +1.5°C)
+- [x] `<SourceCitation />` pour les références scientifiques
+- [x] `<TableOfContents />` sticky pour les longs articles
+- [x] `<RelatedArticles />` carousel en fin d'article
+- [x] `<ShareButtons />` améliorés (Twitter, LinkedIn, copie lien)
 
 ### Phase A4 - Engagement & Polish (~3-4h)
 - [ ] Système de réactions (😱 Alarmant / 💡 Éclairant / 💪 Motivant)
