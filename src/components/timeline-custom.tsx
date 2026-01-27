@@ -1,9 +1,37 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback, memo } from "react";
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
 import * as LucideIcons from "lucide-react";
 import { cn } from "@/lib/utils";
+
+// CSS pour animations performantes (will-change + CSS animations)
+const performanceStyles = `
+  .timeline-card {
+    will-change: transform, opacity;
+  }
+  .timeline-line {
+    will-change: height, opacity;
+  }
+  .timeline-dot {
+    will-change: transform;
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 0.5; }
+  }
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.2); opacity: 1; }
+  }
+  .animate-pulse-ring {
+    animation: pulse-ring 2s ease-in-out infinite;
+  }
+  .animate-pulse-dot {
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+`;
 
 // Types pour les événements de la timeline
 type Period = "discovery" | "warning" | "urgency";
@@ -79,7 +107,7 @@ const periodColors: Record<Period, {
   },
 };
 
-// Configuration des tailles par importance
+// Configuration des tailles par importance avec breakpoints responsive
 const importanceConfig: Record<Importance, {
   scale: string;
   iconSize: string;
@@ -87,22 +115,22 @@ const importanceConfig: Record<Importance, {
   titleSize: string;
 }> = {
   normal: {
-    scale: "md:w-[calc(50%-2rem)]",
-    iconSize: "w-12 h-12",
-    padding: "p-5",
-    titleSize: "text-lg",
+    scale: "w-full sm:w-[calc(100%-3rem)] md:w-[calc(50%-2rem)] lg:w-[calc(50%-3rem)]",
+    iconSize: "w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12",
+    padding: "p-4 sm:p-5",
+    titleSize: "text-base sm:text-lg",
   },
   high: {
-    scale: "md:w-[calc(55%-2rem)]",
-    iconSize: "w-14 h-14",
-    padding: "p-6",
-    titleSize: "text-xl",
+    scale: "w-full sm:w-[calc(100%-3rem)] md:w-[calc(55%-2rem)] lg:w-[calc(55%-3rem)]",
+    iconSize: "w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14",
+    padding: "p-4 sm:p-5 md:p-6",
+    titleSize: "text-lg sm:text-xl",
   },
   critical: {
-    scale: "md:w-[calc(60%-2rem)]",
-    iconSize: "w-16 h-16",
-    padding: "p-7",
-    titleSize: "text-2xl",
+    scale: "w-full sm:w-[calc(100%-3rem)] md:w-[calc(60%-2rem)] lg:w-[calc(60%-3rem)]",
+    iconSize: "w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16",
+    padding: "p-4 sm:p-6 md:p-7",
+    titleSize: "text-lg sm:text-xl md:text-2xl",
   },
 };
 
@@ -290,19 +318,19 @@ function TimelineModal({ event, isOpen, onClose }: TimelineModalProps) {
             onClick={onClose}
           />
 
-          {/* Modal */}
+          {/* Modal - responsive avec will-change */}
           <motion.div
-            className="fixed inset-4 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-2xl md:max-h-[85vh] bg-card border-2 rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col"
+            className="timeline-card fixed inset-2 sm:inset-4 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-2xl md:max-h-[85vh] bg-card border-2 rounded-xl sm:rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col"
             style={{ borderColor: colors.primary + "40" }}
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
           >
-            {/* Header */}
+            {/* Header - responsive padding */}
             <div
               className={cn(
-                "relative p-6 border-b",
+                "relative p-4 sm:p-6 border-b",
                 colors.bg,
                 colors.border
               )}
@@ -315,21 +343,21 @@ function TimelineModal({ event, isOpen, onClose }: TimelineModalProps) {
                 }}
               />
 
-              <div className="relative flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
+              <div className="relative flex items-start justify-between gap-2 sm:gap-4">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-2">
                     <div
                       className={cn(
-                        "w-10 h-10 rounded-full flex items-center justify-center",
+                        "w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0",
                         `bg-gradient-to-br ${colors.gradient}`,
                         "text-white shadow-lg"
                       )}
                     >
-                      <DynamicIcon name={event.icon} className="h-5 w-5" />
+                      <DynamicIcon name={event.icon} className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
                     <span
                       className={cn(
-                        "px-3 py-1 text-sm font-bold rounded-full",
+                        "px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm font-bold rounded-full",
                         colors.bg,
                         colors.text,
                         "border",
@@ -339,25 +367,25 @@ function TimelineModal({ event, isOpen, onClose }: TimelineModalProps) {
                       {event.year}
                     </span>
                   </div>
-                  <h2 className="text-xl md:text-2xl font-bold text-foreground">
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground line-clamp-2">
                     {event.titleFr}
                   </h2>
                 </div>
 
                 <button
                   onClick={onClose}
-                  className="p-2 rounded-full hover:bg-muted transition-colors"
+                  className="p-1.5 sm:p-2 rounded-full hover:bg-muted transition-colors flex-shrink-0"
                 >
-                  <LucideIcons.X className="h-5 w-5" />
+                  <LucideIcons.X className="h-4 w-4 sm:h-5 sm:w-5" />
                 </button>
               </div>
             </div>
 
-            {/* Content */}
-            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+            {/* Content - responsive padding */}
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-6">
               {/* Description détaillée */}
               <div>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                   {event.detailsFr || event.descriptionFr}
                 </p>
               </div>
@@ -421,14 +449,15 @@ function TimelineModal({ event, isOpen, onClose }: TimelineModalProps) {
               )}
             </div>
 
-            {/* Footer */}
-            <div className="p-4 border-t border-border bg-muted/20">
-              <div className="flex items-center justify-between text-xs text-muted-foreground">
-                <span>Période : {period === "discovery" ? "Découvertes" : period === "warning" ? "Alertes" : "Urgence"}</span>
+            {/* Footer - responsive */}
+            <div className="p-3 sm:p-4 border-t border-border bg-muted/20">
+              <div className="flex items-center justify-between text-[10px] sm:text-xs text-muted-foreground">
+                <span className="hidden sm:inline">Période : {period === "discovery" ? "Découvertes" : period === "warning" ? "Alertes" : "Urgence"}</span>
+                <span className="sm:hidden">{period === "discovery" ? "Découvertes" : period === "warning" ? "Alertes" : "Urgence"}</span>
                 <button
                   onClick={onClose}
                   className={cn(
-                    "px-4 py-2 rounded-lg font-medium transition-all",
+                    "px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-sm font-medium transition-all",
                     `bg-gradient-to-r ${colors.gradient}`,
                     "text-white hover:opacity-90"
                   )}
@@ -562,7 +591,7 @@ function TimelineSidebar({ events, activeYear, scrollProgress, onYearClick }: Ti
   );
 }
 
-// Composant pour un élément individuel de la timeline
+// Composant pour un élément individuel de la timeline avec lazy loading
 interface TimelineItemProps {
   event: TimelineEvent;
   index: number;
@@ -570,9 +599,18 @@ interface TimelineItemProps {
   onClick: (event: TimelineEvent) => void;
 }
 
-function TimelineItem({ event, index, isLeft, onClick }: TimelineItemProps) {
+const TimelineItem = memo(function TimelineItem({ event, index, isLeft, onClick }: TimelineItemProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  // Lazy loading: déclenche le rendu quand l'élément est à 200px du viewport
+  const isInView = useInView(ref, { once: true, margin: "200px 0px" });
+  const [shouldRender, setShouldRender] = useState(false);
+
+  // Lazy loading: ne rendre le contenu que quand visible
+  useEffect(() => {
+    if (isInView && !shouldRender) {
+      setShouldRender(true);
+    }
+  }, [isInView, shouldRender]);
 
   const period = event.period || "discovery";
   const importance = event.importance || "normal";
@@ -585,62 +623,62 @@ function TimelineItem({ event, index, isLeft, onClick }: TimelineItemProps) {
       id={`timeline-event-${event.id}`}
       data-year={event.year}
       className={cn(
-        "relative flex items-center w-full",
+        "timeline-card relative flex items-center w-full",
         isLeft ? "md:flex-row-reverse" : "md:flex-row",
-        "flex-col md:gap-8"
+        // Mobile: centré avec flex-col
+        "flex-col gap-4 sm:gap-6 md:gap-8"
       )}
       initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      animate={shouldRender ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{
         duration: 0.6,
-        delay: index * 0.15,
+        delay: Math.min(index * 0.1, 0.3), // Cap delay for better UX
         ease: [0.25, 0.46, 0.45, 0.94],
       }}
     >
-      {/* Carte de contenu */}
-      <motion.div
-        onClick={() => onClick(event)}
-        className={cn(
-          "w-full",
-          sizes.scale,
-          sizes.padding,
-          "rounded-xl",
-          "bg-card/80 backdrop-blur-sm",
-          "border-2",
-          colors.border,
-          "shadow-lg",
-          isLeft ? "md:text-right" : "md:text-left",
-          "text-left",
-          "group cursor-pointer"
-        )}
-        initial={{
-          opacity: 0,
-          x: isLeft ? 50 : -50,
-          scale: 0.95
-        }}
-        animate={isInView ? {
-          opacity: 1,
-          x: 0,
-          scale: 1
-        } : {
-          opacity: 0,
-          x: isLeft ? 50 : -50,
-          scale: 0.95
-        }}
-        transition={{
-          duration: 0.5,
-          delay: index * 0.15 + 0.2,
-          ease: [0.25, 0.46, 0.45, 0.94],
-        }}
-        whileHover={{
-          y: -8,
-          scale: 1.02,
-          transition: { duration: 0.2 }
-        }}
-        style={{
-          boxShadow: `0 4px 20px -5px ${colors.primary}20`,
-        }}
-      >
+      {/* Carte de contenu - rendu uniquement si visible (lazy loading) */}
+      {shouldRender ? (
+        <motion.div
+          onClick={() => onClick(event)}
+          className={cn(
+            sizes.scale,
+            sizes.padding,
+            "rounded-xl",
+            "bg-card/80 backdrop-blur-sm",
+            "border-2",
+            colors.border,
+            "shadow-lg",
+            // Mobile: texte aligné à gauche, Desktop: alternance
+            "text-left",
+            isLeft ? "md:text-right" : "md:text-left",
+            "group cursor-pointer",
+            // Mobile: centré avec marges auto
+            "mx-auto sm:mx-0"
+          )}
+          initial={{
+            opacity: 0,
+            x: isLeft ? 30 : -30,
+            scale: 0.95
+          }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            scale: 1
+          }}
+          transition={{
+            duration: 0.5,
+            delay: Math.min(index * 0.1, 0.2) + 0.1,
+            ease: [0.25, 0.46, 0.45, 0.94],
+          }}
+          whileHover={{
+            y: -6,
+            scale: 1.02,
+            transition: { duration: 0.2 }
+          }}
+          style={{
+            boxShadow: `0 4px 20px -5px ${colors.primary}20`,
+          }}
+        >
         {/* Glow effect on hover */}
         <div
           className={cn(
@@ -652,25 +690,25 @@ function TimelineItem({ event, index, isLeft, onClick }: TimelineItemProps) {
           }}
         />
 
-        {/* Badge année avec couleur de période */}
+        {/* Badge année avec couleur de période - responsive */}
         <motion.span
           className={cn(
-            "inline-flex items-center gap-2 px-3 py-1.5 text-sm font-bold rounded-full mb-3",
+            "inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-bold rounded-full mb-2 sm:mb-3",
             colors.bg,
             colors.text,
             "border",
             colors.border
           )}
           initial={{ scale: 0 }}
-          animate={isInView ? { scale: 1 } : { scale: 0 }}
+          animate={{ scale: 1 }}
           transition={{
             type: "spring",
             stiffness: 500,
             damping: 30,
-            delay: index * 0.15 + 0.3,
+            delay: Math.min(index * 0.1, 0.2) + 0.2,
           }}
         >
-          <DynamicIcon name={event.icon} className="h-4 w-4" />
+          <DynamicIcon name={event.icon} className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           {event.year}
         </motion.span>
 
@@ -683,74 +721,77 @@ function TimelineItem({ event, index, isLeft, onClick }: TimelineItemProps) {
           {event.titleFr}
         </h3>
 
-        <p className="text-muted-foreground leading-relaxed">
+        <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
           {event.descriptionFr}
         </p>
 
-        {/* Indicateur d'importance pour les événements critiques */}
+        {/* Indicateur d'importance pour les événements critiques - CSS animation */}
         {importance === "critical" && (
-          <motion.div
+          <div
             className={cn(
-              "mt-4 inline-flex items-center gap-1.5 px-2 py-1 rounded text-xs font-semibold",
+              "mt-3 sm:mt-4 inline-flex items-center gap-1 sm:gap-1.5 px-2 py-1 rounded text-[10px] sm:text-xs font-semibold animate-pulse-dot",
               colors.bg,
               colors.text
             )}
-            animate={{
-              opacity: [0.7, 1, 0.7],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
           >
-            <LucideIcons.AlertCircle className="h-3 w-3" />
-            Événement majeur
-          </motion.div>
+            <LucideIcons.AlertCircle className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
+            <span className="hidden sm:inline">Événement majeur</span>
+            <span className="sm:hidden">Majeur</span>
+          </div>
         )}
 
         {/* Indicateur "En savoir plus" */}
         <div
           className={cn(
-            "mt-4 inline-flex items-center gap-1.5 text-xs font-medium transition-all",
+            "mt-3 sm:mt-4 inline-flex items-center gap-1.5 text-xs font-medium transition-all",
             "opacity-60 group-hover:opacity-100",
             colors.text
           )}
         >
           <LucideIcons.Info className="h-3.5 w-3.5" />
-          <span>Cliquez pour en savoir plus</span>
+          <span className="hidden sm:inline">Cliquez pour en savoir plus</span>
+          <span className="sm:hidden">Voir plus</span>
           <LucideIcons.ChevronRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
         </div>
       </motion.div>
+      ) : (
+        // Placeholder skeleton pour lazy loading
+        <div
+          className={cn(
+            sizes.scale,
+            sizes.padding,
+            "rounded-xl bg-muted/30 animate-pulse mx-auto sm:mx-0",
+            "min-h-[150px] sm:min-h-[180px]"
+          )}
+        />
+      )}
 
-      {/* Spacer pour le centre (visible uniquement en desktop) */}
-      <div className="hidden md:block w-16" />
+      {/* Spacer pour le centre (visible uniquement en tablet+) */}
+      <div className="hidden md:block w-12 lg:w-16" />
 
-      {/* Point de connexion central */}
+      {/* Point de connexion central - mobile: centré en haut, desktop: milieu */}
       <motion.div
-        className="absolute left-4 md:left-1/2 md:-translate-x-1/2 z-10"
+        className={cn(
+          "timeline-dot absolute z-10",
+          // Mobile: centré horizontalement, en haut de la carte
+          "left-1/2 -translate-x-1/2 -top-5",
+          // Tablet+: sur la ligne centrale
+          "sm:left-6 sm:translate-x-0 sm:top-auto",
+          "md:left-1/2 md:-translate-x-1/2"
+        )}
         initial={{ scale: 0 }}
-        animate={isInView ? { scale: 1 } : { scale: 0 }}
+        animate={shouldRender ? { scale: 1 } : { scale: 0 }}
         transition={{
           type: "spring",
           stiffness: 400,
           damping: 20,
-          delay: index * 0.15,
+          delay: Math.min(index * 0.1, 0.2),
         }}
       >
-        {/* Cercle extérieur pulsant avec couleur de période */}
-        <motion.div
-          className="absolute inset-0 -m-3 rounded-full"
+        {/* Cercle extérieur pulsant - CSS animation pour performance */}
+        <div
+          className="absolute inset-0 -m-2 sm:-m-3 rounded-full animate-pulse-ring"
           style={{ backgroundColor: `${colors.primary}30` }}
-          animate={isInView ? {
-            scale: [1, 1.8, 1],
-            opacity: [0.5, 0, 0.5],
-          } : {}}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            delay: index * 0.3,
-          }}
         />
 
         {/* Cercle principal avec icône et couleur de période */}
@@ -759,7 +800,7 @@ function TimelineItem({ event, index, isLeft, onClick }: TimelineItemProps) {
             "relative rounded-full",
             sizes.iconSize,
             "flex items-center justify-center",
-            "border-4 border-background",
+            "border-3 sm:border-4 border-background",
             `bg-gradient-to-br ${colors.gradient}`,
             "text-white",
             "shadow-lg",
@@ -769,19 +810,19 @@ function TimelineItem({ event, index, isLeft, onClick }: TimelineItemProps) {
           <DynamicIcon
             name={event.icon}
             className={cn(
-              importance === "normal" && "h-5 w-5",
-              importance === "high" && "h-6 w-6",
-              importance === "critical" && "h-7 w-7"
+              importance === "normal" && "h-4 w-4 sm:h-5 sm:w-5",
+              importance === "high" && "h-5 w-5 sm:h-6 sm:w-6",
+              importance === "critical" && "h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7"
             )}
           />
         </div>
       </motion.div>
 
-      {/* Espace vide de l'autre côté (desktop uniquement) */}
-      <div className="hidden md:block w-[calc(50%-2rem)]" />
+      {/* Espace vide de l'autre côté (tablet+ uniquement) */}
+      <div className="hidden md:block w-[calc(50%-2rem)] lg:w-[calc(50%-3rem)]" />
     </motion.div>
   );
-}
+});
 
 // Composant principal TimelineCustom
 interface TimelineCustomProps {
@@ -880,9 +921,12 @@ export function TimelineCustom({ events, className }: TimelineCustomProps) {
   return (
     <div
       ref={containerRef}
-      className={cn("relative py-8", className)}
+      className={cn("relative py-6 sm:py-8", className)}
     >
-      {/* Mini-timeline Sidebar */}
+      {/* Styles CSS pour animations performantes */}
+      <style dangerouslySetInnerHTML={{ __html: performanceStyles }} />
+
+      {/* Mini-timeline Sidebar - masquée sur mobile/tablet petit */}
       <TimelineSidebar
         events={events}
         activeYear={activeYear}
@@ -890,20 +934,28 @@ export function TimelineCustom({ events, className }: TimelineCustomProps) {
         onYearClick={handleYearClick}
       />
 
-      {/* Noise texture overlay */}
+      {/* Noise texture overlay - réduit sur mobile pour performance */}
       <div
-        className="absolute inset-0 opacity-[0.015] pointer-events-none"
+        className="absolute inset-0 opacity-[0.015] pointer-events-none hidden sm:block"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }}
       />
 
       {/* Gradient background subtil */}
-      <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 via-orange-500/5 to-red-500/5 pointer-events-none rounded-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 via-orange-500/5 to-red-500/5 pointer-events-none rounded-2xl sm:rounded-3xl" />
 
-      {/* Ligne verticale de fond (statique) avec gradient */}
+      {/* Ligne verticale de fond (statique) - centrée sur mobile aussi */}
       <div
-        className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-1.5 rounded-full"
+        className={cn(
+          "absolute top-0 bottom-0 rounded-full",
+          // Mobile: centrée, largeur réduite
+          "left-1/2 -translate-x-1/2 w-1",
+          // Tablet: légèrement à gauche
+          "sm:left-6 sm:translate-x-0 sm:w-1",
+          // Desktop: centrée avec largeur normale
+          "md:left-1/2 md:-translate-x-1/2 md:w-1.5"
+        )}
         style={{
           background: "linear-gradient(180deg, rgb(245 158 11 / 0.2), rgb(249 115 22 / 0.2), rgb(239 68 68 / 0.2))",
         }}
@@ -911,7 +963,12 @@ export function TimelineCustom({ events, className }: TimelineCustomProps) {
 
       {/* Ligne verticale de progression (animée) avec gradient multicolore */}
       <motion.div
-        className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-0 w-1.5 rounded-full origin-top overflow-hidden"
+        className={cn(
+          "timeline-line absolute top-0 rounded-full origin-top overflow-hidden",
+          "left-1/2 -translate-x-1/2 w-1",
+          "sm:left-6 sm:translate-x-0 sm:w-1",
+          "md:left-1/2 md:-translate-x-1/2 md:w-1.5"
+        )}
         style={{
           height: lineHeight,
           opacity: lineOpacity,
@@ -925,37 +982,34 @@ export function TimelineCustom({ events, className }: TimelineCustomProps) {
           }}
         />
 
-        {/* Effet glow */}
+        {/* Effet glow - désactivé sur mobile pour performance */}
         <div
-          className="absolute inset-0 blur-sm rounded-full"
+          className="absolute inset-0 blur-sm rounded-full hidden sm:block"
           style={{
             background: "linear-gradient(180deg, rgb(245 158 11), rgb(249 115 22), rgb(239 68 68))",
           }}
         />
 
-        {/* Point brillant au bout de la ligne */}
-        <motion.div
-          className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full"
+        {/* Point brillant au bout de la ligne - CSS animation */}
+        <div
+          className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 sm:w-4 sm:h-4 rounded-full animate-pulse-dot"
           style={{
             background: "linear-gradient(135deg, rgb(249 115 22), rgb(239 68 68))",
-          }}
-          animate={{
-            boxShadow: [
-              "0 0 10px 2px rgba(249, 115, 22, 0.5)",
-              "0 0 25px 6px rgba(239, 68, 68, 0.8)",
-              "0 0 10px 2px rgba(249, 115, 22, 0.5)",
-            ],
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut",
+            boxShadow: "0 0 15px 4px rgba(249, 115, 22, 0.6)",
           }}
         />
       </motion.div>
 
-      {/* Éléments de la timeline */}
-      <div className="relative space-y-12 md:space-y-16 pl-16 md:pl-0">
+      {/* Éléments de la timeline - responsive spacing */}
+      <div className={cn(
+        "relative",
+        // Mobile: espacement vertical réduit, pas de padding gauche (timeline centrée)
+        "space-y-16 pt-8",
+        // Tablet: padding gauche pour la ligne
+        "sm:space-y-14 sm:pl-16",
+        // Desktop: espacement normal, centré
+        "md:space-y-16 md:pl-0"
+      )}>
         {events.map((event, index) => (
           <TimelineItem
             key={event.id}
@@ -967,43 +1021,27 @@ export function TimelineCustom({ events, className }: TimelineCustomProps) {
         ))}
       </div>
 
-      {/* Indicateur de fin avec effet dramatic */}
+      {/* Indicateur de fin avec effet dramatic - CSS animations pour performance */}
       <motion.div
-        className="absolute left-4 md:left-1/2 md:-translate-x-1/2 -bottom-4 flex flex-col items-center"
+        className={cn(
+          "absolute -bottom-4 flex flex-col items-center",
+          "left-1/2 -translate-x-1/2",
+          "sm:left-6 sm:translate-x-0",
+          "md:left-1/2 md:-translate-x-1/2"
+        )}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        <motion.div
-          className="w-6 h-6 rounded-full bg-gradient-to-br from-red-500 to-red-600 shadow-lg shadow-red-500/40"
-          animate={{
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="w-3 h-3 mt-2 rounded-full bg-red-500/60"
-          animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        />
-        <motion.div
-          className="w-2 h-2 mt-1 rounded-full bg-red-500/40"
-          animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.8, 0.3] }}
-          transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
-        />
+        {/* Point principal avec CSS animation */}
+        <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-br from-red-500 to-red-600 shadow-lg shadow-red-500/40 animate-pulse-dot" />
+        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 mt-2 rounded-full bg-red-500/60 animate-pulse-dot" style={{ animationDelay: "0.2s" }} />
+        <div className="w-2 h-2 mt-1 rounded-full bg-red-500/40 animate-pulse-dot" style={{ animationDelay: "0.4s" }} />
 
         {/* Label "Aujourd'hui" */}
-        <motion.span
-          className="mt-4 text-xs font-semibold text-red-500 bg-red-500/10 px-3 py-1 rounded-full border border-red-500/30"
-          animate={{ opacity: [0.7, 1, 0.7] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
+        <span className="mt-3 sm:mt-4 text-[10px] sm:text-xs font-semibold text-red-500 bg-red-500/10 px-2 sm:px-3 py-1 rounded-full border border-red-500/30 animate-pulse-dot">
           Aujourd&apos;hui
-        </motion.span>
+        </span>
       </motion.div>
 
       {/* Modal détails */}

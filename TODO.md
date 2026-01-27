@@ -276,12 +276,12 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Mini graphique CO2 pour Courbe de Keeling
 - [x] Compteur animé pour seuils (+1.5°C)
 
-### Phase T5 - Responsive & Performance (~1-2h)
-- [ ] Mobile : Timeline centrée, cartes empilées verticalement
-- [ ] Tablet : Réduire marges, adapter tailles
-- [ ] Lazy loading cartes non visibles (Intersection Observer)
-- [ ] Préférer CSS animations quand possible
-- [ ] will-change sur éléments animés
+### Phase T5 - Responsive & Performance (~1-2h) ✅
+- [x] Mobile : Timeline centrée, cartes empilées verticalement
+- [x] Tablet : Réduire marges, adapter tailles
+- [x] Lazy loading cartes non visibles (Intersection Observer)
+- [x] Préférer CSS animations quand possible
+- [x] will-change sur éléments animés
 
 ### Palette Timeline
 ```css
