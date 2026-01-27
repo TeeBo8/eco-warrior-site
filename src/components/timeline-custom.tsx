@@ -9,6 +9,23 @@ import { cn } from "@/lib/utils";
 type Period = "discovery" | "warning" | "urgency";
 type Importance = "normal" | "high" | "critical";
 
+interface TimelineSource {
+  label: string;
+  url: string;
+}
+
+interface CO2DataPoint {
+  year: number;
+  ppm: number;
+}
+
+interface TemperatureData {
+  threshold: number;
+  current: number;
+  parisTarget: number;
+  preIndustrial: number;
+}
+
 interface TimelineEvent {
   id: number;
   year: number;
@@ -16,9 +33,15 @@ interface TimelineEvent {
   titleEn?: string;
   descriptionFr: string;
   descriptionEn?: string;
+  detailsFr?: string;
+  detailsEn?: string;
   icon?: string;
   period?: Period;
   importance?: Importance;
+  sources?: TimelineSource[];
+  funFacts?: string[];
+  co2Data?: CO2DataPoint[];
+  temperatureData?: TemperatureData;
 }
 
 // Configuration des couleurs par période
@@ -91,6 +114,335 @@ const DynamicIcon = ({ name, className }: { name: string | null | undefined; cla
   const LucideIcon = LucideIcons[name as keyof typeof LucideIcons] as React.ComponentType<{ className?: string }>;
   return <LucideIcon className={cn("h-5 w-5", className)} />;
 };
+
+// Mini graphique CO2 pour la Courbe de Keeling
+function CO2MiniChart({ data }: { data: CO2DataPoint[] }) {
+  const maxPpm = Math.max(...data.map(d => d.ppm));
+  const minPpm = Math.min(...data.map(d => d.ppm));
+  const range = maxPpm - minPpm;
+
+  return (
+    <div className="mt-4 p-4 bg-amber-500/5 rounded-lg border border-amber-500/20">
+      <div className="flex items-center gap-2 mb-3">
+        <LucideIcons.BarChart3 className="h-4 w-4 text-amber-500" />
+        <span className="text-sm font-semibold text-amber-500">Évolution du CO2 (ppm)</span>
+      </div>
+      <div className="flex items-end gap-1 h-20">
+        {data.map((point, index) => {
+          const height = ((point.ppm - minPpm) / range) * 100;
+          return (
+            <motion.div
+              key={point.year}
+              className="flex-1 flex flex-col items-center gap-1"
+              initial={{ height: 0 }}
+              animate={{ height: "auto" }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <motion.div
+                className="w-full bg-gradient-to-t from-amber-500 to-amber-400 rounded-t"
+                initial={{ height: 0 }}
+                animate={{ height: `${height}%` }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                style={{ minHeight: "4px" }}
+              />
+              <span className="text-[8px] text-muted-foreground">{point.year}</span>
+            </motion.div>
+          );
+        })}
+      </div>
+      <div className="flex justify-between mt-2 text-xs text-muted-foreground">
+        <span>{minPpm} ppm</span>
+        <span className="font-bold text-amber-500">{maxPpm} ppm</span>
+      </div>
+    </div>
+  );
+}
+
+// Compteur animé pour le seuil de température
+function TemperatureGauge({ data }: { data: TemperatureData }) {
+  const [displayValue, setDisplayValue] = useState(0);
+  const currentTemp = data.current;
+  const percentage = (currentTemp / data.parisTarget) * 100;
+
+  useEffect(() => {
+    const duration = 2000;
+    const steps = 60;
+    const increment = currentTemp / steps;
+    let current = 0;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= currentTemp) {
+        setDisplayValue(currentTemp);
+        clearInterval(timer);
+      } else {
+        setDisplayValue(current);
+      }
+    }, duration / steps);
+
+    return () => clearInterval(timer);
+  }, [currentTemp]);
+
+  return (
+    <div className="mt-4 p-4 bg-red-500/5 rounded-lg border border-red-500/20">
+      <div className="flex items-center gap-2 mb-3">
+        <LucideIcons.Thermometer className="h-4 w-4 text-red-500" />
+        <span className="text-sm font-semibold text-red-500">Réchauffement global</span>
+      </div>
+
+      {/* Jauge circulaire */}
+      <div className="flex items-center justify-center">
+        <div className="relative w-32 h-32">
+          <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+            {/* Cercle de fond */}
+            <circle
+              cx="50"
+              cy="50"
+              r="40"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="8"
+              className="text-muted/20"
+            />
+            {/* Seuil 1.5°C */}
+            <circle
+              cx="50"
+              cy="50"
+              r="40"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="8"
+              strokeDasharray={`${(1.5 / data.parisTarget) * 251.2} 251.2`}
+              className="text-orange-500/30"
+            />
+            {/* Progression actuelle */}
+            <motion.circle
+              cx="50"
+              cy="50"
+              r="40"
+              fill="none"
+              stroke="url(#tempGradient)"
+              strokeWidth="8"
+              strokeLinecap="round"
+              initial={{ strokeDasharray: "0 251.2" }}
+              animate={{ strokeDasharray: `${(percentage / 100) * 251.2} 251.2` }}
+              transition={{ duration: 2, ease: "easeOut" }}
+            />
+            <defs>
+              <linearGradient id="tempGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="rgb(249, 115, 22)" />
+                <stop offset="100%" stopColor="rgb(239, 68, 68)" />
+              </linearGradient>
+            </defs>
+          </svg>
+          {/* Valeur centrale */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <motion.span
+              className="text-2xl font-bold text-red-500"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+            >
+              +{displayValue.toFixed(2)}°C
+            </motion.span>
+            <span className="text-xs text-muted-foreground">depuis 1850</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Légende */}
+      <div className="flex justify-between mt-3 text-xs">
+        <div className="flex items-center gap-1">
+          <div className="w-2 h-2 rounded-full bg-orange-500/30" />
+          <span className="text-muted-foreground">Seuil 1.5°C</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="w-2 h-2 rounded-full bg-red-500" />
+          <span className="text-muted-foreground">Objectif Paris: 2°C</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Composant Modal pour les détails d'un événement
+interface TimelineModalProps {
+  event: TimelineEvent | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+function TimelineModal({ event, isOpen, onClose }: TimelineModalProps) {
+  if (!event) return null;
+
+  const period = event.period || "discovery";
+  const colors = periodColors[period];
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+          />
+
+          {/* Modal */}
+          <motion.div
+            className="fixed inset-4 md:inset-auto md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-full md:max-w-2xl md:max-h-[85vh] bg-card border-2 rounded-2xl shadow-2xl z-50 overflow-hidden flex flex-col"
+            style={{ borderColor: colors.primary + "40" }}
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          >
+            {/* Header */}
+            <div
+              className={cn(
+                "relative p-6 border-b",
+                colors.bg,
+                colors.border
+              )}
+            >
+              {/* Glow effect */}
+              <div
+                className="absolute inset-0 opacity-30"
+                style={{
+                  background: `radial-gradient(circle at top, ${colors.primary}30, transparent 70%)`,
+                }}
+              />
+
+              <div className="relative flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div
+                      className={cn(
+                        "w-10 h-10 rounded-full flex items-center justify-center",
+                        `bg-gradient-to-br ${colors.gradient}`,
+                        "text-white shadow-lg"
+                      )}
+                    >
+                      <DynamicIcon name={event.icon} className="h-5 w-5" />
+                    </div>
+                    <span
+                      className={cn(
+                        "px-3 py-1 text-sm font-bold rounded-full",
+                        colors.bg,
+                        colors.text,
+                        "border",
+                        colors.border
+                      )}
+                    >
+                      {event.year}
+                    </span>
+                  </div>
+                  <h2 className="text-xl md:text-2xl font-bold text-foreground">
+                    {event.titleFr}
+                  </h2>
+                </div>
+
+                <button
+                  onClick={onClose}
+                  className="p-2 rounded-full hover:bg-muted transition-colors"
+                >
+                  <LucideIcons.X className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+              {/* Description détaillée */}
+              <div>
+                <p className="text-muted-foreground leading-relaxed">
+                  {event.detailsFr || event.descriptionFr}
+                </p>
+              </div>
+
+              {/* Graphique CO2 si disponible */}
+              {event.co2Data && <CO2MiniChart data={event.co2Data} />}
+
+              {/* Jauge température si disponible */}
+              {event.temperatureData && <TemperatureGauge data={event.temperatureData} />}
+
+              {/* Fun Facts */}
+              {event.funFacts && event.funFacts.length > 0 && (
+                <div className="p-4 bg-muted/30 rounded-lg">
+                  <div className="flex items-center gap-2 mb-3">
+                    <LucideIcons.Lightbulb className="h-4 w-4 text-yellow-500" />
+                    <span className="text-sm font-semibold">Le saviez-vous ?</span>
+                  </div>
+                  <ul className="space-y-2">
+                    {event.funFacts.map((fact, index) => (
+                      <motion.li
+                        key={index}
+                        className="flex items-start gap-2 text-sm text-muted-foreground"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <span className="text-yellow-500 mt-1">•</span>
+                        {fact}
+                      </motion.li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Sources */}
+              {event.sources && event.sources.length > 0 && (
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <LucideIcons.ExternalLink className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-sm font-semibold">Sources</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {event.sources.map((source, index) => (
+                      <a
+                        key={index}
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(
+                          "inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-full transition-all",
+                          "bg-muted/50 hover:bg-muted text-muted-foreground hover:text-foreground",
+                          "border border-transparent hover:border-border"
+                        )}
+                      >
+                        <LucideIcons.Link className="h-3 w-3" />
+                        {source.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div className="p-4 border-t border-border bg-muted/20">
+              <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <span>Période : {period === "discovery" ? "Découvertes" : period === "warning" ? "Alertes" : "Urgence"}</span>
+                <button
+                  onClick={onClose}
+                  className={cn(
+                    "px-4 py-2 rounded-lg font-medium transition-all",
+                    `bg-gradient-to-r ${colors.gradient}`,
+                    "text-white hover:opacity-90"
+                  )}
+                >
+                  Fermer
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
 
 // Composant Mini-Timeline Sidebar
 interface TimelineSidebarProps {
@@ -215,9 +567,10 @@ interface TimelineItemProps {
   event: TimelineEvent;
   index: number;
   isLeft: boolean;
+  onClick: (event: TimelineEvent) => void;
 }
 
-function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
+function TimelineItem({ event, index, isLeft, onClick }: TimelineItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -246,6 +599,7 @@ function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
     >
       {/* Carte de contenu */}
       <motion.div
+        onClick={() => onClick(event)}
         className={cn(
           "w-full",
           sizes.scale,
@@ -354,6 +708,19 @@ function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
             Événement majeur
           </motion.div>
         )}
+
+        {/* Indicateur "En savoir plus" */}
+        <div
+          className={cn(
+            "mt-4 inline-flex items-center gap-1.5 text-xs font-medium transition-all",
+            "opacity-60 group-hover:opacity-100",
+            colors.text
+          )}
+        >
+          <LucideIcons.Info className="h-3.5 w-3.5" />
+          <span>Cliquez pour en savoir plus</span>
+          <LucideIcons.ChevronRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+        </div>
       </motion.div>
 
       {/* Spacer pour le centre (visible uniquement en desktop) */}
@@ -426,6 +793,19 @@ export function TimelineCustom({ events, className }: TimelineCustomProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeYear, setActiveYear] = useState<number | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Handler pour ouvrir le modal
+  const handleEventClick = useCallback((event: TimelineEvent) => {
+    setSelectedEvent(event);
+    setIsModalOpen(true);
+  }, []);
+
+  // Handler pour fermer le modal
+  const handleCloseModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
 
   // Hook pour le scroll progress
   const { scrollYProgress } = useScroll({
@@ -582,6 +962,7 @@ export function TimelineCustom({ events, className }: TimelineCustomProps) {
             event={event}
             index={index}
             isLeft={index % 2 === 0}
+            onClick={handleEventClick}
           />
         ))}
       </div>
@@ -624,6 +1005,13 @@ export function TimelineCustom({ events, className }: TimelineCustomProps) {
           Aujourd&apos;hui
         </motion.span>
       </motion.div>
+
+      {/* Modal détails */}
+      <TimelineModal
+        event={selectedEvent}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }

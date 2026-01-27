@@ -6,9 +6,18 @@
         "titleEn": "Discovery of the Greenhouse Effect",
         "descriptionFr": "Joseph Fourier calcule que la Terre devrait être bien plus froide (-18°C) sans atmosphère pour retenir la chaleur.",
         "descriptionEn": "Joseph Fourier calculates that Earth would be much colder (-18°C) without an atmosphere to retain heat.",
+        "detailsFr": "Le mathématicien et physicien français Joseph Fourier publie ses travaux sur la théorie analytique de la chaleur. Il démontre que l'atmosphère terrestre agit comme une couverture isolante, piégeant une partie du rayonnement infrarouge émis par la surface. Sans cet effet, la température moyenne de la Terre serait d'environ -18°C au lieu des +15°C actuels. C'est la première description scientifique de ce qu'on appellera plus tard l'effet de serre.",
+        "detailsEn": "French mathematician and physicist Joseph Fourier publishes his work on the analytical theory of heat. He demonstrates that Earth's atmosphere acts as an insulating blanket, trapping some of the infrared radiation emitted by the surface. Without this effect, Earth's average temperature would be around -18°C instead of the current +15°C. This is the first scientific description of what would later be called the greenhouse effect.",
         "period": "discovery",
         "icon": "Microscope",
-        "importance": "normal"
+        "importance": "normal",
+        "sources": [
+            {"label": "Article original de Fourier", "url": "https://gallica.bnf.fr/ark:/12148/bpt6k32227"}
+        ],
+        "funFacts": [
+            "Fourier a participé à l'expédition de Napoléon en Égypte avant de devenir physicien",
+            "Il a inventé la transformation de Fourier, encore utilisée aujourd'hui en traitement du signal"
+        ]
     },
     {
         "id": 2,
@@ -17,9 +26,18 @@
         "titleEn": "First CO2 Warning",
         "descriptionFr": "Svante Arrhenius prédit que doubler le CO2 atmosphérique augmenterait la température mondiale de 5-6°C.",
         "descriptionEn": "Svante Arrhenius predicts that doubling atmospheric CO2 would raise global temperatures by 5-6°C.",
+        "detailsFr": "Le chimiste suédois Svante Arrhenius publie un article révolutionnaire calculant pour la première fois l'impact du CO2 sur le climat. Il prédit qu'un doublement de la concentration de CO2 augmenterait les températures de 5 à 6°C. Ironiquement, il pensait que ce réchauffement serait bénéfique pour l'humanité ! Ses calculs, faits à la main pendant un an, sont remarquablement proches des estimations modernes (2.5-4°C).",
+        "detailsEn": "Swedish chemist Svante Arrhenius publishes a revolutionary paper calculating for the first time the impact of CO2 on climate. He predicts that doubling CO2 concentration would increase temperatures by 5 to 6°C. Ironically, he thought this warming would be beneficial for humanity! His calculations, done by hand over a year, are remarkably close to modern estimates (2.5-4°C).",
         "period": "discovery",
         "icon": "FlaskConical",
-        "importance": "normal"
+        "importance": "normal",
+        "sources": [
+            {"label": "Article d'Arrhenius (1896)", "url": "https://www.rsc.org/images/Arrhenius1896_tcm18-173546.pdf"}
+        ],
+        "funFacts": [
+            "Arrhenius a reçu le Prix Nobel de chimie en 1903, mais pas pour ses travaux sur le climat",
+            "Il a fait ses calculs pour comprendre les âges glaciaires, pas le réchauffement futur"
+        ]
     },
     {
         "id": 3,
@@ -28,52 +46,179 @@
         "titleEn": "Keeling Curve",
         "descriptionFr": "Charles Keeling commence les mesures continues du CO2 à Mauna Loa. La concentration grimpe année après année.",
         "descriptionEn": "Charles Keeling begins continuous CO2 measurements at Mauna Loa. Concentration climbs year after year.",
+        "detailsFr": "Charles David Keeling installe ses instruments au sommet du volcan Mauna Loa à Hawaï, loin de toute pollution locale. Il commence alors les premières mesures continues et précises du CO2 atmosphérique. La concentration initiale était de 315 ppm. La fameuse 'Courbe de Keeling' montre non seulement une hausse constante, mais aussi un cycle saisonnier fascinant : la Terre 'respire' avec les saisons de l'hémisphère nord.",
+        "detailsEn": "Charles David Keeling installs his instruments at the summit of Mauna Loa volcano in Hawaii, far from any local pollution. He begins the first continuous and precise measurements of atmospheric CO2. The initial concentration was 315 ppm. The famous 'Keeling Curve' shows not only a constant rise, but also a fascinating seasonal cycle: the Earth 'breathes' with the seasons of the northern hemisphere.",
         "period": "discovery",
         "icon": "BarChart3",
-        "importance": "high"
+        "importance": "high",
+        "sources": [
+            {"label": "Données Mauna Loa - NOAA", "url": "https://gml.noaa.gov/ccgg/trends/"},
+            {"label": "Scripps CO2 Program", "url": "https://scrippsco2.ucsd.edu/"}
+        ],
+        "funFacts": [
+            "La courbe montre que les plantes de l'hémisphère nord absorbent tellement de CO2 en été que ça se voit à l'échelle planétaire",
+            "En 2024, le CO2 a dépassé 425 ppm - 35% de plus qu'en 1958"
+        ],
+        "co2Data": [
+            {"year": 1958, "ppm": 315},
+            {"year": 1970, "ppm": 326},
+            {"year": 1980, "ppm": 339},
+            {"year": 1990, "ppm": 354},
+            {"year": 2000, "ppm": 369},
+            {"year": 2010, "ppm": 390},
+            {"year": 2020, "ppm": 414},
+            {"year": 2024, "ppm": 425}
+        ]
     },
     {
         "id": 4,
+        "year": 1972,
+        "titleFr": "Rapport Meadows - Les Limites à la croissance",
+        "titleEn": "Limits to Growth Report",
+        "descriptionFr": "Le Club de Rome publie un rapport choc : la croissance infinie est impossible sur une planète finie.",
+        "descriptionEn": "The Club of Rome publishes a shocking report: infinite growth is impossible on a finite planet.",
+        "detailsFr": "Commandé par le Club de Rome, ce rapport utilise pour la première fois des simulations informatiques pour modéliser l'avenir de l'humanité. Le modèle World3 prédit un effondrement au 21ème siècle si la croissance économique et démographique continue. Malgré les critiques de l'époque, les données réelles 50 ans plus tard suivent remarquablement bien le scénario 'business as usual' du rapport.",
+        "detailsEn": "Commissioned by the Club of Rome, this report uses computer simulations for the first time to model humanity's future. The World3 model predicts a collapse in the 21st century if economic and demographic growth continues. Despite criticism at the time, real data 50 years later remarkably follows the 'business as usual' scenario of the report.",
+        "period": "discovery",
+        "icon": "TrendingDown",
+        "importance": "high",
+        "sources": [
+            {"label": "Rapport original (PDF)", "url": "https://www.clubofrome.org/publication/the-limits-to-growth/"},
+            {"label": "Mise à jour 2022", "url": "https://www.clubofrome.org/ltg50/"}
+        ],
+        "funFacts": [
+            "Le rapport a été traduit en 37 langues et vendu à 30 millions d'exemplaires",
+            "Une étude de 2020 montre que nous suivons toujours le scénario le plus pessimiste"
+        ]
+    },
+    {
+        "id": 5,
         "year": 1988,
         "titleFr": "Création du GIEC",
         "titleEn": "Formation of the IPCC",
         "descriptionFr": "L'ONU fonde le Groupe d'experts intergouvernemental sur l'évolution du climat pour analyser la science climatique.",
         "descriptionEn": "The UN founds the Intergovernmental Panel on Climate Change to analyze climate science.",
+        "detailsFr": "Face aux preuves croissantes du changement climatique, l'ONU crée le GIEC (IPCC en anglais) pour synthétiser les recherches scientifiques mondiales. Le GIEC ne fait pas de recherche lui-même : il compile et évalue les milliers d'études publiées. Ses rapports, approuvés ligne par ligne par les gouvernements, font autorité. Le GIEC a reçu le Prix Nobel de la Paix en 2007.",
+        "detailsEn": "Faced with growing evidence of climate change, the UN creates the IPCC to synthesize global scientific research. The IPCC doesn't conduct research itself: it compiles and evaluates thousands of published studies. Its reports, approved line by line by governments, are authoritative. The IPCC received the Nobel Peace Prize in 2007.",
         "period": "warning",
         "icon": "Globe",
-        "importance": "high"
+        "importance": "high",
+        "sources": [
+            {"label": "Site officiel du GIEC", "url": "https://www.ipcc.ch/"},
+            {"label": "Rapports du GIEC", "url": "https://www.ipcc.ch/reports/"}
+        ],
+        "funFacts": [
+            "Le GIEC implique des milliers de scientifiques bénévoles du monde entier",
+            "Chaque phrase des résumés est débattue et approuvée par 195 gouvernements"
+        ]
     },
     {
-        "id": 5,
+        "id": 6,
+        "year": 1997,
+        "titleFr": "Protocole de Kyoto",
+        "titleEn": "Kyoto Protocol",
+        "descriptionFr": "Premier traité international contraignant pour réduire les émissions de gaz à effet de serre des pays industrialisés.",
+        "descriptionEn": "First binding international treaty to reduce greenhouse gas emissions from industrialized countries.",
+        "detailsFr": "Adopté au Japon, le Protocole de Kyoto est le premier accord international juridiquement contraignant sur le climat. Il engage les pays industrialisés à réduire leurs émissions de 5% par rapport à 1990. Les États-Unis signent mais ne ratifient jamais. Malgré ses limites (la Chine et l'Inde exemptées), il pose les bases de la coopération climatique internationale.",
+        "detailsEn": "Adopted in Japan, the Kyoto Protocol is the first legally binding international climate agreement. It commits industrialized countries to reduce emissions by 5% compared to 1990. The United States signs but never ratifies. Despite its limitations (China and India exempted), it lays the groundwork for international climate cooperation.",
+        "period": "warning",
+        "icon": "FileSignature",
+        "importance": "normal",
+        "sources": [
+            {"label": "UNFCCC - Protocole de Kyoto", "url": "https://unfccc.int/kyoto_protocol"}
+        ],
+        "funFacts": [
+            "Le protocole a créé le marché du carbone et les mécanismes de développement propre",
+            "Les USA sont le seul pays développé à ne pas l'avoir ratifié"
+        ]
+    },
+    {
+        "id": 7,
+        "year": 2006,
+        "titleFr": "Rapport Stern - Le coût de l'inaction",
+        "titleEn": "Stern Review - The Cost of Inaction",
+        "descriptionFr": "L'économiste Nicholas Stern calcule que l'inaction climatique coûtera 5 à 20% du PIB mondial chaque année.",
+        "descriptionEn": "Economist Nicholas Stern calculates that climate inaction will cost 5-20% of global GDP every year.",
+        "detailsFr": "Commandé par le gouvernement britannique, ce rapport révolutionnaire traduit le changement climatique en termes économiques. Stern démontre que le coût de l'inaction (5-20% du PIB mondial par an) sera bien supérieur au coût de l'action (1% du PIB). C'est la première fois qu'un économiste de renom argumente que la lutte contre le réchauffement est un bon investissement.",
+        "detailsEn": "Commissioned by the British government, this revolutionary report translates climate change into economic terms. Stern demonstrates that the cost of inaction (5-20% of global GDP per year) will far exceed the cost of action (1% of GDP). It's the first time a renowned economist argues that fighting warming is a good investment.",
+        "period": "warning",
+        "icon": "Calculator",
+        "importance": "normal",
+        "sources": [
+            {"label": "Rapport Stern (PDF)", "url": "https://webarchive.nationalarchives.gov.uk/ukgwa/20100407172811/https://www.hm-treasury.gov.uk/stern_review_report.htm"}
+        ],
+        "funFacts": [
+            "Stern a depuis dit que ses estimations étaient trop optimistes",
+            "Le rapport a été téléchargé plus d'un million de fois en quelques jours"
+        ]
+    },
+    {
+        "id": 8,
         "year": 2015,
         "titleFr": "Accord de Paris",
         "titleEn": "Paris Agreement",
         "descriptionFr": "196 nations s'engagent à limiter le réchauffement 'bien en dessous de 2°C' par rapport à l'ère préindustrielle.",
         "descriptionEn": "196 nations pledge to limit warming 'well below 2°C' compared to pre-industrial levels.",
+        "detailsFr": "Après l'échec de Copenhague en 2009, la COP21 à Paris aboutit à un accord historique. Pour la première fois, tous les pays (développés et en développement) s'engagent à réduire leurs émissions. L'objectif : limiter le réchauffement à 1.5°C si possible, 2°C maximum. Chaque pays fixe ses propres objectifs (NDC), révisés tous les 5 ans. Un mécanisme de transparence vérifie les progrès.",
+        "detailsEn": "After the failure of Copenhagen in 2009, COP21 in Paris results in a historic agreement. For the first time, all countries (developed and developing) commit to reducing emissions. The goal: limit warming to 1.5°C if possible, 2°C maximum. Each country sets its own targets (NDC), revised every 5 years. A transparency mechanism verifies progress.",
         "period": "warning",
         "icon": "Handshake",
-        "importance": "critical"
+        "importance": "critical",
+        "sources": [
+            {"label": "Texte de l'Accord de Paris", "url": "https://unfccc.int/process-and-meetings/the-paris-agreement"},
+            {"label": "Climate Action Tracker", "url": "https://climateactiontracker.org/"}
+        ],
+        "funFacts": [
+            "Laurent Fabius a utilisé un petit marteau vert pour adopter l'accord",
+            "Les engagements actuels mènent vers +2.7°C, loin de l'objectif de 1.5°C"
+        ]
     },
     {
-        "id": 6,
+        "id": 9,
         "year": 2023,
         "titleFr": "L'Année de tous les records",
-        "titleEn": "Wait, did we break it?",
+        "titleEn": "The Year of All Records",
         "descriptionFr": "2023 devient l'année la plus chaude jamais enregistrée (+1.48°C). Les océans surchauffent.",
         "descriptionEn": "2023 becomes the hottest year ever recorded (+1.48°C). Oceans overheat globally.",
+        "detailsFr": "2023 pulvérise tous les records. Chaque mois de juin à décembre bat le record du mois le plus chaud. La température moyenne atteint +1.48°C au-dessus de la période préindustrielle. Les océans atteignent des températures jamais vues, alimentant des ouragans plus intenses. L'Antarctique perd une surface de glace équivalente à l'Argentine. Les scientifiques sont 'stupéfaits' par l'ampleur des anomalies.",
+        "detailsEn": "2023 shatters all records. Every month from June to December breaks the record for hottest month. Average temperature reaches +1.48°C above the pre-industrial period. Oceans reach unprecedented temperatures, fueling more intense hurricanes. Antarctica loses an ice area equivalent to Argentina. Scientists are 'stunned' by the scale of the anomalies.",
         "period": "urgency",
         "icon": "Flame",
-        "importance": "high"
+        "importance": "high",
+        "sources": [
+            {"label": "Copernicus Climate Service", "url": "https://climate.copernicus.eu/"},
+            {"label": "NASA GISS", "url": "https://data.giss.nasa.gov/gistemp/"}
+        ],
+        "funFacts": [
+            "Le 4 juillet 2023 a été le jour le plus chaud jamais enregistré sur Terre",
+            "El Niño n'explique qu'une partie du réchauffement record de 2023"
+        ]
     },
     {
-        "id": 7,
+        "id": 10,
         "year": 2024,
         "titleFr": "Le Mur du 1.5°C",
         "titleEn": "Breaching 1.5°C",
         "descriptionFr": "Pour la première fois, la température mondiale dépasse le seuil critique de +1.5°C sur 12 mois glissants.",
         "descriptionEn": "For the first time, global temperature exceeds the critical +1.5°C threshold over a 12-month period.",
+        "detailsFr": "En février 2024, Copernicus annonce que les 12 derniers mois ont dépassé +1.5°C en moyenne. C'est la première fois depuis que l'humanité existe que ce seuil est franchi sur une année entière. Bien que cela ne signifie pas encore l'échec définitif de l'Accord de Paris (qui parle de moyennes sur 20-30 ans), c'est un signal d'alarme majeur. Chaque fraction de degré compte.",
+        "detailsEn": "In February 2024, Copernicus announces that the last 12 months have exceeded +1.5°C on average. It's the first time since humanity has existed that this threshold has been crossed over a full year. While this doesn't yet mean the definitive failure of the Paris Agreement (which refers to 20-30 year averages), it's a major alarm signal. Every fraction of a degree matters.",
         "period": "urgency",
         "icon": "AlertTriangle",
-        "importance": "critical"
+        "importance": "critical",
+        "sources": [
+            {"label": "Annonce Copernicus", "url": "https://climate.copernicus.eu/copernicus-january-2024-was-warmest-january-record"},
+            {"label": "Carbon Brief Analysis", "url": "https://www.carbonbrief.org/"}
+        ],
+        "funFacts": [
+            "À +1.5°C, 70-90% des récifs coralliens disparaissent. À +2°C, c'est 99%",
+            "Le seuil de 1.5°C a été choisi car au-delà, les points de basculement s'accélèrent"
+        ],
+        "temperatureData": {
+            "threshold": 1.5,
+            "current": 1.52,
+            "parisTarget": 2.0,
+            "preIndustrial": 0
+        }
     }
 ]

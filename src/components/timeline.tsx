@@ -42,12 +42,26 @@ export function Timeline() {
         titleEn: event.titleEn ?? undefined,
         descriptionFr: event.descriptionFr,
         descriptionEn: event.descriptionEn ?? undefined,
+        detailsFr: 'detailsFr' in event && typeof event.detailsFr === 'string' ? event.detailsFr : undefined,
+        detailsEn: 'detailsEn' in event && typeof event.detailsEn === 'string' ? event.detailsEn : undefined,
         icon: 'icon' in event && typeof event.icon === 'string' ? event.icon : undefined,
         period: 'period' in event && typeof event.period === 'string'
           ? (event.period as "discovery" | "warning" | "urgency")
           : undefined,
         importance: 'importance' in event && typeof event.importance === 'string'
           ? (event.importance as "normal" | "high" | "critical")
+          : undefined,
+        sources: 'sources' in event && Array.isArray(event.sources)
+          ? (event.sources as { label: string; url: string }[])
+          : undefined,
+        funFacts: 'funFacts' in event && Array.isArray(event.funFacts)
+          ? (event.funFacts as string[])
+          : undefined,
+        co2Data: 'co2Data' in event && Array.isArray(event.co2Data)
+          ? (event.co2Data as { year: number; ppm: number }[])
+          : undefined,
+        temperatureData: 'temperatureData' in event && typeof event.temperatureData === 'object'
+          ? (event.temperatureData as { threshold: number; current: number; parisTarget: number; preIndustrial: number })
           : undefined,
       }))}
     />
