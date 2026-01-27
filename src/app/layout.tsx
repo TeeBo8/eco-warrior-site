@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Montserrat, Merriweather, Source_Code_Pro } from "next/font/google";
+import { Montserrat, Merriweather, Source_Code_Pro, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import TrpcProvider from "./_trpc/provider";
 import { MainSidebar } from "@/components/main-sidebar";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
+import { BookmarksProvider } from "@/components/articles";
 
 const montserrat = Montserrat({
   variable: "--font-sans",
@@ -22,6 +23,12 @@ const sourceCodePro = Source_Code_Pro({
   subsets: ["latin"],
 });
 
+const playfairDisplay = Playfair_Display({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
 export const metadata: Metadata = {
   title: "Eco Warrior",
   description: "Fighting climate change with data and action.",
@@ -35,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body
-        className={`${montserrat.variable} ${merriweather.variable} ${sourceCodePro.variable} antialiased font-sans`}
+        className={`${montserrat.variable} ${merriweather.variable} ${sourceCodePro.variable} ${playfairDisplay.variable} antialiased font-sans`}
       >
         <ThemeProvider
           attribute="class"
@@ -44,14 +51,16 @@ export default function RootLayout({
           disableTransitionOnChange={false}
         >
           <TrpcProvider>
-            <MainSidebar>
-              <div className="flex flex-col min-h-screen">
-                <div className="flex-1">
-                  {children}
+            <BookmarksProvider>
+              <MainSidebar>
+                <div className="flex flex-col min-h-screen">
+                  <div className="flex-1">
+                    {children}
+                  </div>
                 </div>
-              </div>
-            </MainSidebar>
-            <Toaster />
+              </MainSidebar>
+              <Toaster />
+            </BookmarksProvider>
           </TrpcProvider>
         </ThemeProvider>
       </body>

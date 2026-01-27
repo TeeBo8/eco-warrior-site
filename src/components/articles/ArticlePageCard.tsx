@@ -3,7 +3,9 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Eye } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { BookmarkButton } from './ArticleBookmark';
 
 interface ArticlePageCardProps {
     id: number;
@@ -13,6 +15,7 @@ interface ArticlePageCardProps {
     imageUrl?: string | null;
     publishedAt: Date;
     author?: string;
+    views?: number;
     className?: string;
     index?: number; // Pour les animations staggerées
 }
@@ -54,12 +57,23 @@ export function ArticlePageCard({
     summary,
     imageUrl,
     publishedAt,
+    views,
     className,
     // index prop available for future stagger delay customization
 }: ArticlePageCardProps) {
     const relativeTime = getRelativeTime(new Date(publishedAt));
     const [imageError, setImageError] = useState(false);
     const showFallback = !imageUrl || imageError;
+
+    // Format views count
+    const formatViews = (count?: number) => {
+        if (!count) return null;
+        if (count >= 1000) {
+            return `${(count / 1000).toFixed(1).replace('.0', '')}k`;
+        }
+        return count.toString();
+    };
+    const formattedViews = formatViews(views);
 
     return (
         <Link href={`/articles/${slug}`} className={cn("group block", className)}>
@@ -102,6 +116,7 @@ export function ArticlePageCard({
                     </span>
                 </div>
 
+
                 {/* Contenu en bas */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 transition-transform duration-300 group-hover:translate-y-0">
                     <h3 className="text-lg font-bold text-white leading-tight line-clamp-2 group-hover:text-green-300 transition-colors duration-300">
@@ -110,6 +125,12 @@ export function ArticlePageCard({
                     <p className="mt-2 text-sm text-white/70 line-clamp-2 hidden sm:block transition-colors duration-300 group-hover:text-white/90">
                         {summary}
                     </p>
+                    {formattedViews && (
+                        <div className="mt-2 flex items-center gap-1 text-xs text-white/60">
+                            <Eye className="w-3 h-3" />
+                            <span>{formattedViews} lectures</span>
+                        </div>
+                    )}
                 </div>
 
                 {/* Hover effect ring with glow */}
@@ -118,6 +139,15 @@ export function ArticlePageCard({
                 {/* Corner accent on hover */}
                 <div className="absolute top-0 right-0 w-16 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-primary/30 to-transparent rounded-tr-xl" />
+                </div>
+
+                {/* Bookmark button */}
+                <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <BookmarkButton
+                        article={{ slug, title, imageUrl: imageUrl || undefined }}
+                        variant="card"
+                        size="sm"
+                    />
                 </div>
             </div>
         </Link>
@@ -130,11 +160,22 @@ export function ArticlePageCardSmall({
     title,
     imageUrl,
     publishedAt,
+    views,
     className
 }: Omit<ArticlePageCardProps, 'summary' | 'author' | 'index'>) {
     const relativeTime = getRelativeTime(new Date(publishedAt));
     const [imageError, setImageError] = useState(false);
     const showFallback = !imageUrl || imageError;
+
+    // Format views count
+    const formatViews = (count?: number) => {
+        if (!count) return null;
+        if (count >= 1000) {
+            return `${(count / 1000).toFixed(1).replace('.0', '')}k`;
+        }
+        return count.toString();
+    };
+    const formattedViews = formatViews(views);
 
     return (
         <Link href={`/articles/${slug}`} className={cn("group flex gap-3 items-center", className)}>
@@ -161,9 +202,17 @@ export function ArticlePageCardSmall({
                 <h4 className="text-sm font-medium text-foreground line-clamp-2 group-hover:text-primary transition-colors duration-300">
                     {title}
                 </h4>
-                <span className="text-xs text-muted-foreground mt-1 block">
-                    {relativeTime}
-                </span>
+                <div className="flex items-center gap-2 mt-1">
+                    <span className="text-xs text-muted-foreground">
+                        {relativeTime}
+                    </span>
+                    {formattedViews && (
+                        <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                            <Eye className="w-3 h-3" />
+                            {formattedViews}
+                        </span>
+                    )}
+                </div>
             </div>
         </Link>
     );

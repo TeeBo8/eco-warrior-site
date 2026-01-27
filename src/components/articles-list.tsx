@@ -102,7 +102,7 @@ function FeaturedArticleCard({ article }: {
 
           {/* Content */}
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white leading-tight mb-3 group-hover:text-green-300 transition-colors duration-300">
+            <h2 className="article-title text-2xl md:text-3xl lg:text-4xl text-white mb-3 group-hover:text-green-300 transition-colors duration-300">
               {article.titleFr}
             </h2>
             <p className="text-white/80 text-base md:text-lg max-w-3xl line-clamp-2 mb-4">
@@ -376,7 +376,7 @@ export default function ArticlesList() {
   );
 
   return (
-    <div className="w-full min-h-screen bg-background">
+    <div className="w-full min-h-screen bg-background article-noise">
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -403,7 +403,7 @@ export default function ArticlesList() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4"
+            className="article-title text-3xl md:text-4xl lg:text-5xl mb-4"
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-600 via-emerald-500 to-teal-500 dark:from-green-400 dark:via-emerald-300 dark:to-teal-400">
               Nos Analyses
@@ -495,6 +495,7 @@ export default function ArticlesList() {
                             imageUrl={article.imageUrl}
                             publishedAt={new Date(article.publishedAt)}
                             author={article.author}
+                            views={article.views}
                             index={index}
                           />
                         </div>

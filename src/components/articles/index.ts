@@ -21,3 +21,10 @@ export { ArticleShareButtons, ShareButtonCompact } from './ArticleShareButtons';
 
 // Carte d'article existante
 export { ArticlePageCard, ArticlePageCardSmall } from './ArticlePageCard';
+
+// Système de réactions
+export { ArticleReactions, reactions, useArticleReactions } from './ArticleReactions';
+export type { ReactionType } from './ArticleReactions';
+
+// Système de bookmarks/favoris
+export { BookmarkButton, BookmarksList, BookmarksProvider, useBookmarks } from './ArticleBookmark';

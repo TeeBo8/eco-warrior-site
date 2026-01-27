@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/button';
 import { useUserTracking } from '@/hooks/useUserTracking';
 import { motion, useSpring } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { ArticleReactions, BookmarkButton } from '@/components/articles';
+import { NewsletterCTA } from '@/components/debunk/newsletter-cta';
 
 // Icônes par catégorie
 const categoryIcons: Record<string, string> = {
@@ -295,7 +297,7 @@ export default function ArticleDetail() {
   const category = article.category || "Climat";
 
   return (
-    <div className="w-full min-h-screen bg-background">
+    <div className="w-full min-h-screen bg-background article-noise">
       {/* Reading Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 z-50 h-1 bg-muted/30"
@@ -336,15 +338,26 @@ export default function ArticleDetail() {
             <span>{Math.round(progress)}%</span>
           </div>
 
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleShare}
-            className="gap-2"
-          >
-            <Share2 className="w-4 h-4" />
-            Partager
-          </Button>
+          <div className="flex items-center gap-2">
+            <BookmarkButton
+              article={{
+                slug,
+                title,
+                imageUrl: article.imageUrl,
+              }}
+              variant="ghost"
+              size="md"
+            />
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleShare}
+              className="gap-2"
+            >
+              <Share2 className="w-4 h-4" />
+              Partager
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -375,7 +388,7 @@ export default function ArticleDetail() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground mb-6 leading-tight"
+            className="article-title text-3xl md:text-4xl lg:text-5xl text-foreground mb-6"
           >
             {title}
           </motion.h1>
@@ -483,6 +496,26 @@ export default function ArticleDetail() {
           >
             {content}
           </ReactMarkdown>
+        </motion.div>
+
+        {/* Reactions */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+          className="mt-12"
+        >
+          <ArticleReactions articleSlug={slug} />
+        </motion.div>
+
+        {/* Newsletter CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="mt-12"
+        >
+          <NewsletterCTA />
         </motion.div>
 
         {/* Related Articles */}
