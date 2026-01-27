@@ -214,15 +214,15 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] `<RelatedArticles />` carousel en fin d'article
 - [x] `<ShareButtons />` améliorés (Twitter, LinkedIn, copie lien)
 
-### Phase A4 - Engagement & Polish (~3-4h)
-- [ ] Système de réactions (😱 Alarmant / 💡 Éclairant / 💪 Motivant)
-- [ ] Compteur de lectures visible sur les cards
-- [ ] Bookmarks/favoris (localStorage)
-- [ ] Newsletter CTA en fin d'article (réutiliser composant debunk)
-- [ ] Grain/noise background subtle
-- [ ] Typography distinctive (Playfair Display pour titres)
-- [ ] SEO : Schema Article structured data
-- [ ] OpenGraph images dynamiques par article
+### Phase A4 - Engagement & Polish (~3-4h) ✅
+- [x] Système de réactions (😱 Alarmant / 💡 Éclairant / 💪 Motivant)
+- [x] Compteur de lectures visible sur les cards
+- [x] Bookmarks/favoris (localStorage)
+- [x] Newsletter CTA en fin d'article (réutiliser composant debunk)
+- [x] Grain/noise background subtle
+- [x] Typography distinctive (Playfair Display pour titres)
+- [x] SEO : Schema Article structured data
+- [x] OpenGraph images dynamiques par article
 
 ### Catégories d'Articles Prévues
 | Catégorie | Icône | Couleur |
