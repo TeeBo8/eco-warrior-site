@@ -258,11 +258,11 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Hover state avec scale + glow sur les cartes
 - [x] Gradient subtil background + noise texture overlay
 
-### Phase T3 - Navigation & Interactivité (~2-3h)
-- [ ] Mini-timeline fixe en sidebar avec années cliquables
-- [ ] Scroll-to smooth quand on clique sur une date
-- [ ] Indicateur "année active" dans la mini-timeline
-- [ ] Indicateur de progression scroll (barre latérale)
+### Phase T3 - Navigation & Interactivité ✅
+- [x] Mini-timeline fixe en sidebar avec années cliquables
+- [x] Scroll-to smooth quand on clique sur une date
+- [x] Indicateur "année active" dans la mini-timeline
+- [x] Indicateur de progression scroll (barre latérale)
 
 ### Phase T4 - Modal Détails & Contenu Enrichi (~3-4h)
 - [ ] Cartes cliquables pour ouvrir modal avec :
