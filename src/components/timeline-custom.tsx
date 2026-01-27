@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useRef, useState, useEffect, useCallback } from "react";
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
 import * as LucideIcons from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -92,6 +92,124 @@ const DynamicIcon = ({ name, className }: { name: string | null | undefined; cla
   return <LucideIcon className={cn("h-5 w-5", className)} />;
 };
 
+// Composant Mini-Timeline Sidebar
+interface TimelineSidebarProps {
+  events: TimelineEvent[];
+  activeYear: number | null;
+  scrollProgress: number;
+  onYearClick: (year: number, eventId: number) => void;
+}
+
+function TimelineSidebar({ events, activeYear, scrollProgress, onYearClick }: TimelineSidebarProps) {
+  // Extraire les années uniques et les trier
+  const uniqueYears = [...new Map(events.map(e => [e.year, e])).values()];
+
+  return (
+    <motion.div
+      className="fixed right-4 lg:right-8 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-center gap-1"
+      initial={{ opacity: 0, x: 50 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: 0.3 }}
+    >
+      {/* Barre de progression scroll */}
+      <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-muted-foreground/20 rounded-full">
+        <motion.div
+          className="absolute top-0 left-0 right-0 rounded-full origin-top"
+          style={{
+            height: `${scrollProgress * 100}%`,
+            background: "linear-gradient(180deg, rgb(245 158 11), rgb(249 115 22), rgb(239 68 68))",
+          }}
+        />
+      </div>
+
+      {/* Conteneur des années */}
+      <div className="relative flex flex-col items-center gap-3 py-4 px-2">
+        {uniqueYears.map((event, index) => {
+          const isActive = activeYear === event.year;
+          const period = event.period || "discovery";
+          const colors = periodColors[period];
+
+          return (
+            <motion.button
+              key={event.year}
+              onClick={() => onYearClick(event.year, event.id)}
+              className={cn(
+                "relative group flex items-center gap-2 transition-all duration-300",
+                isActive ? "scale-110" : "scale-100"
+              )}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 * index }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {/* Point indicateur */}
+              <motion.div
+                className={cn(
+                  "w-3 h-3 rounded-full border-2 transition-all duration-300",
+                  isActive
+                    ? `bg-gradient-to-br ${colors.gradient} border-white shadow-lg`
+                    : "bg-background border-muted-foreground/40 hover:border-muted-foreground"
+                )}
+                animate={isActive ? {
+                  boxShadow: [
+                    `0 0 0 0 ${colors.primary}40`,
+                    `0 0 0 8px ${colors.primary}00`,
+                  ],
+                } : {}}
+                transition={{
+                  duration: 1.5,
+                  repeat: isActive ? Infinity : 0,
+                }}
+              />
+
+              {/* Label année (visible au hover ou si actif) */}
+              <AnimatePresence>
+                {(isActive || false) && (
+                  <motion.span
+                    initial={{ opacity: 0, x: -10, scale: 0.8 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: -10, scale: 0.8 }}
+                    className={cn(
+                      "absolute right-full mr-3 px-2 py-1 text-xs font-bold rounded-md whitespace-nowrap",
+                      isActive
+                        ? `${colors.bg} ${colors.text} border ${colors.border}`
+                        : "bg-background/80 text-muted-foreground border border-border"
+                    )}
+                  >
+                    {event.year}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+
+              {/* Tooltip au hover */}
+              <div className="absolute right-full mr-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                <div className={cn(
+                  "px-2 py-1 text-xs font-medium rounded-md whitespace-nowrap",
+                  "bg-popover text-popover-foreground border border-border shadow-md"
+                )}>
+                  {event.year}
+                </div>
+              </div>
+            </motion.button>
+          );
+        })}
+      </div>
+
+      {/* Indicateur "Aujourd'hui" en bas */}
+      <motion.div
+        className="mt-2 flex flex-col items-center gap-1"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      >
+        <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+        <span className="text-[10px] text-red-500 font-medium">Now</span>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 // Composant pour un élément individuel de la timeline
 interface TimelineItemProps {
   event: TimelineEvent;
@@ -111,6 +229,8 @@ function TimelineItem({ event, index, isLeft }: TimelineItemProps) {
   return (
     <motion.div
       ref={ref}
+      id={`timeline-event-${event.id}`}
+      data-year={event.year}
       className={cn(
         "relative flex items-center w-full",
         isLeft ? "md:flex-row-reverse" : "md:flex-row",
@@ -304,6 +424,8 @@ interface TimelineCustomProps {
 
 export function TimelineCustom({ events, className }: TimelineCustomProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeYear, setActiveYear] = useState<number | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Hook pour le scroll progress
   const { scrollYProgress } = useScroll({
@@ -317,11 +439,77 @@ export function TimelineCustom({ events, className }: TimelineCustomProps) {
   // Transform pour le glow de la ligne
   const lineOpacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0.5]);
 
+  // Update scroll progress pour la sidebar
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (latest) => {
+      setScrollProgress(latest);
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress]);
+
+  // Observer pour détecter l'élément actif
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // Trouver l'élément le plus visible
+        let maxRatio = 0;
+        let activeYear: string | null = null;
+
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+            maxRatio = entry.intersectionRatio;
+            const year = entry.target.getAttribute("data-year");
+            if (year) {
+              activeYear = year;
+            }
+          }
+        });
+
+        if (activeYear) {
+          setActiveYear(parseInt(activeYear, 10));
+        }
+      },
+      {
+        root: null,
+        rootMargin: "-30% 0px -30% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    // Observer tous les éléments de la timeline
+    const timelineItems = container.querySelectorAll("[data-year]");
+    timelineItems.forEach((item) => observer.observe(item));
+
+    return () => observer.disconnect();
+  }, [events]);
+
+  // Fonction scroll-to smooth
+  const handleYearClick = useCallback((year: number, eventId: number) => {
+    const element = document.getElementById(`timeline-event-${eventId}`);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, []);
+
   return (
     <div
       ref={containerRef}
       className={cn("relative py-8", className)}
     >
+      {/* Mini-timeline Sidebar */}
+      <TimelineSidebar
+        events={events}
+        activeYear={activeYear}
+        scrollProgress={scrollProgress}
+        onYearClick={handleYearClick}
+      />
+
       {/* Noise texture overlay */}
       <div
         className="absolute inset-0 opacity-[0.015] pointer-events-none"
