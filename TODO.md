@@ -236,6 +236,63 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 
 ---
 
+---
+
+## Page Chronologie (Timeline) - Refonte Complète 🎯
+
+### Phase T1 - Timeline Custom & Animations ✅
+- [x] Créer composant `<TimelineCustom />` pour remplacer react-vertical-timeline-component
+- [x] Ajouter vraie ligne verticale de progression (gradient animé)
+- [x] Points de connexion animés sur la ligne pour chaque date
+- [x] Animations fade-in + slide au scroll (Framer Motion)
+- [x] Stagger animation (délai séquentiel entre les cartes)
+- [x] Animation ligne qui se "remplit" au scroll (scroll progress)
+
+### Phase T2 - Design & Différenciation Visuelle (~2-3h)
+- [ ] Code couleur par période dans timeline.json :
+  - 🟡 Découvertes scientifiques (1824-1958) - amber/gold
+  - 🟠 Alertes climatiques (1988-2015) - orange
+  - 🔴 Urgence climatique (2023-2024) - red gradient
+- [ ] Icônes uniques par événement (🔬 Microscope, 📊 BarChart, 🌍 Globe, etc.)
+- [ ] Taille de carte variable selon importance (Accord de Paris plus grand)
+- [ ] Hover state avec scale + glow sur les cartes
+- [ ] Gradient subtil background + noise texture overlay
+
+### Phase T3 - Navigation & Interactivité (~2-3h)
+- [ ] Mini-timeline fixe en sidebar avec années cliquables
+- [ ] Scroll-to smooth quand on clique sur une date
+- [ ] Indicateur "année active" dans la mini-timeline
+- [ ] Indicateur de progression scroll (barre latérale)
+
+### Phase T4 - Modal Détails & Contenu Enrichi (~3-4h)
+- [ ] Cartes cliquables pour ouvrir modal avec :
+  - Plus de détails
+  - Image/graphique associé
+  - Sources/liens officiels
+  - Fun facts
+- [ ] Animation modal smooth (AnimatePresence)
+- [ ] Enrichir timeline.json avec nouveaux champs (sources, funFacts, imageUrl, importance)
+- [ ] Ajouter 3-5 événements manquants (Rapport Meadows 1972, etc.)
+- [ ] Mini graphique CO2 pour Courbe de Keeling
+- [ ] Compteur animé pour seuils (+1.5°C)
+
+### Phase T5 - Responsive & Performance (~1-2h)
+- [ ] Mobile : Timeline centrée, cartes empilées verticalement
+- [ ] Tablet : Réduire marges, adapter tailles
+- [ ] Lazy loading cartes non visibles (Intersection Observer)
+- [ ] Préférer CSS animations quand possible
+- [ ] will-change sur éléments animés
+
+### Palette Timeline
+```css
+--timeline-discovery: #f59e0b;  /* Amber - découvertes */
+--timeline-warning: #f97316;    /* Orange - alertes */
+--timeline-danger: #ef4444;     /* Red - urgence */
+--timeline-line: linear-gradient(180deg, #22c55e, #f97316, #ef4444);
+```
+
+---
+
 ## Idées futures
 - Fiches sur les personnalités climatosceptiques connues
 - Système de gamification (badges pour utilisateurs actifs)
