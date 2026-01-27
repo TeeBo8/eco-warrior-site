@@ -264,17 +264,17 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Indicateur "année active" dans la mini-timeline
 - [x] Indicateur de progression scroll (barre latérale)
 
-### Phase T4 - Modal Détails & Contenu Enrichi (~3-4h)
-- [ ] Cartes cliquables pour ouvrir modal avec :
+### Phase T4 - Modal Détails & Contenu Enrichi ✅
+- [x] Cartes cliquables pour ouvrir modal avec :
   - Plus de détails
-  - Image/graphique associé
+  - Image/graphique associé (mini graphique CO2, jauge température)
   - Sources/liens officiels
   - Fun facts
-- [ ] Animation modal smooth (AnimatePresence)
-- [ ] Enrichir timeline.json avec nouveaux champs (sources, funFacts, imageUrl, importance)
-- [ ] Ajouter 3-5 événements manquants (Rapport Meadows 1972, etc.)
-- [ ] Mini graphique CO2 pour Courbe de Keeling
-- [ ] Compteur animé pour seuils (+1.5°C)
+- [x] Animation modal smooth (AnimatePresence)
+- [x] Enrichir timeline.json avec nouveaux champs (sources, funFacts, detailsFr, co2Data, temperatureData)
+- [x] Ajouter 3 événements manquants (Rapport Meadows 1972, Protocole Kyoto 1997, Rapport Stern 2006)
+- [x] Mini graphique CO2 pour Courbe de Keeling
+- [x] Compteur animé pour seuils (+1.5°C)
 
 ### Phase T5 - Responsive & Performance (~1-2h)
 - [ ] Mobile : Timeline centrée, cartes empilées verticalement
