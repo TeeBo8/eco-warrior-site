@@ -43,6 +43,12 @@ export function Timeline() {
         descriptionFr: event.descriptionFr,
         descriptionEn: event.descriptionEn ?? undefined,
         icon: 'icon' in event && typeof event.icon === 'string' ? event.icon : undefined,
+        period: 'period' in event && typeof event.period === 'string'
+          ? (event.period as "discovery" | "warning" | "urgency")
+          : undefined,
+        importance: 'importance' in event && typeof event.importance === 'string'
+          ? (event.importance as "normal" | "high" | "critical")
+          : undefined,
       }))}
     />
   );

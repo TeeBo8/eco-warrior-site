@@ -248,15 +248,15 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Stagger animation (délai séquentiel entre les cartes)
 - [x] Animation ligne qui se "remplit" au scroll (scroll progress)
 
-### Phase T2 - Design & Différenciation Visuelle (~2-3h)
-- [ ] Code couleur par période dans timeline.json :
+### Phase T2 - Design & Différenciation Visuelle ✅
+- [x] Code couleur par période dans timeline.json :
   - 🟡 Découvertes scientifiques (1824-1958) - amber/gold
   - 🟠 Alertes climatiques (1988-2015) - orange
   - 🔴 Urgence climatique (2023-2024) - red gradient
-- [ ] Icônes uniques par événement (🔬 Microscope, 📊 BarChart, 🌍 Globe, etc.)
-- [ ] Taille de carte variable selon importance (Accord de Paris plus grand)
-- [ ] Hover state avec scale + glow sur les cartes
-- [ ] Gradient subtil background + noise texture overlay
+- [x] Icônes uniques par événement (🔬 Microscope, 📊 BarChart, 🌍 Globe, etc.)
+- [x] Taille de carte variable selon importance (Accord de Paris plus grand)
+- [x] Hover state avec scale + glow sur les cartes
+- [x] Gradient subtil background + noise texture overlay
 
 ### Phase T3 - Navigation & Interactivité (~2-3h)
 - [ ] Mini-timeline fixe en sidebar avec années cliquables
