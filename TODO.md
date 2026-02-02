@@ -304,13 +304,13 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 - [x] Results cards apparition staggerée (transport, diet, energy)
 - [x] Pulse effect sur le chiffre final
 
-### Phase C2 - Layout & Design Visuel (~3-4h)
-- [ ] Layout asymétrique : Form (7 cols) + Preview live (5 cols sticky)
-- [ ] Background gradient mesh animé subtil (style landing page)
-- [ ] Glass morphism sur les cards (backdrop-blur)
-- [ ] Section méthodologie : cards cliquables/expandables
-- [ ] Icônes Lucide au lieu des emojis (Car, Utensils, Zap)
-- [ ] Séparateurs visuels entre sections (lignes gradient)
+### Phase C2 - Layout & Design Visuel (~3-4h) ✅
+- [x] Layout asymétrique : Form (7 cols) + Preview live (5 cols sticky)
+- [x] Background gradient mesh animé subtil (style landing page)
+- [x] Glass morphism sur les cards (backdrop-blur)
+- [x] Section méthodologie : cards cliquables/expandables
+- [x] Icônes Lucide au lieu des emojis (Car, Utensils, Zap)
+- [x] Séparateurs visuels entre sections (lignes gradient)
 
 ### Phase C3 - Contenu Enrichi & Contexte (~4-5h)
 - [ ] InfoCard "Le saviez-vous ?" (moyenne FR 9t, objectif 2030 2t)
