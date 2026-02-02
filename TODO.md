@@ -293,6 +293,78 @@ Transformer le site en arme de combat contre les climatosceptiques avec du conte
 
 ---
 
+## Page Calculateur Carbone - Refonte Complète 🎯
+
+### Phase C1 - Animations & Micro-interactions ✅
+- [x] Page load stagger (titre, subtitle, form fields avec délai séquentiel)
+- [x] Counter animation pour le résultat (0 → X.XX tonnes en 1.5s)
+- [x] Button loading state avec spinner pendant le calcul
+- [x] Hover states sur toutes les cards (scale + glow subtil)
+- [x] Slider avec gradient dynamique qui suit la valeur
+- [x] Results cards apparition staggerée (transport, diet, energy)
+- [x] Pulse effect sur le chiffre final
+
+### Phase C2 - Layout & Design Visuel (~3-4h)
+- [ ] Layout asymétrique : Form (7 cols) + Preview live (5 cols sticky)
+- [ ] Background gradient mesh animé subtil (style landing page)
+- [ ] Glass morphism sur les cards (backdrop-blur)
+- [ ] Section méthodologie : cards cliquables/expandables
+- [ ] Icônes Lucide au lieu des emojis (Car, Utensils, Zap)
+- [ ] Séparateurs visuels entre sections (lignes gradient)
+
+### Phase C3 - Contenu Enrichi & Contexte (~4-5h)
+- [ ] InfoCard "Le saviez-vous ?" (moyenne FR 9t, objectif 2030 2t)
+- [ ] Chart radial comparaison (Recharts) : Vous vs Moyenne vs Objectif
+- [ ] Cards équivalences visuelles :
+  - 🌳 X arbres à planter pour compenser
+  - 🚗 X km en voiture équivalent
+  - ✈️ X vols Paris-NYC
+  - 🏠 X mois de chauffage
+- [ ] Jauge visuelle avec zones colorées (vert < 4t, orange 4-8t, rouge > 8t)
+- [ ] Breakdown en % (pie chart ou bar chart horizontal)
+
+### Phase C4 - Recommandations & Actions (~3-4h)
+- [ ] Système de recommandations personnalisées basées sur le breakdown :
+  - Si transport > 40% → suggestions mobilité douce
+  - Si alimentation > 30% → suggestions régime
+  - Si énergie > 30% → suggestions économies
+- [ ] Cards recommandations avec priorité (haute/moyenne/basse)
+- [ ] CTA "Télécharger mon rapport PDF" (jsPDF déjà installé)
+- [ ] CTA "Partager mes résultats" (Twitter, LinkedIn, copie lien)
+- [ ] Section "Passer à l'action" avec liens ressources (ADEME, Nos Gestes Climat)
+- [ ] Bouton "Recalculer" pour modifier ses réponses
+
+### Phase C5 - Accessibilité & Polish (~2-3h)
+- [ ] Focus-visible sur tous les éléments interactifs
+- [ ] aria-labels pour les sliders et résultats
+- [ ] prefers-reduced-motion : désactiver animations
+- [ ] Keyboard navigation complète (Tab, Enter)
+- [ ] Mobile responsive (stack vertical, touch-friendly sliders)
+- [ ] Loading skeleton pendant le calcul
+- [ ] SEO : Schema FAQ pour la méthodologie
+- [ ] Meta tags OG avec résultat partageable
+
+### Données de référence
+```
+Moyenne française : 9.0 tonnes CO₂e/an
+Objectif 2030 : 4.0 tonnes CO₂e/an
+Objectif 2050 : 2.0 tonnes CO₂e/an
+Seuil "soutenable" : < 2 tonnes
+
+Équivalences (1 tonne CO₂) :
+- 5 000 km en voiture essence
+- 1 vol Paris-NYC aller
+- 50 arbres pendant 1 an
+- 12 mois de chauffage gaz (petit appart)
+```
+
+### Priorités Quick Wins
+1. ⚡ Counter animation + stagger (impact immédiat)
+2. ⚡ InfoCard contexte + jauge colorée (valeur éducative)
+3. ⚡ Layout asymétrique + preview live (UX moderne)
+
+---
+
 ## Idées futures
 - Fiches sur les personnalités climatosceptiques connues
 - Système de gamification (badges pour utilisateurs actifs)
