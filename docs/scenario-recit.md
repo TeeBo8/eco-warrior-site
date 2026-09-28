@@ -53,7 +53,7 @@ Le climat est le sujet le plus « politisé » : attaqué de front, le sceptique
 
 - **Visuel** : un pipeline qui serpente et se transforme en fil barbelé.
 - **Accroche** : « Chaque plein d'essence envoie de l'argent quelque part. Tu sais où ? »
-- **Le fait** : la France importe la quasi-totalité de son pétrole et de son gaz. Depuis 2022, l'Europe a versé à la Russie pour ses énergies fossiles des sommes du même ordre que son aide à l'Ukraine (CREA). **Chiffres exacts à sourcer.**
+- **Le fait** : la France importe la quasi-totalité de son pétrole et de son gaz. Depuis 2022, l'Europe a versé à la Russie pour ses énergies fossiles des sommes du même ordre que son aide à l'Ukraine (CREA). **Vérifié : 99 % du pétrole, 97 % du gaz importés (SDES) ; comparaison CREA valable pour la 3e année de guerre.**
 - **« Oui mais les renouvelables, c'est pas fiable »** → Le soleil et le vent ne font pas la guerre, et on ne les importe pas. Lien vers le mythe existant.
 - **Bascule** : « Sortir des fossiles, ce n'est pas un caprice d'écolo. C'est l'indépendance de ton pays. »
 - **Lien** → `/paix`
@@ -62,7 +62,7 @@ Le climat est le sujet le plus « politisé » : attaqué de front, le sceptique
 
 - **Visuel** : c'est la nuit. Les « warming stripes » de la France (vraies données Météo-France) défilent de 1900 à aujourd'hui, du bleu au rouge sombre.
 - **Accroche** : « Été 2022, la Gironde brûle. Été 2026, encore. »
-- **Le fait** : la France s'est déjà réchauffée d'environ **+1,7 °C** depuis le début du XXᵉ siècle (Météo-France), plus vite que la moyenne mondiale. **Chiffre à revérifier.**
+- **Le fait** : la France s'est déjà réchauffée d'environ **+1,7 °C** depuis le début du XXᵉ siècle (Météo-France), plus vite que la moyenne mondiale. **Vérifié : +2,2 °C (Météo-France).**
 - **« Oui mais le climat a toujours changé »** → Oui, sur des dizaines de milliers d'années. Là, c'est en un siècle, et c'est nous (GIEC). Lien vers le mythe existant.
 - **Bascule** : « Ce n'est plus une prévision. C'est ton été. »
 - **Lien** → `/climat` (dashboard et mythes)
@@ -71,7 +71,7 @@ Le climat est le sujet le plus « politisé » : attaqué de front, le sceptique
 
 - **Visuel** : le jour se lève. Palette Aube, soleil orange sur l'horizon.
 - **Titre** : *Je rêvais d'un autre monde.* Puis, au scroll : *Il existe déjà, par morceaux.*
-- **Contenu** : 4 exemples concrets et réels, un par thème (ex. une commune qui a replanté ses haies, un réseau de transports gratuits, une coopérative d'énergie citoyenne, une ferme bio qui vit bien). **À sourcer, de préférence en Nouvelle-Aquitaine.**
+- **Contenu** : 4 exemples concrets et réels, un par thème (ex. une commune qui a replanté ses haies, un réseau de transports gratuits, une coopérative d'énergie citoyenne, une ferme bio qui vit bien). **Faits : Prom'Haies, bus gratuits de Dunkerque, La Citoyenne Solaire, Loos-en-Gohelle.**
 - **Texte** : « Le 26 septembre 2026, 3 000 personnes ont marché à Bordeaux. Pas contre toi. Pour que tes enfants aient un été. »
 
 ## 6. Agir

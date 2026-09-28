@@ -8,7 +8,8 @@ import {
   Map,
   Calculator,
   Clock,
-  FileText
+  FileText,
+  Construction
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -61,6 +62,18 @@ export function MainSidebar({ children }: { children: React.ReactNode }) {
             {/* Logo dynamique selon l'état ouvert/fermé */}
             <div className="p-2">
               {open ? <Logo /> : <LogoIcon />}
+            </div>
+
+            {/* Badge En Développement */}
+            <div className={cn(
+              "mx-2 mb-2 px-2 py-1.5 rounded-md bg-miel/15 border border-miel/40",
+              "flex items-center gap-2 text-foreground",
+              !open && "justify-center px-1"
+            )}>
+              <Construction className="h-4 w-4 flex-shrink-0 text-miel" />
+              {open && (
+                <span className="text-xs font-medium">En développement</span>
+              )}
             </div>
 
             {/* Navigation - toujours visible */}

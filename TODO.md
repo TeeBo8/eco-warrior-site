@@ -35,10 +35,11 @@ Squelette = les 4 thèmes de la marche du 26 septembre 2026 ([26septembre.org](h
 
 ## Phase 2 — Le récit (page d'accueil)
 
-- [ ] Scroll narratif en 4 chapitres, fil rouge « On veut vivre »
-- [ ] Ouverture : ce que tu aimes (ton coin, ta santé, tes gosses)
-- [ ] Chapitres Climat / Vivant / Paix / Justice sociale : ce qui est menacé et par qui
-- [ ] Final : l'espoir et l'action (pas de culpabilisation)
+- [x] Scroll narratif, la lumière suit l'histoire (jour → soir → crépuscule → nuit → aube)
+- [x] Ouverture « On veut vivre » + choix « ce que tu aimes »
+- [x] Chapitres Vivant / Justice sociale / Paix / Climat, chiffres vérifiés et sourcés (2026-09-28)
+- [x] Final « Je rêvais d'un autre monde » + 4 exemples réels + section Agir
+- [x] Mobile, animations réduites (prefers-reduced-motion), contrastes AA
 
 ## Phase 3 — Les 4 hubs thématiques
 

@@ -53,6 +53,7 @@
   --lutte-vermillon: #C8321F;
   --lutte-sapin: #1F5A3D;
   --lutte-carton: #C9A56B;
+  --lutte-vermillon-carton: #9E2416; /* texte rouge sur carton (3,3:1) */
 
   --font-sans: "Work Sans", sans-serif;
   --font-serif: "Fraunces", Georgia, serif;
@@ -168,6 +169,13 @@
   --color-lutte-vermillon: var(--lutte-vermillon);
   --color-lutte-sapin: var(--lutte-sapin);
   --color-lutte-carton: var(--lutte-carton);
+  --color-lutte-vermillon-carton: var(--lutte-vermillon-carton);
+
+  --color-r-bg: var(--r-bg);
+  --color-r-fg: var(--r-fg);
+  --color-r-muted: var(--r-muted);
+  --color-r-accent: var(--r-accent);
+  --color-r-card: var(--r-card);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -408,4 +416,33 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.1;
+}
+
+/*
+ * Récit de la page d'accueil : la lumière suit l'histoire.
+ * jour (Herbier) → soir → crépuscule → nuit → aube.
+ * Indépendant du switch clair/sombre. Contrastes vérifiés (AA).
+ */
+.recit {
+  background-color: var(--r-bg);
+  color: var(--r-fg);
+  transition: background-color 1.2s ease, color 1.2s ease;
+}
+.recit[data-ambiance="jour"] {
+  --r-bg: #F4EFE3; --r-fg: #1D3A2C; --r-muted: #56665B; --r-accent: #A4493D; --r-card: #FBF8F0;
+}
+.recit[data-ambiance="soir"] {
+  --r-bg: #EADCC2; --r-fg: #2B2A20; --r-muted: #5A5443; --r-accent: #973D2D; --r-card: #F3E9D6;
+}
+.recit[data-ambiance="crepuscule"] {
+  --r-bg: #2E2A36; --r-fg: #EDE6D8; --r-muted: #C2B9AA; --r-accent: #F0A36B; --r-card: #3A3544;
+}
+.recit[data-ambiance="nuit"] {
+  --r-bg: #0F141B; --r-fg: #EDE6D8; --r-muted: #B3AC9E; --r-accent: #F29A4A; --r-card: #161D27;
+}
+.recit[data-ambiance="aube"] {
+  --r-bg: #F7E4CE; --r-fg: #2B1D14; --r-muted: #67503F; --r-accent: #A3401A; --r-card: #FCF1E4;
+}
+@media (prefers-reduced-motion: reduce) {
+  .recit { transition: none; }
 }
