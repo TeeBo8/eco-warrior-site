@@ -4,7 +4,7 @@ import { DebunkContent } from './debunk-content';
 import { FAQSchema } from '@/components/debunk/faq-schema';
 
 export const metadata: Metadata = {
-  title: 'Mythes & Réalités du Climat | EcoWarrior',
+  title: 'Mythes & Réalités du Climat',
   description: 'Des faits scientifiques solides pour démonter les idées reçues sur le changement climatique. Basé sur le GIEC et les sources scientifiques.',
   keywords: ['mythes climatiques', 'fact-checking climat', 'changement climatique', 'GIEC', 'debunk'],
   openGraph: {

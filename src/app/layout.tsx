@@ -30,8 +30,12 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Eco Warrior",
-  description: "Fighting climate change with data and action.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  title: {
+    default: "EcoWarrior — Chaque argument climatosceptique, sa réponse sourcée",
+    template: "%s | EcoWarrior",
+  },
+  description: "Des réponses sourcées à chaque argument climatosceptique : données NASA, NOAA, GIEC, outils interactifs et mythes décortiqués.",
 };
 
 export default function RootLayout({

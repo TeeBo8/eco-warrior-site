@@ -1,5 +1,4 @@
-'use client';
-
+import type { Metadata } from "next";
 import Image from "next/image";
 import { FeatureCard } from "@/components/landing/FeatureCard";
 import { ContactDialog } from "@/components/landing/ContactDialog";
@@ -19,6 +18,10 @@ import {
   Heart
 } from 'lucide-react';
 
+export const metadata: Metadata = {
+  description: "Données NASA, NOAA et GIEC pour répondre à chaque argument climatosceptique : dashboard climat, mythes décortiqués, chronologie et calculateur d'empreinte carbone, gratuits.",
+};
+
 export default function HomePage() {
   const featureCards = [
     {
@@ -28,10 +31,10 @@ export default function HomePage() {
       description: "CO₂, température, niveau des mers - en temps réel"
     },
     {
-      title: "Détruire les arguments bidons",
+      title: "Les arguments décortiqués, sources à l'appui",
       href: "/debunk",
       icon: <ShieldCheck className="w-5 h-5" />,
-      description: "Chaque mythe climatosceptique démonté par la science"
+      description: "Chaque mythe climatosceptique, sa réponse sourcée"
     },
     {
       title: "200 ans de preuves ignorées",
@@ -72,11 +75,10 @@ export default function HomePage() {
         <Marquee duration={80} gap={0} repeat={4} className="h-full p-0">
           <div className="relative h-full w-[200vw] min-h-screen">
             <Image
-              src="https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/hero/image-63.png"
+              src="/images/hero/clouds-light.png"
               alt="Background nuages"
               fill
               className="object-cover"
-              unoptimized
             />
           </div>
         </Marquee>
@@ -87,11 +89,10 @@ export default function HomePage() {
         <Marquee duration={80} gap={0} repeat={4} className="h-full p-0">
           <div className="relative h-full w-[200vw] min-h-screen">
             <Image
-              src="https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/hero/image-63-dark.png"
+              src="/images/hero/clouds-dark.png"
               alt="Background nuages"
               fill
               className="object-cover"
-              unoptimized
             />
           </div>
         </Marquee>
@@ -117,15 +118,15 @@ export default function HomePage() {
         <div className="w-full mb-6 sm:mb-8">
           <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-600 via-emerald-500 to-teal-500 dark:from-green-400 dark:via-emerald-300 dark:to-teal-400">
-              La science contre
+              Chaque argument climatosceptique,
             </span>
             <br />
             <span className="text-foreground">
-              les climatosceptiques
+              sa réponse sourcée
             </span>
           </h1>
           <p className="mt-4 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Ils nient, on prouve. Chaque argument climatosceptique démonté par des données vérifiables.
+            Données vérifiables, sources officielles, sans mépris.
             <span className="block mt-2 text-foreground font-medium">NASA • NOAA • IPCC • GIEC</span>
           </p>
         </div>
@@ -137,6 +138,7 @@ export default function HomePage() {
               <FeatureCard
                 key={card.href}
                 title={card.title}
+                description={card.description}
                 icon={card.icon}
                 href={card.href}
               />

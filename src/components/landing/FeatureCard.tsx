@@ -5,15 +5,16 @@ import { ReactNode } from 'react';
 
 interface FeatureCardProps {
   title: string;
+  description: string;
   icon: ReactNode;
   href: string;
 }
 
-export function FeatureCard({ title, icon, href }: FeatureCardProps) {
+export function FeatureCard({ title, description, icon, href }: FeatureCardProps) {
   return (
     <Link
       href={href}
-      className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm p-3 transition-all duration-400 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 min-h-[100px] flex flex-col"
+      className="group relative overflow-hidden rounded-2xl border border-border/60 bg-card/80 backdrop-blur-sm p-3 transition-all duration-400 hover:-translate-y-1 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10 min-h-[116px] flex flex-col"
     >
       {/* Background gradient on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-primary/4 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
@@ -26,9 +27,14 @@ export function FeatureCard({ title, icon, href }: FeatureCardProps) {
       </div>
 
       {/* Content */}
-      <h3 className="relative text-base sm:text-lg font-bold text-foreground leading-tight group-hover:text-primary transition-colors duration-400 flex-1">
-        {title}
-      </h3>
+      <div className="relative flex-1">
+        <h3 className="text-base sm:text-lg font-bold text-foreground leading-tight group-hover:text-primary transition-colors duration-400">
+          {title}
+        </h3>
+        <p className="mt-1 text-xs sm:text-sm text-muted-foreground leading-snug">
+          {description}
+        </p>
+      </div>
 
       {/* CTA arrow */}
       <div className="relative mt-2 text-xs font-semibold text-primary inline-flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-400">

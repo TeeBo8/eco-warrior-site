@@ -19,7 +19,7 @@ const faqs = [
     },
     {
         question: "Comment soutenir le projet ?",
-        answer: "Si vous aimez EcoWarrior, vous pouvez nous soutenir via le bouton de don sur le site. Votre contribution aide directement notre mission : démystifier les mensonges climatosceptiques et sensibiliser le plus grand nombre."
+        answer: "Si vous aimez EcoWarrior, vous pouvez nous soutenir via le bouton de don sur le site. Votre contribution aide directement notre mission : démystifier les idées reçues sur le climat et sensibiliser le plus grand nombre."
     }
 ];
 
