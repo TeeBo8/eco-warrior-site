@@ -35,12 +35,6 @@ export function useUserTracking() {
         setSession(getOrCreateSession());
     }, []);
 
-    // Tracker un scan visuel
-    const trackScan = useCallback((imageType?: string, resultSummary?: string) => {
-        trackAction('scan_performed', { imageType, resultSummary });
-        setSession(getOrCreateSession());
-    }, []);
-
     // Tracker une lecture d'article
     const trackArticleRead = useCallback((articleSlug: string, articleTitle?: string) => {
         trackAction('article_read', { slug: articleSlug, title: articleTitle });
@@ -75,7 +69,6 @@ export function useUserTracking() {
         // Actions de tracking
         trackPageView,
         trackCarbonCalculation,
-        trackScan,
         trackArticleRead,
         trackMythViewed,
         trackMapInteraction,

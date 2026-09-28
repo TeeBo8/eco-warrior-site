@@ -8,7 +8,6 @@ export interface TrackedAction {
     type:
     | 'page_view'
     | 'carbon_calculation'
-    | 'scan_performed'
     | 'article_read'
     | 'myth_viewed'
     | 'map_interaction';
@@ -28,7 +27,6 @@ export interface AnonymousSession {
     stats: {
         pagesViewed: number;
         calculationsPerformed: number;
-        scansPerformed: number;
         articlesRead: number;
     };
 }
@@ -87,7 +85,6 @@ function createEmptySession(): AnonymousSession {
         stats: {
             pagesViewed: 0,
             calculationsPerformed: 0,
-            scansPerformed: 0,
             articlesRead: 0,
         },
     };
@@ -134,9 +131,6 @@ export function trackAction(
             break;
         case 'carbon_calculation':
             session.stats.calculationsPerformed++;
-            break;
-        case 'scan_performed':
-            session.stats.scansPerformed++;
             break;
         case 'article_read':
             session.stats.articlesRead++;

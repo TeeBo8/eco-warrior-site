@@ -12,7 +12,6 @@ import {
   Clock,
   Map,
   Calculator,
-  Scan,
   FileText,
   Sparkles,
   Heart
@@ -53,12 +52,6 @@ export default function HomePage() {
       href: "/calculator",
       icon: <Calculator className="w-5 h-5" />,
       description: "Votre empreinte carbone en chiffres"
-    },
-    {
-      title: "Scanner Carbone IA",
-      href: "/scanner",
-      icon: <Scan className="w-5 h-5" />,
-      description: "Analysez n'importe quoi avec Gemini"
     },
     {
       title: "Enquêtes & Analyses",

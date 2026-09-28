@@ -11,7 +11,7 @@ const faqs = [
     },
     {
         question: "Est-ce que c'est gratuit ?",
-        answer: "Oui, tout est gratuit ! Vous avez accès à l'ensemble des fonctionnalités : dashboard climatique, section Mythes & Réalités, chronologie, calculateur carbone et assistant IA. Si vous souhaitez nous soutenir, un lien de don est disponible."
+        answer: "Oui, tout est gratuit ! Vous avez accès à l'ensemble des fonctionnalités : dashboard climatique, section Mythes & Réalités, chronologie, calculateur carbone, chronologie et carte des impacts. Si vous souhaitez nous soutenir, un lien de don est disponible."
     },
     {
         question: "D'où viennent vos données ?",

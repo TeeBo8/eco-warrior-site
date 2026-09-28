@@ -8,8 +8,7 @@ import {
   Map,
   Calculator,
   Clock,
-  FileText,
-  Scan
+  FileText
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -51,11 +50,6 @@ export function MainSidebar({ children }: { children: React.ReactNode }) {
       label: "Carte des Impacts",
       href: "/map",
       icon: <Map className="h-5 w-5" />
-    },
-    {
-      label: "Scanner Visuel",
-      href: "/scanner",
-      icon: <Scan className="h-5 w-5" />
     },
   ];
 
