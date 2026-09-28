@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Merriweather, Source_Code_Pro, Playfair_Display } from "next/font/google";
+import { Work_Sans, Fraunces, Source_Code_Pro, Anton, Caveat, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import TrpcProvider from "./_trpc/provider";
 import { MainSidebar } from "@/components/main-sidebar";
@@ -7,15 +7,17 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/toaster";
 import { BookmarksProvider } from "@/components/articles";
 
-const montserrat = Montserrat({
+// Direction artistique : Herbier vivant (jour) / Nuit & aube (nuit) / Affiche de lutte (La Rue)
+const workSans = Work_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
 });
 
-const merriweather = Merriweather({
-  variable: "--font-serif",
+const fraunces = Fraunces({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["300", "400", "700", "900"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
 });
 
 const sourceCodePro = Source_Code_Pro({
@@ -23,10 +25,24 @@ const sourceCodePro = Source_Code_Pro({
   subsets: ["latin"],
 });
 
-const playfairDisplay = Playfair_Display({
-  variable: "--font-display",
+// Polices d'ambiance, chargées seulement là où elles servent (preload désactivé)
+const anton = Anton({
+  variable: "--font-lutte",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: "400",
+  preload: false,
+});
+
+const caveat = Caveat({
+  variable: "--font-main",
+  subsets: ["latin"],
+  preload: false,
+});
+
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-aube",
+  subsets: ["latin"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -46,7 +62,7 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body
-        className={`${montserrat.variable} ${merriweather.variable} ${sourceCodePro.variable} ${playfairDisplay.variable} antialiased font-sans`}
+        className={`${workSans.variable} ${fraunces.variable} ${sourceCodePro.variable} ${anton.variable} ${caveat.variable} ${bricolage.variable} antialiased font-sans`}
       >
         <ThemeProvider
           attribute="class"

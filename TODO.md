@@ -27,9 +27,9 @@ Squelette = les 4 thèmes de la marche du 26 septembre 2026 ([26septembre.org](h
 
 ## Phase 1 — Direction artistique
 
-- [ ] 2-3 directions artistiques (palette, typo, style d'illustration) en planche de tendance
-- [ ] Choix de Leture
-- [ ] Tokens CSS (clair/sombre) + typo appliqués au projet
+- [x] 3 directions artistiques en planche de tendance
+- [x] Choix : les 3 ! Clair = « Herbier vivant », sombre = « Nuit & aube », La Rue = « Affiche de lutte »
+- [x] Tokens CSS (clair/sombre + `--lutte-*`, `miel`, `aube`, `ciel`…) + typo (Fraunces, Work Sans ; Anton, Caveat, Bricolage en ambiance)
 - [ ] Une illustration SVG « étalon » par thème pour valider le style
 - [ ] Refaire les images OG (4 fichiers en runtime `edge`, à passer en Node — le prérendu plante sur une URL invalide)
 
@@ -47,6 +47,7 @@ Squelette = les 4 thèmes de la marche du 26 septembre 2026 ([26septembre.org](h
 - [ ] `/paix` — fossiles qui financent les guerres, indépendance énergétique
 - [ ] `/justice-sociale` — superprofits, pollution des ultra-riches, qui paie
 - [ ] Liens vers les assos de chaque thème
+- [ ] Remplacer les verts codés en dur (`green-*`, `emerald-*`, `teal-*` dans ~36 fichiers) par les tokens de la DA
 - [ ] Décider du sort de timeline / carte / calculateur (intégrés à un hub ou retirés)
 
 ## Phase 4 — La Rue
