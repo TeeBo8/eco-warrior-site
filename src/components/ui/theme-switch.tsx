@@ -1,17 +1,13 @@
 "use client"
 
-import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { cn } from "@/lib/utils"
+import { useMonte } from "@/lib/use-monte"
 
 export function ThemeSwitch() {
   const { setTheme, theme } = useTheme()
-  const [mounted, setMounted] = React.useState(false)
-
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
+  const mounted = useMonte()
 
   if (!mounted) {
     return (
@@ -34,7 +30,7 @@ export function ThemeSwitch() {
         isDark ? "bg-primary" : "bg-muted"
       )}
     >
-      <span className="sr-only">Toggle theme</span>
+      <span className="sr-only">Mode sombre</span>
       <div
         className={cn(
           "inline-block h-4 w-4 rounded-full bg-background shadow-lg transition-transform",

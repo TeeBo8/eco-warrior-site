@@ -44,12 +44,17 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      (process.env.VERCEL_PROJECT_PRODUCTION_URL
+        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+        : "http://localhost:3000"),
+  ),
   title: {
     default: "EcoWarrior — Chaque argument climatosceptique, sa réponse sourcée",
     template: "%s | EcoWarrior",
   },
-  description: "Des réponses sourcées à chaque argument climatosceptique : données NASA, NOAA, GIEC, outils interactifs et mythes décortiqués.",
+  description: "Climat, vivant, paix, justice sociale : un seul combat. Un récit sourcé et les idées reçues décortiquées, sans mépris.",
 };
 
 export default function RootLayout({

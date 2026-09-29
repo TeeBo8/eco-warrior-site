@@ -41,34 +41,34 @@ Squelette = les 4 thèmes de la marche du 26 septembre 2026 ([26septembre.org](h
 - [x] Final « Je rêvais d'un autre monde » + 4 exemples réels + section Agir
 - [x] Mobile, animations réduites (prefers-reduced-motion), contrastes AA
 
-## Phase 3 — On repart propre (plan validé le 2026-09-28, À FAIRE)
+## Phase 3 — On repart propre (plan validé le 2026-09-28)
 
 > Règle : rien ne part sur `main` tant que les mythes et les hubs ne sont pas reconstruits (zéro lien cassé en ligne).
 
 **3.0 Filet de sécurité**
-- [ ] Tag git `avant-table-rase` sur main avant toute suppression
-- [ ] Base Neon : débranchée, pas supprimée (Leture la supprimera plus tard)
+- [x] Tag git `avant-table-rase` sur main avant toute suppression
+- [x] Base Neon : débranchée, pas supprimée (Leture la supprimera plus tard)
 
 **3.1 Sauver le fond en fichiers statiques**
-- [ ] Les 30 mythes (table `posts` : mythe, réalité, shortExplanation, keyFacts, sources, catégorie) → `src/content/mythes.ts`, un slug pour chacun (19 n'en ont pas), classés dans les 4 thèmes
-- [ ] Frise (`src/data/timeline.json` + table `timeline_events`), points de carte (`map-points.json` + table `map_points`), `climate-history.ts`, `countries-climate.ts` → gardés pour les hubs
-- [ ] Ne PAS migrer les comptes utilisateurs (données perso inutiles)
+- [x] Les 30 mythes (table `posts` : mythe, réalité, shortExplanation, keyFacts, sources, catégorie) → `src/content/mythes.ts`, un slug pour chacun (19 n'en ont pas), classés dans les 4 thèmes
+- [x] Frise (`src/data/timeline.json` + table `timeline_events`), points de carte (`map-points.json` + table `map_points`), `climate-history.ts`, `countries-climate.ts` → gardés pour les hubs
+- [x] Ne PAS migrer les comptes utilisateurs (données perso inutiles)
 
 **3.2 Table rase**
-- [ ] Supprimer : anciennes pages (dashboard, debunk, timeline, map, calculator, articles), `src/server` (tRPC, db, services, gamification), Drizzle, `anonymous-auth`, `useUserTracking`, `scripts/`, cron `sync-climate`, `api/og/myth`
-- [ ] Supprimer les dépendances inutiles (trpc, react-query, drizzle, neon, @vercel/postgres, leaflet, recharts, jspdf, dom-to-image, react-vertical-timeline, zustand…)
-- [ ] Formulaire de contact : refait en server action Resend (sans tRPC)
-- [ ] Abandonnés : calculateur, quiz, comparateur, likes/commentaires, dashboard « temps réel »
+- [x] Supprimer : anciennes pages (dashboard, debunk, timeline, map, calculator, articles), `src/server` (tRPC, db, services, gamification), Drizzle, `anonymous-auth`, `useUserTracking`, `scripts/`, cron `sync-climate`, `api/og/myth`
+- [x] Supprimer les dépendances inutiles (trpc, react-query, drizzle, neon, @vercel/postgres, leaflet, recharts, jspdf, dom-to-image, react-vertical-timeline, zustand…)
+- [x] Formulaire de contact : refait en server action Resend (sans tRPC)
+- [x] Abandonnés : calculateur, quiz, comparateur, likes/commentaires, dashboard « temps réel »
 
 **3.3 Next.js 16**
-- [ ] Upgrade Next 15.1.9 → 16 (+ React à jour) sur le code allégé
-- [ ] `next lint` supprimé en v16 → script `eslint .` (toujours 0 erreur, 0 warning)
+- [x] Upgrade Next 15.1.9 → 16.3.7 (+ React à jour) sur le code allégé
+- [x] `next lint` supprimé en v16 → script `eslint .` (toujours 0 erreur, 0 warning)
 
 **3.4 Reconstruire dans la DA**
-- [ ] `/mythes` + `/mythes/[slug]` : 30 pages statiques, image OG par mythe
+- [x] `/mythes` + `/mythes/[slug]` : 30 pages statiques (reste : image OG par mythe)
 - [ ] Hubs `/vivant`, `/justice-sociale`, `/paix`, `/climat` : chiffres sourcés + mythes du thème + assos
 - [ ] Hub Climat : données climat en statique, sourcées et datées (remplace le dashboard)
-- [ ] Brancher les liens du récit et de la sidebar sur les nouvelles pages
+- [x] Brancher les liens du récit et de la sidebar sur les nouvelles pages (+ redirections des anciennes URL)
 - [ ] Réécrire les images OG (fin du runtime `edge`)
 
 ## Phase 4 — La Rue
