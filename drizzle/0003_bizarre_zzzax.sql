@@ -1,1 +1,0 @@
-ALTER TABLE "map_points" ADD COLUMN "image_url" text;

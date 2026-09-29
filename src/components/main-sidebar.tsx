@@ -1,16 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
-import {
-  LayoutDashboard,
-  Leaf,
-  ShieldCheck,
-  Map,
-  Calculator,
-  Clock,
-  FileText,
-  Construction
-} from "lucide-react";
+import { Home, Leaf, ShieldCheck, Construction } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -22,36 +13,8 @@ export function MainSidebar({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
 
   const links = [
-    {
-      label: "Tableau de Bord",
-      href: "/dashboard",
-      icon: <LayoutDashboard className="h-5 w-5" />
-    },
-    {
-      label: "Mythes & Réalités",
-      href: "/debunk",
-      icon: <ShieldCheck className="h-5 w-5" />
-    },
-    {
-      label: "Analyses",
-      href: "/articles",
-      icon: <FileText className="h-5 w-5" />
-    },
-    {
-      label: "Chronologie",
-      href: "/timeline",
-      icon: <Clock className="h-5 w-5" />
-    },
-    {
-      label: "Calculateur",
-      href: "/calculator",
-      icon: <Calculator className="h-5 w-5" />
-    },
-    {
-      label: "Carte des Impacts",
-      href: "/map",
-      icon: <Map className="h-5 w-5" />
-    },
+    { label: "On veut vivre", href: "/", icon: <Home className="h-5 w-5" /> },
+    { label: "Les mythes", href: "/mythes", icon: <ShieldCheck className="h-5 w-5" /> },
   ];
 
   return (
@@ -114,6 +77,6 @@ const LogoIcon = () => (
     href="/"
     className="font-bold flex items-center justify-center py-1 relative z-20"
   >
-    <Leaf className="h-7 w-7 text-green-600" />
+    <Leaf className="h-7 w-7 text-primary" />
   </Link>
 );

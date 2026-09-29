@@ -7,10 +7,10 @@ import { ThemeSwitch } from "@/components/ui/theme-switch";
 export const LIEN_DON = "https://buy.stripe.com/00w7sMgs4aGbfUi3daaVa04";
 
 const COMPRENDRE = [
-  { href: "/debunk", label: "Les mythes décortiqués" },
-  { href: "/dashboard", label: "Les données en direct" },
-  { href: "/timeline", label: "200 ans de science" },
-  { href: "/map", label: "La carte des impacts" },
+  { href: "/mythes", label: "Les 30 mythes décortiqués" },
+  { href: "/mythes#theme-vivant", label: "Les idées reçues sur le vivant" },
+  { href: "/mythes#theme-paix", label: "Les idées reçues sur l'énergie" },
+  { href: "/mythes#theme-climat", label: "Les idées reçues sur le climat" },
 ];
 
 const REJOINDRE = [

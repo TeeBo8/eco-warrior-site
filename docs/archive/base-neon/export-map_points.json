@@ -1,0 +1,167 @@
+[
+  {
+    "id": 69,
+    "lat": 43.2965,
+    "lng": 5.3698,
+    "name_en": "Mediterranean Coast Erosion",
+    "name_fr": "Érosion du littoral méditerranéen",
+    "impact_en": "Rising sea levels and intensified storms are accelerating coastal erosion, threatening seaside towns and their economies.",
+    "impact_fr": "La montée du niveau de la mer et l'intensification des tempêtes accélèrent l'érosion côtière, menaçant les villes balnéaires et leur économie.",
+    "category": "erosion",
+    "image_url": null
+  },
+  {
+    "id": 70,
+    "lat": 45.4642,
+    "lng": 2.164,
+    "name_en": "Central France Drought",
+    "name_fr": "Sécheresse en France centrale",
+    "impact_en": "Recurring droughts are becoming more frequent and severe, affecting agriculture and water resources in central regions.",
+    "impact_fr": "Les sécheresses récurrentes deviennent plus fréquentes et sévères, affectant l'agriculture et les ressources en eau des régions centrales.",
+    "category": "drought",
+    "image_url": null
+  },
+  {
+    "id": 71,
+    "lat": 43.6047,
+    "lng": 1.4442,
+    "name_en": "Toulouse Heat Waves",
+    "name_fr": "Canicules à Toulouse",
+    "impact_en": "Urban heat islands intensify during heat waves, posing health risks to vulnerable populations and straining energy systems.",
+    "impact_fr": "Les îlots de chaleur urbains s'intensifient pendant les canicules, posant des risques sanitaires aux populations vulnérables et mettant à rude épreuve les systèmes énergétiques.",
+    "category": "heatwave",
+    "image_url": null
+  },
+  {
+    "id": 72,
+    "lat": 45.764,
+    "lng": 4.8357,
+    "name_en": "Lyon Air Quality",
+    "name_fr": "Qualité de l'air à Lyon",
+    "impact_en": "Climate change exacerbates air pollution episodes, with warmer temperatures increasing ozone formation and health impacts.",
+    "impact_fr": "Le changement climatique exacerbe les épisodes de pollution atmosphérique, les températures plus chaudes augmentant la formation d'ozone et les impacts sanitaires.",
+    "category": "heatwave",
+    "image_url": null
+  },
+  {
+    "id": 73,
+    "lat": 46.2044,
+    "lng": 6.1432,
+    "name_en": "Alpine Ski Resort Impact",
+    "name_fr": "Impact sur les stations de ski alpines",
+    "impact_en": "Rising temperatures and changing precipitation patterns threaten the viability of low-altitude ski resorts, affecting mountain economies.",
+    "impact_fr": "L'augmentation des températures et le changement des régimes de précipitations menacent la viabilité des stations de ski de basse altitude, affectant l'économie montagnarde.",
+    "category": "drought",
+    "image_url": null
+  },
+  {
+    "id": 74,
+    "lat": 34.0522,
+    "lng": -118.2437,
+    "name_en": "California Wildfires",
+    "name_fr": "Feux de forêt en Californie",
+    "impact_en": "The fire season is becoming longer and more intense, with recent years seeing record-breaking megafires fueled by extreme heat and drought.",
+    "impact_fr": "La saison des feux devient plus longue et plus intense, les dernières années ayant connu des mégafeux records alimentés par une chaleur et une sécheresse extrêmes.",
+    "category": "heatwave",
+    "image_url": null
+  },
+  {
+    "id": 75,
+    "lat": 25.7617,
+    "lng": -80.1918,
+    "name_en": "Miami Sea Level Rise",
+    "name_fr": "Montée des eaux à Miami",
+    "impact_en": "Regular 'sunny-day flooding' now occurs as sea levels rise, threatening trillions of dollars in property and vital infrastructure.",
+    "impact_fr": "Des 'inondations par temps ensoleillé' se produisent régulièrement avec la montée du niveau de la mer, menaçant des billions de dollars de biens immobiliers et d'infrastructures vitales.",
+    "category": "erosion",
+    "image_url": null
+  },
+  {
+    "id": 76,
+    "lat": -14.235,
+    "lng": -51.9253,
+    "name_en": "Amazon Rainforest Deforestation",
+    "name_fr": "Déforestation de la Forêt Amazonienne",
+    "impact_en": "Deforestation, often linked to agricultural expansion exacerbated by climate change, is pushing parts of the rainforest towards a tipping point, turning it from a carbon sink to a source.",
+    "impact_fr": "La déforestation, souvent liée à l'expansion agricole exacerbée par le changement climatique, pousse des parties de la forêt vers un point de bascule, la transformant d'un puits de carbone en une source.",
+    "category": "biodiversity",
+    "image_url": null
+  },
+  {
+    "id": 77,
+    "lat": 9.0765,
+    "lng": 7.3986,
+    "name_en": "Lake Chad Shrinking",
+    "name_fr": "Assèchement du Lac Tchad",
+    "impact_en": "The lake has shrunk by 90% since the 1960s due to climate change, overuse of water, and prolonged drought, affecting millions of people who depend on it.",
+    "impact_fr": "Le lac a diminué de 90% depuis les années 1960 à cause du changement climatique, de la surexploitation de l'eau et de sécheresses prolongées, affectant des millions de personnes qui en dépendent.",
+    "category": "drought",
+    "image_url": null
+  },
+  {
+    "id": 78,
+    "lat": 27.9881,
+    "lng": 86.925,
+    "name_en": "Himalayan Glaciers Melting",
+    "name_fr": "Fonte des Glaciers de l'Himalaya",
+    "impact_en": "Glaciers are melting at an unprecedented rate, threatening water supplies for billions of people in Asia and increasing the risk of glacial lake outburst floods (GLOFs).",
+    "impact_fr": "Les glaciers fondent à un rythme sans précédent, menaçant l'approvisionnement en eau de milliards de personnes en Asie et augmentant le risque d'inondations par rupture de lac glaciaire (GLOF).",
+    "category": "drought",
+    "image_url": null
+  },
+  {
+    "id": 79,
+    "lat": 35.6895,
+    "lng": 139.6917,
+    "name_en": "Tokyo Typhoons",
+    "name_fr": "Typhons à Tokyo",
+    "impact_en": "Warmer ocean waters are fueling more powerful and slower-moving typhoons, bringing extreme rainfall and record-breaking flooding to the world's largest metropolis.",
+    "impact_fr": "Le réchauffement des eaux océaniques alimente des typhons plus puissants et plus lents, apportant des pluies extrêmes et des inondations records à la plus grande métropole du monde.",
+    "category": "storm",
+    "image_url": null
+  },
+  {
+    "id": 80,
+    "lat": -18.2871,
+    "lng": 147.6992,
+    "name_en": "Great Barrier Reef Bleaching",
+    "name_fr": "Blanchissement de la Grande Barrière de Corail",
+    "impact_en": "Mass bleaching events, caused by rising ocean temperatures, have severely damaged the world's largest coral reef system, threatening a massive and unique ecosystem.",
+    "impact_fr": "Des épisodes de blanchissement massif, causés par la hausse des températures de l'océan, ont gravement endommagé le plus grand système de récifs coralliens du monde, menaçant un écosystème immense et unique.",
+    "category": "biodiversity",
+    "image_url": null
+  },
+  {
+    "id": 81,
+    "lat": -75.25098,
+    "lng": -0.071389,
+    "name_en": "Antarctic Ice Sheet Melting",
+    "name_fr": "Fonte de la calotte glaciaire de l'Antarctique",
+    "impact_en": "The West Antarctic Ice Sheet is losing mass at an accelerating rate, contributing significantly to global sea-level rise.",
+    "impact_fr": "La calotte glaciaire de l'Antarctique occidental perd de la masse à un rythme accéléré, contribuant de manière significative à l'élévation du niveau de la mer à l'échelle mondiale.",
+    "category": "erosion",
+    "image_url": null
+  },
+  {
+    "id": 82,
+    "lat": 46.8182,
+    "lng": 8.2275,
+    "name_en": "Alpine Glaciers Retreat",
+    "name_fr": "Recul des glaciers alpins",
+    "impact_en": "Alpine glaciers have lost over 60% of their volume since 1850, with accelerated melting in recent decades affecting water resources and mountain ecosystems.",
+    "impact_fr": "Les glaciers alpins ont perdu plus de 60% de leur volume depuis 1850, avec une fonte accélérée ces dernières décennies affectant les ressources en eau et les écosystèmes montagnards.",
+    "category": "drought",
+    "image_url": null
+  },
+  {
+    "id": 83,
+    "lat": 52.3676,
+    "lng": 4.9041,
+    "name_en": "Netherlands Sea Level Defense",
+    "name_fr": "Défense contre la montée des eaux aux Pays-Bas",
+    "impact_en": "Two-thirds of the Netherlands lies below sea level, making it one of the most vulnerable countries to sea-level rise, requiring constant adaptation of flood defenses.",
+    "impact_fr": "Les deux tiers des Pays-Bas se situent sous le niveau de la mer, en faisant l'un des pays les plus vulnérables à la montée du niveau de la mer, nécessitant une adaptation constante des défenses contre les inondations.",
+    "category": "erosion",
+    "image_url": null
+  }
+]

@@ -121,7 +121,7 @@ export const CHAPITRES: ChapitreContenu[] = [
       reponse:
         "Le soleil et le vent ne déclarent pas de guerre, et personne ne peut couper leur robinet.",
       lien: {
-        href: "/debunk/les-energies-renouvelables-ne-sont-pas-fiables",
+        href: "/mythes/les-energies-renouvelables-ne-sont-pas-fiables",
         label: "Le mythe décortiqué",
       },
     },
@@ -156,7 +156,7 @@ export const CHAPITRES: ChapitreContenu[] = [
       question: "« Oui mais le climat a toujours changé. »",
       reponse:
         "Oui, sur des dizaines de milliers d'années. Là, c'est en un siècle, et c'est nous : le GIEC le dit sans ambiguïté.",
-      lien: { href: "/debunk", label: "Tous les mythes décortiqués" },
+      lien: { href: "/mythes/le-climat-a-toujours-change-c-est-naturel", label: "Le mythe décortiqué" },
     },
     bascule: "Ce n'est plus une prévision. C'est ton été.",
     rappels: {
@@ -165,7 +165,7 @@ export const CHAPITRES: ChapitreContenu[] = [
       enfants: "Ils vivront le climat qu'on leur laisse.",
       portemonnaie: "Sécheresses, incendies, assurances : tout ça finit par se payer.",
     },
-    hub: { href: "/dashboard", label: "Les données en direct" },
+    hub: { href: "/mythes", label: "Les 30 mythes décortiqués" },
   },
 ];
 

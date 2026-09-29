@@ -1,0 +1,47 @@
+[
+  {
+    "id": 31,
+    "year": 1824,
+    "title_en": "Discovery of the Greenhouse Effect",
+    "title_fr": "Découverte de l'Effet de Serre",
+    "description_en": "Joseph Fourier discovers the greenhouse effect, realizing the Earth's atmosphere traps heat.",
+    "description_fr": "Joseph Fourier découvre l'effet de serre, comprenant que l'atmosphère terrestre retient la chaleur.",
+    "icon": "FlaskConical"
+  },
+  {
+    "id": 32,
+    "year": 1896,
+    "title_en": "First Calculation of CO₂ Impact",
+    "title_fr": "Premier Calcul de l'Impact du CO₂",
+    "description_en": "Svante Arrhenius is the first to quantify the warming effect of carbon dioxide, predicting that a doubling of CO₂ would warm the planet.",
+    "description_fr": "Svante Arrhenius est le premier à quantifier l'effet de réchauffement du dioxyde de carbone, prédisant qu'un doublement du CO₂ réchaufferait la planète.",
+    "icon": "Calculator"
+  },
+  {
+    "id": 33,
+    "year": 1958,
+    "title_en": "The Keeling Curve Begins",
+    "title_fr": "Début de la Courbe de Keeling",
+    "description_en": "Charles David Keeling begins continuous measurements of atmospheric CO₂ at Mauna Loa, Hawaii, creating the iconic graph showing its steady rise.",
+    "description_fr": "Charles David Keeling commence les mesures continues du CO₂ atmosphérique à Mauna Loa, Hawaï, créant le graphique emblématique de son augmentation constante.",
+    "icon": "LineChart"
+  },
+  {
+    "id": 34,
+    "year": 1988,
+    "title_en": "IPCC is Formed",
+    "title_fr": "Création du GIEC",
+    "description_en": "The Intergovernmental Panel on Climate Change (IPCC) is established by the UN to provide comprehensive scientific assessments of climate change.",
+    "description_fr": "Le Groupe d'experts intergouvernemental sur l'évolution du climat (GIEC) est créé par l'ONU pour fournir des évaluations scientifiques complètes sur le changement climatique.",
+    "icon": "Landmark"
+  },
+  {
+    "id": 35,
+    "year": 2015,
+    "title_en": "Paris Agreement Signed",
+    "title_fr": "Signature de l'Accord de Paris",
+    "description_en": "196 parties adopt a legally binding international treaty on climate change, with the goal of limiting global warming to well below 2°C.",
+    "description_fr": "196 parties adoptent un traité international juridiquement contraignant sur le changement climatique, dans le but de limiter le réchauffement climatique bien en dessous de 2°C.",
+    "icon": "FileSignature"
+  }
+]

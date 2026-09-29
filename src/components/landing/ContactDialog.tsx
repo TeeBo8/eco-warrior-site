@@ -11,7 +11,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
-import { trpc } from "@/app/_trpc/client";
+import { useTransition } from "react";
+import { envoyerContact } from "@/app/actions/contact";
 
 const contactFormSchema = z.object({
   email: z.string().email({ message: "Veuillez entrer une adresse email valide." }),
@@ -27,25 +28,21 @@ export function ContactDialog() {
     resolver: zodResolver(contactFormSchema),
   });
 
-  const { mutate, isPending } = trpc.contact.send.useMutation({
-    onSuccess: () => {
-      toast({
-        title: "Message envoyé !",
-        description: "Merci, nous vous répondrons dès que possible.",
-      });
-      reset();
-    },
-    onError: (error: { message: string }) => {
-      toast({
-        title: "Erreur",
-        description: error.message ?? "Le message n'a pas pu être envoyé.",
-        variant: "destructive",
-      });
-    },
-  });
+  const [isPending, startTransition] = useTransition();
 
   function onSubmit(data: ContactFormValues) {
-    mutate(data);
+    startTransition(async () => {
+      const resultat = await envoyerContact(data);
+      if (resultat.ok) {
+        toast({
+          title: "Message envoyé !",
+          description: "Merci, nous vous répondrons dès que possible.",
+        });
+        reset();
+      } else {
+        toast({ title: "Erreur", description: resultat.erreur, variant: "destructive" });
+      }
+    });
   }
 
   return (
